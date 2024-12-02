@@ -20,7 +20,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 const appConfig = {
     ver: 1,
-    title: '木偶',
+    title: '看片狂人',
     site: 'https://www.kpkuang.fun/',
     // 定義分類
     tabs: [

@@ -20,33 +20,33 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 const appConfig = {
     ver: 1,
-    title: '看片狂人',
-    site: 'https://www.kpkuang.fun/',
+    title: '桃子影视',
+    site: 'https://www.taozi008.com/index.html',
     // 定義分類
     tabs: [
         // name 為分類名，ext 可以傳入任意參數由 getCards 接收
         {
             name: '電影',
             ext: {
-                id: 1,
+                id: 229,
             },
         },
         {
             name: '连续剧',
             ext: {
-                id: 2,
+                id: 230,
             },
         },
         {
             name: '综艺',
             ext: {
-                id: 3,
+                id: 231,
             },
         },
         {
             name: '动漫',
             ext: {
-                id: 4,
+                id: 232,
             },
         },
     ],
@@ -69,7 +69,7 @@ async function getCards(ext) {
     let { page = 1, id } = ext
 
     // 定義請求的 URL
-    const url = appConfig.site + `vodshow/${id}--------${page}-----.html`//`/index.php/vod/show/id/${id}/page/${page}.html`
+    const url = appConfig.site + `/vod/index.html?${page}&type_id=${id}`//`/index.php/vod/show/id/${id}/page/${page}.html`
     // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {
         headers: {
@@ -81,13 +81,13 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
 
     // 用 css 選擇器選出影片列表
-    const videos = $('#ul.fed-list-item fed-padding fed-col-xs4 fed-col-sm3 fed-col-md2')
+    const videos = $('#div.container')
     // 遍歷所有影片
     videos.each((_, e) => {
-        const href = $(e).find('.uk-text-center fed-list-title fed-font-xiv fed-text-center fed-visible fed-part-eone a').attr('href')
-        const title = $(e).find('.module-item-pic img').attr('alt')
-        const cover = $(e).find('.module-item-pic img').attr('data-src')
-        const remarks = $(e).find('.module-item-text').text()
+        const href = $(e).find('.thumbnail a').attr('href')
+        const title = $(e).find('.thumbc img').attr('alt')
+        const cover = $(e).find('.thumb img').attr('src')
+        const remarks = $(e).find('.note').text()
         // 將每個影片加入 cards 數組中
         cards.push({
             vod_id: href,
@@ -107,82 +107,3 @@ async function getCards(ext) {
 }
 
 // 取得播放列表
-async function getTracks(ext) {
-    ext = argsify(ext)
-    let tracks = []
-    let url = ext.url
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const $ = cheerio.load(data)
-
-    const playlist = $('.module-player-list .module-row-one')
-    playlist.each((_, e) => {
-        const name = $(e).find('.module-row-title h4').text().replace('- 第1集', '')
-        // 網盤的分享連結
-        const panShareUrl = $(e).find('.module-row-title p').text()
-        tracks.push({
-            name: name.trim(),
-            pan: panShareUrl,
-        })
-    })
-
-    return jsonify({
-        // list 返回一個數組，用於區分不同線路(參考 AGE 動漫及 girigiri 動漫)，但功能未實現目前只會讀取第一項
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
-    })
-}
-
-// 網盤源不需要寫播放
-async function getPlayinfo(ext) {
-    return jsonify({ urls: [] })
-}
-
-// search 的寫法跟 getCards 一樣，唯一不同就是由分類 id 改為關鍵字
-async function search(ext) {
-    ext = argsify(ext)
-    let cards = []
-
-    // 必須把中文編碼否則 iOS 16 會報錯
-    let text = encodeURIComponent(ext.text)
-    let page = ext.page || 1
-    let url = `${appConfig.site}/index.php/vod/search/page/${page}/wd/${text}.html`
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const $ = cheerio.load(data)
-
-    const videos = $('#main .module-search-item')
-    videos.each((_, e) => {
-        const href = $(e).find('.video-info-header h3 a').attr('href')
-        const title = $(e).find('.module-item-pic img').attr('alt')
-        const cover = $(e).find('.module-item-pic img').attr('data-src')
-        const remarks = $(e).find('.video-serial').text()
-        cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            vod_remarks: remarks,
-            ext: {
-                url: `${appConfig.site}${href}`,
-            },
-        })
-    })
-
-    return jsonify({
-        list: cards,
-    })
-}

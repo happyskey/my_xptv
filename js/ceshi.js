@@ -121,7 +121,7 @@ async function search(ext) {
     })
   }
 
-  const url = appConfig.site + `/?s=${text}&post_type=post`  // 构建搜索 URL
+  const url = appConfig.site + `/search/index.html?keyword=${text}`//`/?s=${text}&post_type=post`  // 构建搜索 URL
   const { data } = await $fetch.get(url, {
     headers  // 使用上面定义的请求头发送 GET 请求
   })

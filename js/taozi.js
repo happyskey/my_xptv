@@ -105,9 +105,26 @@ async function getCards(ext) {
         list: cards,
     })
 }
+
+async function getPlayinfo(ext) {
+    ext = argsify(ext)  // 解析扩展参数
+    const { srctype, src0, } = ext  // 获取视频源类型和源链接
+    let url = ''
+    if (srctype) {
+      url = 'https://www.taozi008.com' + src0  // 构建视频播放链接
+    }
+
+    $print('***url: ' + url)  // 打印 URL，方便调试
+    return jsonify({
+      urls: [url],  // 返回包含播放链接的 JSON 数据
+      headers: [{
+       
+        'User-Agent': UA,  // User-Agent header
+      }]
+    })
+}
+
 /*
-
-
 
 // 取得播放列表
 async function getTracks(ext) {
@@ -144,6 +161,9 @@ async function getTracks(ext) {
         ],
     })
 }
+
+
+
 
 // 網盤源不需要寫播放
 async function getPlayinfo(ext) {

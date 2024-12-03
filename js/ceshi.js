@@ -130,12 +130,9 @@ async function search(ext) {
   $('article.post').each((_, each) => {  // 遍历每个文章（影片）节点
     cards.push({
       vod_id: $(each).find('h2 > a').attr('href'),  // 获取影片的 URL
-      vod_name: $(each).find('h2.post-title').text(),  // 获取影片的标题
-      vod_pic: '',  // 搜索结果可能没有封面图片
-      vod_remarks: $(each).find('div.entry-content > p').text(),  // 获取影片的备注信息
-      ext: {
-        url: $(each).find('h2 > a').attr('href'),  // 影片的详细页面链接
-      },
+      vod_name: $(each).find('h2.post-box-title').text(),  // 获取影片的标题
+      vod_pic:  $(each).find('.post-box-image').text(), // 搜索结果可能没有封面图片
+      vod_remarks: $(each).find('div.post-box-text > p').text(),  // 获取影片的备注信息
     })
   })
 

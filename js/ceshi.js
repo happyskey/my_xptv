@@ -98,13 +98,13 @@ async function getPlayinfo(ext) {
     $print('***url: ' + url)  // 打印 URL，方便调试
     return jsonify({
       urls: [url],  // 返回包含播放链接的 JSON 数据
-      /*
+      
       headers: [{
-        'Referer': 'https://ddys.pro/',  // Referer header
-        'Origin': 'https://ddys.pro',   // Origin header
+        //'Referer': 'https://ddys.pro/',  // Referer header
+      //  'Origin': 'https://ddys.pro',   // Origin header
         'User-Agent': UA,  // User-Agent header
       }]
-      */
+      
     })
 }
 /*

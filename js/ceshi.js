@@ -92,7 +92,7 @@ async function getPlayinfo(ext) {
     const { srctype, src0, } = ext  // 获取视频源类型和源链接
     let url = ''
     if (srctype) {
-      url = 'https://v.ddys.pro' + src0  // 构建视频播放链接
+      url = 'https://www.taozi008.com' + src0  // 构建视频播放链接
     }
 
     $print('***url: ' + url)  // 打印 URL，方便调试

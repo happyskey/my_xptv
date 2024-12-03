@@ -1,109 +1,187 @@
+// 创建一个 cheerio 实例，用于解析 HTML 内容
 const cheerio = createCheerio()
-// const CryptoJS = createCryptoJS()
-// const JSEncrypt = loadJSEncrypt()
-/*
-以上是可以調用的第三方庫，使用方法自行查閱文檔
-內置方法有:
-$print: 等同於 console.log
-$fetch: http client，可發送 get 及 post 請求
-    get: $fetch.get(url,options)
-    post: $fetch.post(url,postData,options)
-argsify, jsonify: 等同於 JSON 的 parse 及 stringify
-$html: 內置的 html 解析方法，建議用 cheerio 替代
-$cache: 可將數據存入緩存
-    set: $cache.set(key, value)
-    get: $cache.get(key)
-*/
 
-// 預先定義請求使用的 user-agent
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+// 定义一个 User-Agent 字符串，用于模拟浏览器请求
+const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
 
+// 定义请求头，模拟浏览器请求，避免被反爬虫机制屏蔽
+const headers = {
+  'Referer': 'https://ddys.pro/', // Referer header，标明请求的来源
+  'Origin': 'https://ddys.pro',  // Origin header，标明请求的起源
+  'User-Agent': UA,              // User-Agent header，模拟浏览器访问
+}
+
+// 定义应用的配置，包括网站信息和分类
 const appConfig = {
-    ver: 1,
-    title: '桃子影视',
-    site: 'https://www.taozi008.com',
-    // 定義分類
-    tabs: [
-        // name 為分類名，ext 可以傳入任意參數由 getCards 接收
-        {
-            name: '電影',
-            ext: {
-                id: 229,
-            },
-        },
-        {
-            name: '连续剧',
-            ext: {
-                id: 230,
-            },
-        },
-        {
-            name: '综艺',
-            ext: {
-                id: 231,
-            },
-        },
-        {
-            name: '动漫',
-            ext: {
-                id: 232,
-            },
-        },
-    ],
+  ver: 1,  // 应用的版本
+  title: "低端影视",  // 应用的标题
+  site: "https://ddys.pro/",  // 网站的主域名
+  // 定义应用的多个分类标签及其相关链接
+  tabs: [{
+    name: '首页',  // 标签名称
+    ext: {
+      url: '/'  // 标签对应的网址路径
+    },
+  }, {
+    name: '所有电影',
+    ext: {
+      url: '/category/movie/'  // 电影分类的 URL
+    },
+  }, {
+    name: '连载剧集',
+    ext: {
+      url: '/category/airing/',  // 连载剧集分类的 URL
+      hasMore: false  // 标记该分类不需要分页
+    },
+  }, {
+    name: '本季新番',
+    ext: {
+      url: '/category/anime/new-bangumi/',  // 新番动漫分类的 URL
+      hasMore: false
+    },
+  }, {
+    name: '动画',
+    ext: {
+      url: '/category/anime/'  // 动画分类的 URL
+    },
+  }, {
+    name: '华语电影',
+    ext: {
+      url: '/category/movie/chinese-movie/'  // 华语电影的 URL
+    },
+  }, {
+    name: '欧美电影',
+    ext: {
+      url: '/category/movie/western-movie/'  // 欧美电影的 URL
+    },
+  }, {
+    name: '日韩电影',
+    ext: {
+      url: '/category/movie/asian-movie/'  // 日韩电影的 URL
+    },
+  }, {
+    name: '豆瓣电影Top250',
+    ext: {
+      url: '/tag/douban-top250/'  // 豆瓣电影 Top250 的 URL
+    },
+  }, {
+    name: '欧美剧',
+    ext: {
+      url: '/category/drama/western-drama/'  // 欧美剧集的 URL
+    },
+  }, {
+    name: '日剧',
+    ext: {
+      url: '/category/drama/jp-drama/'  // 日剧集的 URL
+    },
+  }, {
+    name: '韩剧',
+    ext: {
+      url: '/category/drama/kr-drama/'  // 韩剧集的 URL
+    },
+  }, {
+    name: '华语剧',
+    ext: {
+      url: '/category/drama/cn-drama/'  // 华语剧集的 URL
+    },
+  }]
 }
 
-// 進入源時調用，ver,title,site,tabs 為必須項
+// 获取应用配置的函数
 async function getConfig() {
-    return jsonify(appConfig)
+    return jsonify(appConfig)  // 返回应用的配置 JSON
 }
 
-// 取得分類的影片列表，ext 為 tabs 定義的 ext 加上頁碼(page)
+// 获取影片卡片的函数，ext 包含额外的请求参数（如分页信息）
 async function getCards(ext) {
-    // 將 JSON 字符串轉為 JS 對象
-    ext = argsify(ext)
-    // 定義一個空的卡片數組
-    let cards = []
-    // 從 ext 中解構賦值取出頁數及分類 id，等同於:
-    // let page = ext.page
-    // let id = ext.id
-    let { page = 1, id } = ext
+  ext = argsify(ext)  // 解析扩展参数
+  let cards = []  // 用于存储抓取到的影片卡片
+  let url = ext.url  // 获取请求的 URL
+  let page = ext.page || 1  // 获取当前页面（默认是第1页）
+  let hasMore = ext.hasMore || true  // 是否有更多内容（默认为 true）
 
-    // 定義請求的 URL
-    const url = appConfig.site +`/vod/index.html?page=2&type_id=230` //`/vod/index.html?${page}&type_id=${id}`//`/index.php/vod/show/id/${id}/page/${page}.html`
-    // 使用內置的 http client 發起請求獲取 html
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    // 用 cheerio 解析 html
-    const $ = cheerio.load(data)
-
-    // 用 css 選擇器選出影片列表
-    const videos = $('.lists-content ul li')
-    // 遍歷所有影片
-    videos.each((_, e) => {
-        const href = $(e).find('a').attr('href')
-        const title = $(e).find('h2.post-box-title').attr('alt')
-        const cover = $(e).find('a > img').attr('src')
-        const remarks = $(e).find('.note > span').text()
-        // 將每個影片加入 cards 數組中
-        cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            vod_remarks: remarks, // 海報右上角的子標題
-            // ext 會傳給 getTracks
-            ext: {
-                url: `${appConfig.site}${href}`,
-            },
-        })
-    })
-
+  if (!hasMore && page > 1) {
     return jsonify({
-        list: cards,
+      list: cards,  // 如果没有更多内容且当前页面大于1，返回空卡片列表
+    })
+  }
+
+  url = appConfig.site + url + `/page/${page}/`  // 拼接成具体的请求 URL
+
+  const { data } = await $fetch.get(url, {
+    headers  // 使用上面定义的请求头发送 GET 请求
+  })
+
+  const $ = cheerio.load(data)  // 使用 cheerio 解析返回的 HTML 数据
+  $('article.post').each((_, each) => {  // 遍历每个文章（影片）节点
+    cards.push({
+      vod_id: $(each).find('h2 > a').attr('href'),  // 获取影片的 URL
+      vod_name: $(each).find('h2.post-box-title').text(),  // 获取影片的标题
+      vod_pic: $(each).find('.post-box-image').attr('style').replace('background-image: url(', '').replace('");"', ''),  // 获取影片的封面图片
+      vod_remarks: $(each).find('div.post-box-text > p').text(),  // 获取影片的备注信息
+      ext: {
+        url: $(each).find('h2 > a').attr('href'),  // 影片的详细页面链接
+      },
+    })
+  })
+
+  return jsonify({
+    list: cards,  // 返回抓取到的影片卡片列表
+  })
+}
+
+// 获取播放信息的函数
+async function getPlayinfo(ext) {
+    ext = argsify(ext)  // 解析扩展参数
+    const { srctype, src0, } = ext  // 获取视频源类型和源链接
+    let url = ''
+    if (srctype) {
+      url = 'https://v.ddys.pro' + src0  // 构建视频播放链接
+    }
+
+    $print('***url: ' + url)  // 打印 URL，方便调试
+    return jsonify({
+      urls: [url],  // 返回包含播放链接的 JSON 数据
+      headers: [{
+        'Referer': 'https://ddys.pro/',  // Referer header
+        'Origin': 'https://ddys.pro',   // Origin header
+        'User-Agent': UA,  // User-Agent header
+      }]
     })
 }
 
-// 取得播放列表
+// 搜索影片的函数
+async function search(ext) {
+  ext = argsify(ext)  // 解析扩展参数
+  let cards = []  // 用于存储搜索结果
+
+  let text = encodeURIComponent(ext.text)  // 编码搜索文本
+  let page = ext.page || 1  // 获取当前页面（默认是第1页）
+  if (page > 1) {
+    return jsonify({
+      list: cards,  // 如果是分页请求并且当前页大于1，返回空卡片列表
+    })
+  }
+
+  const url = appConfig.site + `/?s=${text}&post_type=post`  // 构建搜索 URL
+  const { data } = await $fetch.get(url, {
+    headers  // 使用上面定义的请求头发送 GET 请求
+  })
+  
+  const $ = cheerio.load(data)  // 使用 cheerio 解析返回的 HTML 数据
+  $('article.post').each((_, each) => {  // 遍历每个文章（影片）节点
+    cards.push({
+      vod_id: $(each).find('h2 > a').attr('href'),  // 获取影片的 URL
+      vod_name: $(each).find('h2.post-title').text(),  // 获取影片的标题
+      vod_pic: '',  // 搜索结果可能没有封面图片
+      vod_remarks: $(each).find('div.entry-content > p').text(),  // 获取影片的备注信息
+      ext: {
+        url: $(each).find('h2 > a').attr('href'),  // 影片的详细页面链接
+      },
+    })
+  })
+
+  return jsonify({
+      list: cards,  // 返回搜索结果
+  })
+}

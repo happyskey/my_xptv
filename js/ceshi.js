@@ -115,7 +115,7 @@ async function getCards(ext) {
       },
     })
   })
-
+$print("888")
   return jsonify({
     list: cards,
   })

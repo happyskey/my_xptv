@@ -75,10 +75,11 @@ async function getCards(ext) {
       vod_name: $(each).find('a > img').attr('alt'), // 获取影片名称
       vod_pic: $(each).find('a > img').attr('src'), // 获取封面图片的URL
       vod_remarks: $(each).find('.note > span').text(), // 获取影片的简介
-      ext: {
+   /*
+     ext: {
         url: $(each).find('a').attr('href'),  // 影片的详细页面链接
       },
-    
+    */
     
     })
    

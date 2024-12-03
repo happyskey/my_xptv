@@ -14,7 +14,7 @@ const headers = {
 // 定义应用的配置，包括网站信息和分类
 const appConfig = {
   ver: 1,  // 应用的版本
-  title: "低端影视",  // 应用的标题
+  title: "测试视频",  // 应用的标题
   site: "https://ddys.pro/",  // 网站的主域名
   // 定义应用的多个分类标签及其相关链接
   tabs: [{

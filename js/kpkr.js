@@ -6,8 +6,7 @@ const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
 
 // 定义请求头，模拟浏览器请求，避免被反爬虫机制屏蔽
 const headers = {
-  'Referer': 'https://ddys.pro/', // Referer header，标明请求的来源
-  'Origin': 'https://ddys.pro',  // Origin header，标明请求的起源
+
   'User-Agent': UA,              // User-Agent header，模拟浏览器访问
 }
 
@@ -15,75 +14,31 @@ const headers = {
 const appConfig = {
   ver: 1,  // 应用的版本
   title: "测试视频",  // 应用的标题
-  site: "https://ddys.pro/",  // 网站的主域名
+  site: "https://www.taozi008.com/",  // 网站的主域名
   // 定义应用的多个分类标签及其相关链接
   tabs: [{
-    name: '首页',  // 标签名称
+    name: '电影',  // 标签名称
     ext: {
-      url: '/'  // 标签对应的网址路径
+      url: 229 ,// 标签对应的网址路径
     },
   }, {
-    name: '所有电影',
+    name: '电视剧',
     ext: {
-      url: '/category/movie/'  // 电影分类的 URL
+      url: 230, // 电影分类的 URL
     },
   }, {
-    name: '连载剧集',
+    name: '综艺',
     ext: {
-      url: '/category/airing/',  // 连载剧集分类的 URL
+      url: 231,  // 连载剧集分类的 URL
       hasMore: false  // 标记该分类不需要分页
     },
   }, {
-    name: '本季新番',
+    name: '动漫',
     ext: {
-      url: '/category/anime/new-bangumi/',  // 新番动漫分类的 URL
+      url: 232,  // 新番动漫分类的 URL
       hasMore: false
     },
-  }, {
-    name: '动画',
-    ext: {
-      url: '/category/anime/'  // 动画分类的 URL
-    },
-  }, {
-    name: '华语电影',
-    ext: {
-      url: '/category/movie/chinese-movie/'  // 华语电影的 URL
-    },
-  }, {
-    name: '欧美电影',
-    ext: {
-      url: '/category/movie/western-movie/'  // 欧美电影的 URL
-    },
-  }, {
-    name: '日韩电影',
-    ext: {
-      url: '/category/movie/asian-movie/'  // 日韩电影的 URL
-    },
-  }, {
-    name: '豆瓣电影Top250',
-    ext: {
-      url: '/tag/douban-top250/'  // 豆瓣电影 Top250 的 URL
-    },
-  }, {
-    name: '欧美剧',
-    ext: {
-      url: '/category/drama/western-drama/'  // 欧美剧集的 URL
-    },
-  }, {
-    name: '日剧',
-    ext: {
-      url: '/category/drama/jp-drama/'  // 日剧集的 URL
-    },
-  }, {
-    name: '韩剧',
-    ext: {
-      url: '/category/drama/kr-drama/'  // 韩剧集的 URL
-    },
-  }, {
-    name: '华语剧',
-    ext: {
-      url: '/category/drama/cn-drama/'  // 华语剧集的 URL
-    },
+  },   
   }]
 }
 
@@ -106,7 +61,7 @@ async function getCards(ext) {
     })
   }
 
-  url = appConfig.site + url + `/page/${page}/`  // 拼接成具体的请求 URL
+  url = appConfig.site + `/vod/index.html?page=${page}&type_id=${url}`//`/page/${page}/`  // 拼接成具体的请求 URL
 
   const { data } = await $fetch.get(url, {
     headers  // 使用上面定义的请求头发送 GET 请求

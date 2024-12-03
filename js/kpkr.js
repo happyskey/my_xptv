@@ -6,7 +6,8 @@ const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
 
 // 定义请求头，模拟浏览器请求，避免被反爬虫机制屏蔽
 const headers = {
-
+ {
+'Content-Type': 'application/json',
   'User-Agent': UA,              // User-Agent header，模拟浏览器访问
 }
 

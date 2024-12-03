@@ -1,0 +1,18 @@
+
+{
+    "sites": [
+        {
+            "name": "桃子影视",
+            "type": 3,
+            "api": "csp_tzsp",
+            "ext": "https://github.com/kingreevice/my_xptv/blob/main/js/kpkr.js"
+        },
+        {
+            "name": "多多影音",
+            "type": 3,
+            "api": "csp_ddys",
+            "ext": "https://github.com/kingreevice/my_xptv/blob/main/js/ceshi.js"
+        }
+       
+    ]
+}

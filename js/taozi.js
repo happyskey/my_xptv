@@ -20,33 +20,33 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 const appConfig = {
     ver: 1,
-    title: '木偶',
-    site: 'http://www.mogg.top',
+    title: '桃子',
+    site: 'https://www.taozi008.com',
     // 定義分類
     tabs: [
         // name 為分類名，ext 可以傳入任意參數由 getCards 接收
         {
-            name: '電影',
+            name: '电影',
             ext: {
-                id: 1,
+                id: 229,
             },
         },
         {
-            name: '劇集',
+            name: '电视剧',
             ext: {
-                id: 2,
+                id: 230,
             },
         },
         {
-            name: '動漫',
+            name: '综艺',
             ext: {
-                id: 3,
+                id: 231,
             },
         },
         {
-            name: '紀錄片',
+            name: '动漫',
             ext: {
-                id: 4,
+                id: 232,
             },
         },
     ],
@@ -69,7 +69,7 @@ async function getCards(ext) {
     let { page = 1, id } = ext
 
     // 定義請求的 URL
-    const url = appConfig.site + `/index.php/vod/show/id/${id}/page/${page}.html`
+    const url = appConfig.site + `/vod/index.html?page=${page}&type_id=${id}`     //`/index.php/vod/show/id/${id}/page/${page}.html`
     // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {
         headers: {
@@ -81,13 +81,13 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
 
     // 用 css 選擇器選出影片列表
-    const videos = $('#main .module-item')
+    const videos = $('.lists-content ul li')
     // 遍歷所有影片
     videos.each((_, e) => {
-        const href = $(e).find('.module-item-pic a').attr('href')
-        const title = $(e).find('.module-item-pic img').attr('alt')
-        const cover = $(e).find('.module-item-pic img').attr('data-src')
-        const remarks = $(e).find('.module-item-text').text()
+        const href = $(e).find('a').attr('href')
+        const title = $(e).find('a > img').attr('alt')
+        const cover = $(e).find('a > img').attr('src')
+        const remarks = $(e).find('.note > span').text()
         // 將每個影片加入 cards 數組中
         cards.push({
             vod_id: href,
@@ -105,6 +105,9 @@ async function getCards(ext) {
         list: cards,
     })
 }
+/*
+
+
 
 // 取得播放列表
 async function getTracks(ext) {
@@ -186,3 +189,5 @@ async function search(ext) {
         list: cards,
     })
 }
+
+*/

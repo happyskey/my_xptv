@@ -1,143 +1,267 @@
-// 创建一个 cheerio 实例，用于解析 HTML 内容
 const cheerio = createCheerio()
-
-// 定义一个 User-Agent 字符串，用于模拟浏览器请求
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
-
-// 定义请求头，模拟浏览器请求，避免被反爬虫机制屏蔽
 const headers = {
- // 'Referer': 'https://ddys.pro/', // Referer header，标明请求的来源
- // 'Origin': 'https://ddys.pro',  // Origin header，标明请求的起源
-  'User-Agent': UA,              // User-Agent header，模拟浏览器访问
+  'Referer': 'https://ddys.pro/',
+  'Origin': 'https://ddys.pro',
+  'User-Agent': UA,
 }
 
-// 定义应用的配置，包括网站信息和分类
 const appConfig = {
-    ver: 1,
-    title: '桃子影视',
-    site: 'https://www.taozi008.com',
-    // 定義分類
-    tabs: [
-        // name 為分類名，ext 可以傳入任意參數由 getCards 接收
-        {
-            name: '電影',
-            ext: {
-                id: 229,
-            },
-        },
-        {
-            name: '连续剧',
-            ext: {
-                id: 230,
-            },
-        },
-        {
-            name: '综艺',
-            ext: {
-                id: 231,
-            },
-        },
-        {
-            name: '动漫',
-            ext: {
-                id: 232,
-            },
-        },
-    ],
+  ver: 1,
+  title: "低端影视",
+  site: "https://ddys.pro/",
+  tabs: [{
+    name: '首页',
+    ext: {
+      url: '/'
+    },
+  }, {
+    name: '所有电影',
+    ext: {
+      url: '/category/movie/'
+    },
+  }, {
+    name: '连载剧集',
+    ext: {
+      url: '/category/airing/',
+      hasMore: false
+    },
+  }, {
+    name: '本季新番',
+    ext: {
+      url: '/category/anime/new-bangumi/',
+      hasMore: false
+    },
+  }, {
+    name: '动画',
+    ext: {
+      url: '/category/anime/'
+    },
+  }, {
+    name: '华语电影',
+    ext: {
+      url: '/category/movie/chinese-movie/'
+    },
+  }, {
+    name: '欧美电影',
+    ext: {
+      url: '/category/movie/western-movie/'
+    },
+  }, {
+    name: '日韩电影',
+    ext: {
+      url: '/category/movie/asian-movie/'
+    },
+  }, {
+    name: '豆瓣电影Top250',
+    ext: {
+      url: '/tag/douban-top250/'
+    },
+  }, {
+    name: '欧美剧',
+    ext: {
+      url: '/category/drama/western-drama/'
+    },
+  }, {
+    name: '日剧',
+    ext: {
+      url: '/category/drama/jp-drama/'
+    },
+  }, {
+    name: '韩剧',
+    ext: {
+      url: '/category/drama/kr-drama/'
+    },
+  }, {
+    name: '华语剧',
+    ext: {
+      url: '/category/drama/cn-drama/'
+    },
+  }]
 }
 
-// 获取应用配置的函数
 async function getConfig() {
-    return jsonify(appConfig)  // 返回应用的配置 JSON
+    return jsonify(appConfig)
 }
 
-// 获取影片卡片的函数，ext 包含额外的请求参数（如分页信息）
 async function getCards(ext) {
-  ext = argsify(ext)  // 解析扩展参数
-  let cards = []  // 用于存储抓取到的影片卡片
-  let url = ext.url  // 获取请求的 URL
-  let page = ext.page || 1  // 获取当前页面（默认是第1页）
-  let hasMore = ext.hasMore || true  // 是否有更多内容（默认为 true）
+  ext = argsify(ext)
+  let cards = []
+  let url = ext.url
+  let page = ext.page || 1
+  let hasMore = ext.hasMore || true
 
   if (!hasMore && page > 1) {
     return jsonify({
-      list: cards,  // 如果没有更多内容且当前页面大于1，返回空卡片列表
+      list: cards,
     })
   }
 
-  const url = appConfig.site +`/vod/index.html?page=2&type_id=230` //`/vod/index.html?${page}&type_id=${id}`//`/index.php/vod/show/id/${id}/page/${page}.html`
+  url = appConfig.site + url + `/page/${page}/`
 
   const { data } = await $fetch.get(url, {
-    headers  // 使用上面定义的请求头发送 GET 请求
+    headers
   })
 
-  const $ = cheerio.load(data)  // 使用 cheerio 解析返回的 HTML 数据
-  $('article.post').each((_, each) => {  // 遍历每个文章（影片）节点
+  const $ = cheerio.load(data)
+  $('article.post').each((_, each) => {
     cards.push({
-      vod_id: '/vod/player.html?cate_id=250&id=119728&type_id=230',  // 获取影片的 URL
-      vod_name: '丁丁小姐',  // 获取影片的标题
-      vod_pic:'https://shandianpic.com/upload/vod/20241202-1/2097126632ea24d92a46dafefcb19d42.jpg',  // 获取影片的封面图片
-      vod_remarks: '更新第12集',  // 获取影片的备注信息
+      vod_id: $(each).find('h2 > a').attr('href'),
+      vod_name: $(each).find('h2.post-box-title').text(),
+      vod_pic: $(each).find('.post-box-image').attr('style').replace('background-image: url(', '').replace('");"', ''),
+      vod_remarks: $(each).find('div.post-box-text > p').text(),
+      ext: {
+        url: $(each).find('h2 > a').attr('href'),
+      },
     })
   })
 
   return jsonify({
-    list: cards,  // 返回抓取到的影片卡片列表
+    list: cards,
   })
 }
 
-// 获取播放信息的函数
-async function getPlayinfo(ext) {
-    ext = argsify(ext)  // 解析扩展参数
-    const { srctype, src0, } = ext  // 获取视频源类型和源链接
-    let url = ''
-    if (srctype) {
-      url = 'https://www.taozi008.com' + src0  // 构建视频播放链接
+async function getTracks(ext) {
+    ext = argsify(ext);
+    let groups = [];
+    let url = ext.url;
+
+    const { data } = await $fetch.get(url, {
+        headers
+    });
+
+    const $ = cheerio.load(data);
+
+    const seasonNumbers = [];
+    $('.page-links .post-page-numbers').each((_, each) => {
+        const seasonNumber = $(each).text();
+        if (!isNaN(seasonNumber)) {
+            seasonNumbers.push(seasonNumber);
+        }
+    });
+
+    if (seasonNumbers.length === 0) {
+        let onlineGroup = {
+            title: '在线',
+            tracks: []
+        };
+
+        const trackText = $('script.wp-playlist-script').text();
+        const tracks = JSON.parse(trackText).tracks;
+
+        tracks.forEach(each => {
+            onlineGroup.tracks.push({
+                name: each.caption,
+                pan: '',
+                ext: each
+            });
+        });
+
+        groups.push(onlineGroup);
+    } else {
+        for (const season of seasonNumbers) {
+            let seasonGroup = {
+                title: `第${season}季`,
+                tracks: []
+            };
+
+            const seasonUrl = `${url}${season}/`;
+            const seasonData = await $fetch.get(seasonUrl, {
+                headers
+            });
+            const season$ = cheerio.load(seasonData.data);
+
+            const trackText = season$('script.wp-playlist-script').text();
+            const tracks = JSON.parse(trackText).tracks;
+
+            tracks.forEach(each => {
+                seasonGroup.tracks.push({
+                    name: each.caption,
+                    pan: '',
+                    ext: each
+                });
+            });
+
+            groups.push(seasonGroup);
+        }
     }
 
-    $print('***url: ' + url)  // 打印 URL，方便调试
-    return jsonify({
-      urls: [url],  // 返回包含播放链接的 JSON 数据
-      
-      headers: [{
-        //'Referer': 'https://ddys.pro/',  // Referer header
-      //  'Origin': 'https://ddys.pro',   // Origin header
-        'User-Agent': UA,  // User-Agent header
-      }]
-      
-    })
-}
-/*
-// 搜索影片的函数
-async function search(ext) {
-  ext = argsify(ext)  // 解析扩展参数
-  let cards = []  // 用于存储搜索结果
+    let group2 = {
+        title: '',
+        tracks: []
+    };
+    $('a').each((_, each) => {
+        const v = $(each).attr('href');
+        if (v.startsWith('https://drive.uc.cn/s')) {
+            group2.tracks.push({
+                name: 'uc网盘',
+                pan: v,
+            });
+        } else if (v.startsWith('https://pan.quark.cn/s/')) {
+            group2.tracks.push({
+                name: '夸克网盘',
+                pan: v,
+            });
+        }
+    });
+    if (group2.tracks.length > 0) {
+        groups.push(group2);
+    }
 
-  let text = encodeURIComponent(ext.text)  // 编码搜索文本
-  let page = ext.page || 1  // 获取当前页面（默认是第1页）
+    return jsonify({ list: groups });
+}
+
+async function getPlayinfo(ext) {
+    ext = argsify(ext)
+    const { srctype, src0, } = ext
+    let url = ''
+    if (srctype) {
+      url = 'https://v.ddys.pro' + src0
+    }
+
+    $print('***url: ' + url)
+    return jsonify({
+      urls: [url],
+      headers: [{
+        'Referer': 'https://ddys.pro/',
+        'Origin': 'https://ddys.pro',
+        'User-Agent': UA,
+      }]
+    })
+    // return jsonify({urls: []})
+}
+
+async function search(ext) {
+  ext = argsify(ext)
+  let cards = [];
+
+  let text = encodeURIComponent(ext.text)
+  let page = ext.page || 1
   if (page > 1) {
     return jsonify({
-      list: cards,  // 如果是分页请求并且当前页大于1，返回空卡片列表
+      list: cards,
     })
   }
 
-  const url = appConfig.site + `/search/index.html?keyword=${text}`//`/?s=${text}&post_type=post`  // 构建搜索 URL
+  const url = appConfig.site + `/?s=${text}&post_type=post`
   const { data } = await $fetch.get(url, {
-    headers  // 使用上面定义的请求头发送 GET 请求
+    headers
   })
   
-  const $ = cheerio.load(data)  // 使用 cheerio 解析返回的 HTML 数据
-  $('article.post').each((_, each) => {  // 遍历每个文章（影片）节点
+  const $ = cheerio.load(data)
+  $('article.post').each((_, each) => {
     cards.push({
-      vod_id: $(each).find('h2 > a').attr('href'),  // 获取影片的 URL
-      vod_name: $(each).find('h2.post-box-title').text(),  // 获取影片的标题
-      vod_pic:  $(each).find('.post-box-image').text(), // 搜索结果可能没有封面图片
-      vod_remarks: $(each).find('div.post-box-text > p').text(),  // 获取影片的备注信息
+      vod_id: $(each).find('h2 > a').attr('href'),
+      vod_name: $(each).find('h2.post-title').text(),
+      vod_pic: '',
+      vod_remarks: $(each).find('div.entry-content > p').text(),
+      ext: {
+        url: $(each).find('h2 > a').attr('href'),
+      },
     })
   })
 
   return jsonify({
-      list: cards,  // 返回搜索结果
+      list: cards,
   })
 }
-*/

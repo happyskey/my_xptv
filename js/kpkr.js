@@ -61,21 +61,21 @@ async function getCards(ext) {
     })
   }
 
-  url = appConfig.site + `/vod/index.html?page=${page}&type_id=${url}`//`/page/${page}/`  // 拼接成具体的请求 URL
+  url = appConfig.site + `/vod/index.html?page=${page}&type_id=${url}`       //`/page/${page}/`  // 拼接成具体的请求 URL
 
   const { data } = await $fetch.get(url, {
     headers  // 使用上面定义的请求头发送 GET 请求
   })
 
   const $ = cheerio.load(data)  // 使用 cheerio 解析返回的 HTML 数据
-  $('article.post').each((_, each) => {  // 遍历每个文章（影片）节点
+  $('.lists-content ul li').each((_, each) => {  // 遍历每个文章（影片）节点
     cards.push({
-      vod_id: $(each).find('h2 > a').attr('href'),  // 获取影片的 URL
-      vod_name: $(each).find('h2.post-box-title').text(),  // 获取影片的标题
-      vod_pic: $(each).find('.post-box-image').attr('style').replace('background-image: url(', '').replace('");"', ''),  // 获取影片的封面图片
-      vod_remarks: $(each).find('div.post-box-text > p').text(),  // 获取影片的备注信息
+      vod_id: $(each).find('a').attr('href'),  // 获取影片的 URL
+      vod_name: $(each).find('a > img').text(),  // 获取影片的标题
+      vod_pic: $(each).find('a > img').attr('src'),  // 获取影片的封面图片
+      vod_remarks: $(each).find('.countrie .orange:nth-child(2)').text(),  // 获取影片的备注信息
       ext: {
-        url: $(each).find('h2 > a').attr('href'),  // 影片的详细页面链接
+        url: $(each).find('a').attr('href'),  // 影片的详细页面链接
       },
     })
   })

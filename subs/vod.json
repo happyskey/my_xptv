@@ -7,18 +7,13 @@
             "api": "csp_tzsp",
             "ext": "https://github.com/kingreevice/my_xptv/blob/main/js/kpkr.js"
         },
-        {
-            "name": "多多影音",
-            "type": 3,
-            "api": "csp_ddys",
-            "ext": "https://github.com/kingreevice/my_xptv/blob/main/js/ceshi.js"
-        },
       {
             "name": "pppHub",
             "type": 3,
             "api": "csp_ppron",
             "ext": "https://ghp.ci/https://github.com/kingreevice/my_xptv/blob/main/js/pppPorn.js" 
-},    {
+},
+        {
             "name": "ceshi",
             "type": 3,
             "api": "csp_ceshi",

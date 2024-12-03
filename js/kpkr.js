@@ -62,7 +62,7 @@ async function getCards(ext) {
     })
   }
 
-  url ='https://www.taozi008.com/'+ `/vod/index.html?page=${page}&type_id=${url}`       //`/page/${page}/`  // 拼接成具体的请求 URL
+  url ='https://www.taozi008.com'+ `/vod/index.html?page=${page}&type_id=${url}`       //`/page/${page}/`  // 拼接成具体的请求 URL
 
   const { data } = await $fetch.get(url, {
     headers  // 使用上面定义的请求头发送 GET 请求

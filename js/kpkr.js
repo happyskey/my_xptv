@@ -14,7 +14,7 @@ const headers = {
 const appConfig = {
   ver: 1,  // 应用的版本
   title: "测试视频",  // 应用的标题
-  site: "https://www.taozi008.com/",  // 网站的主域名
+  site: "https://www.taozi008.com",  // 网站的主域名
   // 定义应用的多个分类标签及其相关链接
   tabs: [{
     name: '电影',  // 标签名称
@@ -91,15 +91,14 @@ async function getPlayinfo(ext) {
     const { srctype, src0, } = ext  // 获取视频源类型和源链接
     let url = ''
     if (srctype) {
-      url = 'https://v.ddys.pro' + src0  // 构建视频播放链接
+      url = 'https://www.taozi008.com' + src0  // 构建视频播放链接
     }
 
     $print('***url: ' + url)  // 打印 URL，方便调试
     return jsonify({
       urls: [url],  // 返回包含播放链接的 JSON 数据
       headers: [{
-        'Referer': 'https://ddys.pro/',  // Referer header
-        'Origin': 'https://ddys.pro',   // Origin header
+       
         'User-Agent': UA,  // User-Agent header
       }]
     })

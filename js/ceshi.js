@@ -65,7 +65,7 @@ async function getCards(ext) {
     })
   }
 
-  url = appConfig.site + url + `/page/${page}/`  // 拼接成具体的请求 URL
+  const url = appConfig.site +`/vod/index.html?page=2&type_id=230` //`/vod/index.html?${page}&type_id=${id}`//`/index.php/vod/show/id/${id}/page/${page}.html`
 
   const { data } = await $fetch.get(url, {
   //  headers  // 使用上面定义的请求头发送 GET 请求

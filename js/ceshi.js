@@ -107,7 +107,7 @@ async function getPlayinfo(ext) {
       */
     })
 }
-
+/*
 // 搜索影片的函数
 async function search(ext) {
   ext = argsify(ext)  // 解析扩展参数
@@ -140,3 +140,4 @@ async function search(ext) {
       list: cards,  // 返回搜索结果
   })
 }
+*/

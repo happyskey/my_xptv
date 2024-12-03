@@ -78,9 +78,6 @@ async function getCards(ext) {
       vod_name: $(each).find('h2.post-box-title').text(),  // 获取影片的标题
       vod_pic: $(each).find('.post-box-image').attr('style').replace('background-image: url(', '').replace('");"', ''),  // 获取影片的封面图片
       vod_remarks: $(each).find('div.post-box-text > p').text(),  // 获取影片的备注信息
-      ext: {
-        url: $(each).find('h2 > a').attr('href'),  // 影片的详细页面链接
-      },
     })
   })
 

@@ -74,10 +74,10 @@ async function getCards(ext) {
   const $ = cheerio.load(data)  // 使用 cheerio 解析返回的 HTML 数据
   $('article.post').each((_, each) => {  // 遍历每个文章（影片）节点
     cards.push({
-      vod_id: $(each).find('h2 > a').attr('href'),  // 获取影片的 URL
-      vod_name: $(each).find('h2.post-box-title').text(),  // 获取影片的标题
-      vod_pic: $(each).find('.post-box-image').attr('style').replace('background-image: url(', '').replace('");"', ''),  // 获取影片的封面图片
-      vod_remarks: $(each).find('div.post-box-text > p').text(),  // 获取影片的备注信息
+      vod_id: '/vod/player.html?cate_id=250&id=119728&type_id=230',  // 获取影片的 URL
+      vod_name: '丁丁小姐',  // 获取影片的标题
+      vod_pic:'https://shandianpic.com/upload/vod/20241202-1/2097126632ea24d92a46dafefcb19d42.jpg',  // 获取影片的封面图片
+      vod_remarks: '更新第12集',  // 获取影片的备注信息
     })
   })
 

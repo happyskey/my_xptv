@@ -162,6 +162,7 @@ const urlParams = new URLSearchParams(url_id.split('?')[1]);
 
 // 提取 id 参数的值
 const id = urlParams.get('id');
+const get_url =` https://www.taozi008.com/openapi/playline/${id}`
  const data = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,

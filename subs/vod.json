@@ -5,25 +5,25 @@
             "name": "桃子影视",
             "type": 3,
             "api": "csp_tzsp",
-            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/kpkr.js"
+            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/kpkr.js"
         },
       {
             "name": "pppHub",
             "type": 3,
             "api": "csp_ppron",
-            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
+            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
 },
         {
             "name": "ceshi",
             "type": 3,
             "api": "csp_ceshi",
-            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/ceshi.js" 
+            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/ceshi.js" 
 },
           {
             "name": "练手",
             "type": 3,
             "api": "csp_taozi",
-            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js" 
+            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js" 
 }
        
     ]

@@ -113,7 +113,7 @@ async function getCards(ext) {
 async function getTracks(ext) {
     ext = argsify(ext)
     let groups = []
-    let url = ext.url
+    let url = appConfig.site + ext.url
 
     const { data } = await $fetch.get(url, {
         headers: {

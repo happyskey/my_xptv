@@ -129,12 +129,11 @@ async function getTracks(ext) {
 
     const playlist = $('#eps-ul .play-btn')
     playlist.each((_, e) => {
-        let group = {
-            tracks: [],
-        }
+        let tracks = []
+        
         const name = $(e).find('a').text()
         const ShareUrl = $(e).find('a').attr('href')
-            group.tracks.push({
+          tracks.push({
                 name: `${name}`,
                 pan: '',
                 ext: {
@@ -149,7 +148,7 @@ async function getTracks(ext) {
         list: [
             {
                 title: '默认分组',
-                group,
+                tracks,
             },
         ],
     })

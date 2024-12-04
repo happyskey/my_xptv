@@ -133,8 +133,8 @@ async function getTracks(ext) {
         const name = $(e).find('a').attr('href')
         const panShareUrl = $(e).find('a').text()
         tracks.push({
-            name: name.trim(),
-            pan: panShareUrl,
+            name: `${name}`,
+            pan: '',
             ext: panShareUrl,
         })
     })

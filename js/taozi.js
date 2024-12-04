@@ -130,8 +130,8 @@ async function getTracks(ext) {
 
     const playlist = $('#eps-ul .play-btn')
     playlist.each((_, e) => {
-        const name = $(e).find('a').attr('href')
-        const ShareUrl = $(e).find('a').text()
+        const name = $(e).find('a').text()
+        const ShareUrl = $(e).find('a').attr('href')
         tracks.push({
             name: `${name}`,
             pan: '',

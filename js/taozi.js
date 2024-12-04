@@ -162,6 +162,7 @@ async funciton getPlayid(url_id){
 
 const num = url_id.match(/[?&]id=([^&]*)/);
 // 提取 id 参数的值
+    /*
 const num = urlParams.get('id');
 const get_url =` https://www.taozi008.com/openapi/playline/${num}`
  const data = await $fetch.get(get_url, {
@@ -171,8 +172,8 @@ const get_url =` https://www.taozi008.com/openapi/playline/${num}`
     })
 
     const new_url = data.info.file
-
-return new_url
+*/
+return 'https://v5.fentvoss.com/sdv5/202412/03/Ch4fjewarW24/video/index.m3u8'
 }
 
 

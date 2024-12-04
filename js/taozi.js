@@ -117,7 +117,7 @@ async function getCards(ext) {
 //获取单个播放列表
 async function getTracks(ext) {
     ext = argsify(ext)
-    let url = appConfig.site + ext.url
+    let url = 'https://www.taozi008.com/vod/player.html?cate_id=250&id=119786&type_id=230'//appConfig.site + ext.url
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -155,7 +155,6 @@ async function getTracks(ext) {
     })
 
 }
-    
     
 }
 

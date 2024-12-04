@@ -113,7 +113,7 @@ async function getCards(ext) {
 // 取得播放列表
 async function getTracks(ext) {
     ext = argsify(ext)
-    let tracks = []
+    let groups = []
     let url = ext.url
 
     const { data } = await $fetch.get(url, {
@@ -126,23 +126,27 @@ async function getTracks(ext) {
 
     const playlist = $('#eps-ul .play-btn')
     playlist.each((_, e) => {
+        let group = {
+            tracks: [],
+        }
         const name = $(e).find('a').text()
         // 網盤的分享連結
-        const panShareUrl = $(e).find('a').attr('href')
-        tracks.push({
-            name: name.trim(),
-            pan: panShareUrl,
+        const ShareUrl = $(e).find('a').attr('href')
+            group.tracks.push({
+                name: `${name}`,
+                pan: '',
+                ext: {
+                    url: ShareUrl,
+                },
+            })
         })
+
+        groups.push(group)
     })
 
     return jsonify({
-        // list 返回一個數組，用於區分不同線路(參考 AGE 動漫及 girigiri 動漫)，但功能未實現目前只會讀取第一項
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
+         list: groups,
+    
     })
 }
 

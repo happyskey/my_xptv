@@ -105,22 +105,40 @@ async function getCards(ext) {
         list: cards,
     })
 }
+/*
+// 取得播放列表
+async function getTracks(ext) {
+    ext = argsify(ext)
+    let tracks = []
+    let url = ext.url
 
-async function getPlayinfo(ext) {
-    ext = argsify(ext)  // 解析扩展参数
-    const { srctype, src0, } = ext  // 获取视频源类型和源链接
-    let url = ''
-    if (srctype) {
-      url = 'https://www.taozi008.com' + src0  // 构建视频播放链接
-    }
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
 
-    $print('***url: ' + url)  // 打印 URL，方便调试
+    const $ = cheerio.load(data)
+
+    const playlist = $('.module-player-list .module-row-one')
+    playlist.each((_, e) => {
+        const name = $(e).find('.module-row-title h4').text().replace('- 第1集', '')
+        // 網盤的分享連結
+        const panShareUrl = $(e).find('.module-row-title p').text()
+        tracks.push({
+            name: name.trim(),
+            pan: panShareUrl,
+        })
+    })
+
     return jsonify({
-      urls: [url],  // 返回包含播放链接的 JSON 数据
-      headers: [{
-       
-        'User-Agent': UA,  // User-Agent header
-      }]
+        // list 返回一個數組，用於區分不同線路(參考 AGE 動漫及 girigiri 動漫)，但功能未實現目前只會讀取第一項
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
     })
 }
 

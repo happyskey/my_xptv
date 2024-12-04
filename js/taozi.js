@@ -146,7 +146,7 @@ async function getTracks(ext) {
             })
          groups.push(group)
         })
-
+  getTracks()
 return jsonify({
          list: groups,
     
@@ -167,9 +167,9 @@ async function getPlayinfo(ext) {
 
 
 
-/*
 
-async function getTracks(ext) {
+
+async function getTracks() {
     let tracks = [{
                     name: '播放',
                     ext: {
@@ -188,6 +188,8 @@ async function getTracks(ext) {
     })
 
 }
+
+/*
 //播放组件没有无法播放
 async function getPlayinfo(ext) {
     ext = argsify(ext)

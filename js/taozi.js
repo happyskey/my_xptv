@@ -161,9 +161,9 @@ async funciton getPlayid(url_id){
 const urlParams = new URLSearchParams(url_id.split('?')[1]);
 
 // 提取 id 参数的值
-const id = urlParams.get('id');
-const get_url =` https://www.taozi008.com/openapi/playline/${id}`
- const data = await $fetch.get(url, {
+const num = urlParams.get('id');
+const get_url =` https://www.taozi008.com/openapi/playline/${num}`
+ const data = await $fetch.get(get_url, {
         headers: {
             'User-Agent': UA,
         },

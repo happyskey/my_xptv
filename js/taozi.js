@@ -153,12 +153,30 @@ async function getTracks(ext) {
 }
 
     
+async funciton getPlayid(url_id){
 
+
+
+// 创建一个 URL 对象，方便解析参数
+const urlParams = new URLSearchParams(url_id.split('?')[1]);
+
+// 提取 id 参数的值
+const id = urlParams.get('id');
+ const data = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const new_url = data.info.file
+
+return new_url
+}
 
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const url = ext.url
+    const url =await getPlayid(ext.url)// ext.url
     return jsonify({ urls: [url] })
 }
 

@@ -153,33 +153,11 @@ async function getTracks(ext) {
 }
 
     
-async funciton getPlayid(url_id){
-
-
-
-// 创建一个 URL 对象，方便解析参数
-//const urlParams = new URLSearchParams(url_id.split('?')[1]);
-
-const num = url_id.match(/[?&]id=([^&]*)/);
-// 提取 id 参数的值
-    /*
-const num = urlParams.get('id');
-const get_url =` https://www.taozi008.com/openapi/playline/${num}`
- const data = await $fetch.get(get_url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const new_url = data.info.file
-*/
-return 'https://v5.fentvoss.com/sdv5/202412/03/Ch4fjewarW24/video/index.m3u8'
-}
 
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const url = getPlayid(ext.url)// ext.url
+    const url =' https://v5.fentvoss.com/sdv5/202412/03/Ch4fjewarW24/video/index.m3u8'// ext.url
     return jsonify({ urls: [url] })
 }
 

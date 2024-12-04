@@ -134,7 +134,7 @@ async function getTracks(ext) {
         }
         const name = $(e).find('a').text()
         const ShareUrl = $(e).find('a').attr('href')
-            tracks.push({
+            group.tracks.push({
                 name: `${name}`,
                 pan: '',
                 ext: {
@@ -149,7 +149,7 @@ async function getTracks(ext) {
         list: [
             {
                 title: '默认分组',
-                tracks,
+                group,
             },
         ],
     })

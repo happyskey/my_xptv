@@ -109,6 +109,60 @@ async function getCards(ext) {
 
 
 async function getTracks(ext) {
+    ext = argsify(ext)
+    let groups = []
+    let url = ext.url
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const playlist = $('#eps-ul .play-btn')
+    playlist.each((_, e) => {
+        let group = {
+            tracks: [],
+        }
+        const name = $(e).find('a').text()
+        const ShareUrl = $(e).find('a').attr('href')
+            group.tracks.push({
+                name: `${name}`,
+                pan: '',
+                ext: {
+                    url: ShareUrl,
+                },
+                
+            })
+         groups.push(group)
+        })
+
+ return jsonify({
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
+    })
+}
+
+
+async function getPlayinfo(ext) {
+    ext = argsify(ext)
+    const url = ext.url
+    return jsonify({ urls: [url] })
+}
+
+
+
+
+
+/*
+
+async function getTracks(ext) {
     let tracks = [{
                     name: '播放',
                     ext: {
@@ -134,6 +188,18 @@ async function getPlayinfo(ext) {
     return jsonify({ urls: [url] })
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 let groups = [ {
             title: '在线',
@@ -154,11 +220,7 @@ return jsonify({ list: groups })
  
 }
 
-async function getPlayinfo(ext) {
-    ext = argsify(ext)
-    const url = ext.url
-    return jsonify({ urls: [url] })
-}
+
 
 
 

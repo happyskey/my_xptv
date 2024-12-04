@@ -158,8 +158,9 @@ async funciton getPlayid(url_id){
 
 
 // 创建一个 URL 对象，方便解析参数
-const urlParams = new URLSearchParams(url_id.split('?')[1]);
+//const urlParams = new URLSearchParams(url_id.split('?')[1]);
 
+const num = url_id.match(/[?&]id=([^&]*)/);
 // 提取 id 参数的值
 const num = urlParams.get('id');
 const get_url =` https://www.taozi008.com/openapi/playline/${num}`

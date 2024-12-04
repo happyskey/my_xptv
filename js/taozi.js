@@ -109,7 +109,25 @@ async function getCards(ext) {
 
 
 async function getTracks(ext) {
+    let tracks = [{
+                    name: '播放',
+                    ext: {
+                        url: 'https://ppvod01.blbtgg.com/splitOut/20241130/560085/V2024113012065288633560085/index.m3u8?auth_key=1733289584-e3d35681b5bc40cfad1a512d5a192658-0-b26ab5b2c8ff61bfe5f0a41f6505eb56',
+                    },
+                }]
 
+  
+   return jsonify({
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
+    })
+
+}
+/*
 let groups = [ {
             title: '在线',
             tracks: [{
@@ -126,16 +144,11 @@ let groups = [ {
         } ] 
 
 return jsonify({ list: groups })
-    
+ 
 }
 
 
 
-async function getPlayinfo(ext) {
-    ext = argsify(ext)
-    const url = ext.url
-    return jsonify({ urls: [url] })
-}
 
 /*
 

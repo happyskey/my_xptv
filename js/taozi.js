@@ -146,7 +146,7 @@ async function getTracks(ext) {
             })
          groups.push(group)
         })
-  getT('gggg')
+  getT()
 return jsonify({
          list: groups,
     
@@ -169,7 +169,7 @@ async function getPlayinfo(ext) {
 
 
 
-async function getT(name) {
+async function getT() {
     let tracks = [{
                     name: name,
                     ext: {

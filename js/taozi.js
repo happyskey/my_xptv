@@ -117,7 +117,8 @@ async function getCards(ext) {
 //获取单个播放列表
 async function getTracks(ext) {
     ext = argsify(ext)
-    let url = 'https://www.taozi008.com/vod/player.html?cate_id=250&id=119786&type_id=230'//appConfig.site + ext.url
+    let groups = []
+    let url = ext.url
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -125,16 +126,17 @@ async function getTracks(ext) {
         },
     })
 
-    
     const $ = cheerio.load(data)
 
     const playlist = $('#eps-ul .play-btn')
     playlist.each((_, e) => {
-        let tracks = []
-        
+        let group = {
+            tracks: [],
+        }
         const name = $(e).find('a').text()
+        // 網盤的分享連結
         const ShareUrl = $(e).find('a').attr('href')
-          tracks.push({
+            group.tracks.push({
                 name: `${name}`,
                 pan: '',
                 ext: {
@@ -142,19 +144,15 @@ async function getTracks(ext) {
                 },
                 
             })
+         groups.push(group)
         })
 
-
-         return jsonify({
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
+return jsonify({
+         list: groups,
+    
     })
-
 }
+       
     
 
 

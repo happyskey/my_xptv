@@ -116,7 +116,12 @@ let groups = [ {
                 name: '1', // 播放源的名称
                 pan: '', // 网盘链接为空
                 ext: 'https://v2.fentvoss.com/sdv2/202412/03/74Y9FgJ2EN24/video/index.m3u8' // 播放源的详细信息
-            }]
+            },{
+                name: '2', // 播放源的名称
+                pan: '', // 网盘链接为空
+                ext: 'https://v2.fentvoss.com/sdv2/202412/03/74Y9FgJ2EN24/video/index.m3u8' // 播放源的详细信息
+            },
+                    ]
         }] 
 
 return jsonify({ list: groups })

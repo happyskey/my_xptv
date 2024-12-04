@@ -108,11 +108,133 @@ async function getCards(ext) {
 
 
 
+async function getTracks(ext) {
+
+let groups = [ {
+            title: '在线',
+            tracks: [{
+                name: '1', // 播放源的名称
+                pan: '', // 网盘链接为空
+                ext: 'https://www.taozi008.com/vod/player.html?cate_id=257&id=119789&line_id=2539980&type_id=230' // 播放源的详细信息
+            }]
+        }] 
+
+return jsonify({ list: groups })
+    
+}
+
+/*
 
 
+// 获取视频播放资源（例如在线播放链接或网盘链接）
+async function getTracks(ext) {
+    ext = argsify(ext) // 解析扩展参数
+    let groups = [] // 存储资源分组的数组
+    let url = ext.url // 获取影片的URL
 
+    // 发送请求并获取数据
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
 
+    
 
+    // 使用Cheerio解析返回的数据
+    const $ = cheerio.load(data)
+
+    // 提取季数信息
+    const seasonNumbers = []
+    
+    $('.page-links .post-page-numbers').each((_, each) => {
+        const seasonNumber = $(each).text()
+        if (!isNaN(seasonNumber)) {
+            seasonNumbers.push(seasonNumber) // 收集季数信息
+        }
+    })
+
+    // 如果没有季数信息，则处理在线资源
+    if (seasonNumbers.length === 0) {
+        let onlineGroup = {
+            title: '在线',
+            tracks: []
+        }
+
+        // 提取并解析视频播放数据
+        const trackText = $('script.wp-playlist-script').text()
+        const tracks = JSON.parse(trackText).tracks
+
+        // 将每个播放源添加到资源组中
+        tracks.forEach(each => {
+            onlineGroup.tracks.push({
+                name: each.caption, // 播放源的名称
+                pan: '', // 网盘链接为空
+                ext: each // 播放源的详细信息
+            })
+        })
+
+        // 将在线资源添加到资源分组
+        groups.push(onlineGroup)
+    } else {
+        // 如果有季数信息，处理每个季的播放资源
+        for (const season of seasonNumbers) {
+            let seasonGroup = {
+                title: `第${season}季`,
+                tracks: []
+            }
+
+            const seasonUrl = `${url}${season}/`
+            const seasonData = await $fetch.get(seasonUrl, {
+                headers
+            })
+            const season$ = cheerio.load(seasonData.data)
+
+            // 获取并解析季的播放资源
+            const trackText = season$('script.wp-playlist-script').text()
+            const tracks = JSON.parse(trackText).tracks
+
+            tracks.forEach(each => {
+                seasonGroup.tracks.push({
+                    name: each.caption, // 播放源名称
+                    pan: '', // 网盘链接为空
+                    ext: each // 资源的详细信息
+                })
+            })
+
+            groups.push(seasonGroup) // 添加季资源分组
+        }
+    }
+
+    // 添加网盘资源组
+    let group2 = {
+        title: '',
+        tracks: []
+    }
+
+    // 搜索并提取网盘链接
+    $('a').each((_, each) => {
+        const v = $(each).attr('href')
+        if (v.startsWith('https://drive.uc.cn/s')) {
+            group2.tracks.push({
+                name: 'uc网盘',
+                pan: v, // 夸克网盘链接
+            })
+        } else if (v.startsWith('https://pan.quark.cn/s/')) {
+            group2.tracks.push({
+                name: '夸克网盘',
+                pan: v, // 夸克网盘链接
+            })
+        }
+    })
+
+    if (group2.tracks.length > 0) {
+        groups.push(group2) // 如果有网盘链接，则添加网盘资源组
+    }
+
+    // 返回资源分组
+    return jsonify({ list: groups })
+}
 
 
 

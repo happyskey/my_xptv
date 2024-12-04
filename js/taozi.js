@@ -177,7 +177,7 @@ return new_url
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const url =await getPlayid(ext.url)// ext.url
+    const url = getPlayid(ext.url)// ext.url
     return jsonify({ urls: [url] })
 }
 

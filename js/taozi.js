@@ -117,7 +117,6 @@ async function getCards(ext) {
 //获取单个播放列表
 async function getTracks(ext) {
     ext = argsify(ext)
-    let groups = []
     let url = appConfig.site + ext.url
 
     const { data } = await $fetch.get(url, {
@@ -135,7 +134,7 @@ async function getTracks(ext) {
         }
         const name = $(e).find('a').text()
         const ShareUrl = $(e).find('a').attr('href')
-            group.tracks.push({
+            tracks.push({
                 name: `${name}`,
                 pan: '',
                 ext: {
@@ -143,11 +142,19 @@ async function getTracks(ext) {
                 },
                 
             })
-         groups.push(group)
         })
 
 
-      return jsonify({ groups })
+         return jsonify({
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
+    })
+
+}
     
     
 }

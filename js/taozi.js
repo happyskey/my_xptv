@@ -57,6 +57,11 @@ async function getConfig() {
     return jsonify(appConfig)
 }
 
+
+
+
+
+
 // 取得分類的影片列表，ext 為 tabs 定義的 ext 加上頁碼(page)
 async function getCards(ext) {
     // 將 JSON 字符串轉為 JS 對象
@@ -142,13 +147,9 @@ async function getTracks(ext) {
         })
 
  return jsonify({
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
+      return jsonify({ list: groups })
     })
+    
 }
 
 

@@ -105,7 +105,11 @@ async function getCards(ext) {
         list: cards,
     })
 }
-/*
+
+
+///
+
+
 // 取得播放列表
 async function getTracks(ext) {
     ext = argsify(ext)
@@ -120,11 +124,11 @@ async function getTracks(ext) {
 
     const $ = cheerio.load(data)
 
-    const playlist = $('.module-player-list .module-row-one')
+    const playlist = $('#eps-ul .play-btn')
     playlist.each((_, e) => {
-        const name = $(e).find('.module-row-title h4').text().replace('- 第1集', '')
+        const name = $(e).find('a').text()
         // 網盤的分享連結
-        const panShareUrl = $(e).find('.module-row-title p').text()
+        const panShareUrl = $(e).find('a').attr('href')
         tracks.push({
             name: name.trim(),
             pan: panShareUrl,

@@ -146,7 +146,7 @@ async function getTracks(ext) {
             })
          groups.push(group)
         })
-  getT(group.tracks.name)
+  getT('gggg')
 return jsonify({
          list: groups,
     

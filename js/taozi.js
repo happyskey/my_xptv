@@ -157,7 +157,7 @@ async function getTracks(ext) {
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const url =' https://v5.fentvoss.com/sdv5/202412/03/Ch4fjewarW24/video/index.m3u8'// ext.url
+    const url = ext.url
     return jsonify({ urls: [url] })
 }
 

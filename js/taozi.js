@@ -107,7 +107,13 @@ async function getCards(ext) {
 }
 
 
-///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 
 // 取得播放列表
@@ -138,17 +144,18 @@ async function getTracks(ext) {
                 ext: {
                     url: ShareUrl,
                 },
+                
             })
+         groups.push(group)
         })
 
-        groups.push(group)
-    })
-
-    return jsonify({
+return jsonify({
          list: groups,
     
     })
 }
+       
+ 
 
 /*
 

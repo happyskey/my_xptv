@@ -115,7 +115,7 @@ let groups = [ {
             tracks: [{
                 name: '1', // 播放源的名称
                 pan: '', // 网盘链接为空
-                ext: 'https://www.taozi008.com/vod/player.html?cate_id=240&id=119779&line_id=2534987&type_id=229' // 播放源的详细信息
+                ext: 'https://v2.fentvoss.com/sdv2/202412/03/74Y9FgJ2EN24/video/index.m3u8' // 播放源的详细信息
             }]
         }] 
 

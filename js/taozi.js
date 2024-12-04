@@ -147,7 +147,7 @@ async function getTracks(ext) {
         })
 
 
-      return jsonify({ list: groups })
+      return jsonify({ groups })
     
     
 }

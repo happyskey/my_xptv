@@ -127,6 +127,13 @@ async function getTracks(ext) {
     })
 
 }
+
+async function getPlayinfo(ext) {
+    ext = argsify(ext)
+    const url = ext.url
+    return jsonify({ urls: [url] })
+}
+
 /*
 let groups = [ {
             title: '在线',

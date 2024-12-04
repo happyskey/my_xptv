@@ -127,7 +127,7 @@ async function getTracks(ext) {
     })
 
 }
-
+//播放组件没有无法播放
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url

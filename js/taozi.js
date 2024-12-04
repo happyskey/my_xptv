@@ -123,7 +123,21 @@ let groups = [ {
             }
                     
                     ]
-        }] 
+        },{
+            title: '看看',
+            tracks: [{
+                name: '1', // 播放源的名称
+                pan: '', // 网盘链接为空
+                ext: 'https://v2.fentvoss.com/sdv2/202412/03/74Y9FgJ2EN24/video/index.m3u8' // 播放源的详细信息
+            },{
+                name: '2', // 播放源的名称
+                pan: '', // 网盘链接为空
+                ext: 'https://ppvod01.blbtgg.com/splitOut/20241130/560085/V2024113012065288633560085/index.m3u8?auth_key=1733289584-e3d35681b5bc40cfad1a512d5a192658-0-b26ab5b2c8ff61bfe5f0a41f6505eb56' // 播放源的详细信息
+            }
+                    
+                    ]
+        }
+             ] 
 
 return jsonify({ list: groups })
     

@@ -177,15 +177,9 @@ async function getPlayinfo(ext) {
     })
 
 
-
-    
     data = argsify(data)
-    const url =  data.info.file//ext.url
- const da = await $fetch.get( url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
+    const url =  'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
+
     
     return jsonify({ urls: [url] })
 }

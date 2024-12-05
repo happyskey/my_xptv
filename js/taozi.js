@@ -167,7 +167,7 @@ async function getPlayinfo(ext) {
     
     ext = argsify(ext)
 
-    /*
+    
     const idMatch = ext.url.match(/[?&]line_id=([^&]*)/)[1];
     let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
     
@@ -178,8 +178,8 @@ async function getPlayinfo(ext) {
     })
 
 
-    data = argsify(data)
-        */
+  //  data = argsify(data)
+        
     const url =  'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
 
     

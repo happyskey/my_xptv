@@ -183,7 +183,7 @@ async function getPlayinfo(ext) {
     })
 
  
-await getNewid()
+ getNewid()
    
 
 

@@ -57,6 +57,11 @@ async function getConfig() {
     return jsonify(appConfig)
 }
 
+
+
+
+
+
 // 取得分類的影片列表，ext 為 tabs 定義的 ext 加上頁碼(page)
 async function getCards(ext) {
     // 將 JSON 字符串轉為 JS 對象
@@ -108,9 +113,141 @@ async function getCards(ext) {
 
 
 
+
+//获取单个播放列表
+async function getTracks(ext) {
+    
+    ext = argsify(ext)
+    let tracks = []
+    let url = ext.url
+    
+    
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const playlist = $('#eps-ul .play-btn')
+    playlist.each((_, e) => {
+        const name = $(e).find('a').text()
+        const ShareUrl =appConfig.site + $(e).find('a').attr('href')
+
+        
+
+
+        
+        tracks.push({
+            name:name.trim(),
+            pan: '',
+           ext: {
+                        url: ShareUrl,
+                    }, 
+        })
+    })
+
+    return jsonify({
+        // list 返回一個數組，用於區分不同線路(參考 AGE 動漫及 girigiri 動漫)，但功能未實現目前只會讀取第一項
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
+    })
+}
+
+    
+
+
+async function getPlayinfo(ext) {
+    
+    ext = argsify(ext)
+
+    
+    const idMatch = ext.url.match(/[?&]line_id=([^&]*)/)[1];
+    let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
+
+
+
+    
+// let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`
+
+   const data = await $fetch.get(get_url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+ 
+
+   
+
+
+
+
+    
+    const url =  data.match(/"file":"(.*?)"/)[1]    //'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
+    
+
+
+  // data = argsify(data).info.file
+
+
+    
+    return jsonify({ urls: [url] })
+}
+
+
+
+//搜索
+async function search(ext) {
+    ext = argsify(ext)
+    let cards = []
+
+    let text = encodeURIComponent(ext.text)
+    let page = ext.page || 1
+    let url = `${appConfig.site}/public/auto/search1.html?keyword=${text}&page=${page}`
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const videos = $('.lists-content ul li a.thumbnail')
+    videos.each((_, e) => {
+        const href = $(e).attr('href')
+        const title = $(e).find('img.thumb').attr('alt')
+        const cover = $(e).find('img.thumb').attr('src')
+
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            vod_remarks: '',
+
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+    return jsonify({
+        list: cards,
+    })
+}
+
+
+/*
+
 async function getTracks(ext) {
     let tracks = [{
-                    name: '播放',
+                    name: name,
                     ext: {
                         url: 'https://v2.fentvoss.com/sdv2/202412/03/74Y9FgJ2EN24/video/index.m3u8'//'https://ppvod01.blbtgg.com/splitOut/20241130/560085/V2024113012065288633560085/index.m3u8?auth_key=1733289584-e3d35681b5bc40cfad1a512d5a192658-0-b26ab5b2c8ff61bfe5f0a41f6505eb56',
                     },
@@ -127,12 +264,26 @@ async function getTracks(ext) {
     })
 
 }
+
+/*
 //播放组件没有无法播放
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
     return jsonify({ urls: [url] })
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 let groups = [ {
@@ -154,11 +305,7 @@ return jsonify({ list: groups })
  
 }
 
-async function getPlayinfo(ext) {
-    ext = argsify(ext)
-    const url = ext.url
-    return jsonify({ urls: [url] })
-}
+
 
 
 

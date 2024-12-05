@@ -178,9 +178,16 @@ async function getPlayinfo(ext) {
     })
 
 
-   data = jsonify(data).info.file
-        
-    const url =  data//'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
+  // data = argsify(data).info.file
+
+
+   
+
+
+
+
+    
+    const url =  data.match(/"file":"(.*?)"/)[1]    //'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
 
     
     return jsonify({ urls: [url] })

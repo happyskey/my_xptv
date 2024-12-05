@@ -210,7 +210,7 @@ async function search(ext) {
 
     let text = encodeURIComponent(ext.text)
     let page = ext.page || 1
-    let url = `${appConfig.site}/search/index.html?keyword=${text}&page=${page}`
+    let url = `${appConfig.site}/public/auto/search1.html?keyword=${text}&page=${page}`
 
     const { data } = await $fetch.get(url, {
         headers: {

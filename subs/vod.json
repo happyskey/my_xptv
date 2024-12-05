@@ -5,7 +5,7 @@
             "name": "桃子影视",
             "type": 3,
             "api": "csp_tzsp",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/kpkr.js"
+            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js"
         },
       {
             "name": "pppHub",
@@ -14,16 +14,10 @@
             "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
 },
         {
-            "name": "ceshi",
+            "name": "练手",
             "type": 3,
             "api": "csp_ceshi",
             "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/ceshi.js" 
-},
-          {
-            "name": "练手",
-            "type": 3,
-            "api": "csp_taozi",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js" 
 }
        
     ]

@@ -298,4 +298,15 @@ return jsonify({ list: groups })
  
 }
 
+<div class="lists-content">
+            <ul>
+    <li>
+        <a href="/vod/player.html?cate_id=264&amp;id=79305&amp;type_id=232" class="thumbnail">
+                <img src="https://shandianpic.com/upload/vod/20230911-1/0448dd1ac753bb8f52e514136abb2cca.jpg" class="thumb" alt="名侦探柯南：绯色的不在场证明">提取hrf src alt
+
+ $('.lists-content ul li a.thumbnail').each((index, element) => {
+      const href = $(element).attr('href'); // 提取 href 属性
+      const src = $(element).find('img.thumb').attr('src'); // 提取 img 标签中的 src 属性
+      const alt = $(element).find('img.thumb').attr('alt'); // 提取 img 标签中的 alt 属性
+
 */

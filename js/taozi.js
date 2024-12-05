@@ -174,9 +174,9 @@ async function getPlayinfo(ext) {
 
 
     
- let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`
+// let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`
 
-   const data = await $fetch.get(txt, {
+   const data = await $fetch.get(get_url, {
         headers: {
             'User-Agent': UA,
         },
@@ -203,6 +203,44 @@ async function getPlayinfo(ext) {
 
 
 
+//搜索
+async function search(ext) {
+    ext = argsify(ext)
+    let cards = []
+
+    let text = encodeURIComponent(ext.text)
+    let page = ext.page || 1
+    let url = `${appConfig.site}/search/index.html?keyword=${text}&page=${page}`
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const videos = $('.lists-content ul li')
+    videos.each((_, e) => {
+        const href = $(e).find('a').attr('href')
+        const title = $(e).find('a > img').attr('alt')
+        const cover = $(e).find('a > img').attr('src')
+
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            vod_remarks: '',
+
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+    return jsonify({
+        list: cards,
+    })
+}
 
 
 /*

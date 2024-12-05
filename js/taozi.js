@@ -116,9 +116,12 @@ async function getCards(ext) {
 
 //获取单个播放列表
 async function getTracks(ext) {
+    
     ext = argsify(ext)
     let tracks = []
     let url = ext.url
+    
+    
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -156,7 +159,18 @@ async function getTracks(ext) {
 
 
 async function getPlayinfo(ext) {
+    
     ext = argsify(ext)
+   
+    const idMatch = ext.url.match(/[?&]id=([^&]*)/);
+    let get_url = `https://www.taozi008.com/openapi/playline${idMatch}`
+    
+   const data = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+    const new_url = data.info.file
     const url = `https://v2.fentvoss.com/sdv2/202412/04/jRys6aHswD22/video/index.m3u8`//ext.url
     return jsonify({ urls: [url] })
 }

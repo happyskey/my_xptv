@@ -174,7 +174,7 @@ async function getPlayinfo(ext) {
 
 
     
-// let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`
+
 
    const data = await $fetch.get(get_url, {
         headers: {
@@ -193,7 +193,7 @@ async function getPlayinfo(ext) {
 
             const result = JSON.parse(presp.data)
 
-            let playUrl = result.url.info.file
+            let playUrl = result.info.file
             return jsonify({ urls: [playUrl] })
          }
 

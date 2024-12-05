@@ -137,24 +137,11 @@ async function getTracks(ext) {
         const ShareUrl =appConfig.site + $(e).find('a').attr('href')
 
         
-//
-    const idMatch = ppConfig.site + $(e).find('a').attr('href').match(/[?&]id=([^&]*)/);
-    let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
-    
-   const data = await $fetch.get(get_url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-    new_url = data.info.file
 
-
-
-        //
 
         
         tracks.push({
-            name:new_url.trim()// name.trim(),
+            name:name.trim(),
             pan: '',
            ext: {
                         url: ShareUrl,
@@ -183,7 +170,7 @@ async function getPlayinfo(ext) {
     const idMatch = ext.url.match(/[?&]id=([^&]*)/);
     let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
     
-   const data = await $fetch.get(get_ur, {
+   const data = await $fetch.get(get_url, {
         headers: {
             'User-Agent': UA,
         },

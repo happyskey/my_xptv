@@ -170,6 +170,9 @@ async function getPlayinfo(ext) {
     
     const idMatch = ext.url.match(/[?&]line_id=([^&]*)/)[1];
     let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
+
+
+
     
    const data = await $fetch.get(get_url, {
         headers: {
@@ -177,9 +180,7 @@ async function getPlayinfo(ext) {
         },
     })
 
-
-  // data = argsify(data).info.file
-
+ 
 
    
 
@@ -188,6 +189,18 @@ async function getPlayinfo(ext) {
 
     
     const url =  data.match(/"file":"(.*?)"/)[1]    //'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
+    
+
+ let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=通知&content=${url}&template=html`
+
+
+  // data = argsify(data).info.file
+   const text = await $fetch.get(txt, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
 
     
     return jsonify({ urls: [url] })

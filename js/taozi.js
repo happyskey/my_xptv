@@ -183,16 +183,9 @@ async function getPlayinfo(ext) {
     })
 
          if (data) {
+             //目前这个JSON.parse方法可靠 ，argsify 不适用于解析
             const result = JSON.parse(data)
-            let playUrl = result.info.file
-
-                const presp = await $fetch.get(`https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`, {
-              headers: {
-            'User-Agent': UA,
-        },
-            })
-
-             
+            let playUrl = result.info.file        
             return jsonify({ urls: [playUrl] })
          }
 

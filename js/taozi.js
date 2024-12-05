@@ -167,7 +167,7 @@ async function getPlayinfo(ext) {
     
     ext = argsify(ext)
    
-    const idMatch = ext.url.match(/[?&]id=([^&]*)/);
+    const idMatch = ext.url.match(/[?&]id=([^&]*)/)[1];
     let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
     
    const data = await $fetch.get(get_url, {

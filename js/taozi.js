@@ -181,7 +181,7 @@ async function getPlayinfo(ext) {
     
     data = argsify(data)
     const url =  data.info.file//ext.url
- const da = await $fetch.get(url, {
+ const da = await $fetch.get( `https://www.taozi008.com/openapi/playline/119828`, {
         headers: {
             'User-Agent': UA,
         },

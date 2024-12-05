@@ -183,16 +183,7 @@ async function getPlayinfo(ext) {
     })
 
          if (data) {
-          
-
-            const presp = await $fetch.post(apiUrl, params, {
-                headers: {
-                    'User-Agent': UA,
-                },
-            })
-
-            const result = JSON.parse(presp.data)
-
+            const result = JSON.parse(data)
             let playUrl = result.info.file
             return jsonify({ urls: [playUrl] })
          }

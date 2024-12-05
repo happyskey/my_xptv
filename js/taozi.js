@@ -220,11 +220,11 @@ async function search(ext) {
 
     const $ = cheerio.load(data)
 
-    const videos = $('.lists-content ul li')
+    const videos = $('.lists-content ul li a.thumbnail')
     videos.each((_, e) => {
-        const href = $(e).find('a').attr('href')
-        const title = $(e).find('a > img').attr('alt')
-        const cover = $(e).find('a > img').attr('src')
+        const href = $(e).attr('href')
+        const title = $(e).find('img.thumb').attr('alt')
+        const cover = $(e).find('img.thumb').attr('src')
 
         cards.push({
             vod_id: href,

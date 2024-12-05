@@ -135,8 +135,26 @@ async function getTracks(ext) {
     playlist.each((_, e) => {
         const name = $(e).find('a').text()
         const ShareUrl =appConfig.site + $(e).find('a').attr('href')
+
+        
+//
+    const idMatch = ppConfig.site + $(e).find('a').attr('href').match(/[?&]id=([^&]*)/);
+    let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
+    
+   const data = await $fetch.get(get_url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+    new_url = data.info.file
+
+
+
+        //
+
+        
         tracks.push({
-            name: name.trim(),
+            name:new_url.trim()// name.trim(),
             pan: '',
            ext: {
                         url: ShareUrl,

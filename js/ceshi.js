@@ -20,35 +20,35 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 const appConfig = {
     ver: 1,
-    title: '桃子',
-    site: 'https://www.taozi008.com',
+    title: '樱花动漫',
+    site: 'https://yhdm.one',
     // 定義分類
     tabs: [
         // name 為分類名，ext 可以傳入任意參數由 getCards 接收
         {
-            name: '电影',
+            name: '日本动漫',
             ext: {
-                id: 229,
+                id: 'jp',
             },
         },
         {
-            name: '电视剧',
+            name: '国产动漫',
             ext: {
-                id: 230,
+                id: 'cn',
             },
         },
         {
-            name: '综艺',
+            name: '欧美动漫',
             ext: {
-                id: 231,
+                id: 'us',
             },
-        },
-        {
-            name: '动漫',
+        },{
+            name: '其他',
             ext: {
-                id: 232,
+                id: 'other',
             },
-        },
+        }
+        
     ],
 }
 
@@ -74,7 +74,7 @@ async function getCards(ext) {
     let { page = 1, id } = ext
 
     // 定義請求的 URL
-    const url = appConfig.site + `/vod/index.html?page=${page}&type_id=${id}`     //`/index.php/vod/show/id/${id}/page/${page}.html`
+    const url = appConfig.site + `/list/?country=${id}&page=${page}`     //`/index.php/vod/show/id/${id}/page/${page}.html`
     // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {
         headers: {
@@ -90,15 +90,24 @@ async function getCards(ext) {
     // 遍歷所有影片
     videos.each((_, e) => {
         const href = $(e).find('a').attr('href')
-        const title = $(e).find('a > img').attr('alt')
-        const cover = $(e).find('a > img').attr('src')
-        const remarks = $(e).find('.note > span').text()
+        const title = $(e).find('h6').text()
+        const cover = $(e).find('img').attr('src')
+        //const remarks = $(e).find('.note > span').text()
+
+
+       
+
+
+
+
+
+        
         // 將每個影片加入 cards 數組中
         cards.push({
             vod_id: href,
             vod_name: title,
             vod_pic: cover,
-            vod_remarks: remarks, // 海報右上角的子標題
+            //vod_remarks: remarks, // 海報右上角的子標題
             // ext 會傳給 getTracks
             ext: {
                 url: `${appConfig.site}${href}`,
@@ -111,7 +120,7 @@ async function getCards(ext) {
     })
 }
 
-
+/*
 
 
 //获取单个播放列表

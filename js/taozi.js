@@ -180,7 +180,7 @@ async function getPlayinfo(ext) {
 
    data = argsify(data).info.file
         
-    const url =  'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
+    const url =  data//'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
 
     
     return jsonify({ urls: [url] })

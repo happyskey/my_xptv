@@ -182,23 +182,24 @@ async function getPlayinfo(ext) {
         },
     })
 
- 
- getNewid()
-   
+         if (data) {
+          
 
+            const presp = await $fetch.post(apiUrl, params, {
+                headers: {
+                    'User-Agent': UA,
+                },
+            })
+
+            const result = JSON.parse(presp.data)
+
+            let playUrl = result.url.info.file
+            return jsonify({ urls: [playUrl] })
+         }
 
 
 
     
-    const url =  data.match(/"file":"(.*?)"/)[1]    //'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
-    
-
-
-  // data = argsify(data).info.file
-
-
-    
-    return jsonify({ urls: [url] })
 }
 
 
@@ -242,21 +243,7 @@ async function search(ext) {
     })
 }
 
-async function getNewid(){
 
- let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`
-
-   const data = await $fetch.get(txt, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-
-
-
-
-}
 /*
 
 async function getTracks(ext) {

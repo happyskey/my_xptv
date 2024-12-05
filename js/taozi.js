@@ -176,7 +176,7 @@ async function getPlayinfo(ext) {
 
 
 
-   const data = await $fetch.get(get_url, {
+   const {data} = await $fetch.get(get_url, {
         headers: {
             'User-Agent': UA,
         },

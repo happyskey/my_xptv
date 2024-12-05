@@ -171,7 +171,7 @@ async function getPlayinfo(ext) {
         },
     })
     const new_url = data.info.file
-    const url = `https://v2.fentvoss.com/sdv2/202412/04/jRys6aHswD22/video/index.m3u8`//ext.url
+    const url = new_url //ext.url
     return jsonify({ urls: [url] })
 }
 

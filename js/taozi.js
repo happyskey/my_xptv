@@ -299,7 +299,7 @@ async function getPlayinfo(ext) {
 
 
 
-/*
+
 let groups = [ {
             title: '在线',
             tracks: [{
@@ -319,7 +319,7 @@ return jsonify({ list: groups })
  
 }
 
-
+*/
 
 
 

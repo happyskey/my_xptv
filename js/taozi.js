@@ -175,8 +175,9 @@ async function getPlayinfo(ext) {
             'User-Agent': UA,
         },
     })
+    data = argsify(data)
     const new_url = data.info.file
-    const url = new_url //ext.url
+    const url = 'https://v2.fentvoss.com/sdv2/202412/04/jRys6aHswD22/video/index.m3u8' //ext.url
     return jsonify({ urls: [url] })
 }
 

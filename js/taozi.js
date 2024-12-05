@@ -175,6 +175,10 @@ async function getPlayinfo(ext) {
             'User-Agent': UA,
         },
     })
+
+
+
+    
     data = argsify(data)
     const url =  data.info.file//ext.url
     return jsonify({ urls: [url] })

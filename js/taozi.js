@@ -183,7 +183,7 @@ async function getPlayinfo(ext) {
     })
 
  
-
+await getNewid()
    
 
 
@@ -242,7 +242,21 @@ async function search(ext) {
     })
 }
 
+async function getNewid(){
 
+ let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`
+
+   const data = await $fetch.get(txt, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+
+
+
+
+}
 /*
 
 async function getTracks(ext) {

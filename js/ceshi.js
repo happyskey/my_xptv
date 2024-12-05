@@ -173,32 +173,25 @@ async function getPlayinfo(ext) {
 
 
 
-    
-// let   txt=` https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=xx&content=ggg&template=html`
 
-   const data = await $fetch.get(get_url, {
+
+
+   const {data} = await $fetch.get(get_url, {
         headers: {
             'User-Agent': UA,
         },
     })
 
- 
+         if (data) {
+             //目前这个JSON.parse方法可靠 ，argsify 不适用于解析
+            const result = JSON.parse(data)
+            let playUrl = result.info.file        
+            return jsonify({ urls: [playUrl] })
+         }
 
-   
-
-
-
-
-    
-    const url =  data.match(/"file":"(.*?)"/)[1]    //'https://v4.fentvoss.com/sdv4/202412/04/PLw0AyTRFs22/video/index.m3u8'//ext.url
-    
-
-
-  // data = argsify(data).info.file
 
 
     
-    return jsonify({ urls: [url] })
 }
 
 
@@ -285,7 +278,7 @@ async function getPlayinfo(ext) {
 
 
 
-/*
+
 let groups = [ {
             title: '在线',
             tracks: [{
@@ -303,255 +296,6 @@ let groups = [ {
 
 return jsonify({ list: groups })
  
-}
-
-
-
-
-
-/*
-
-
-// 获取视频播放资源（例如在线播放链接或网盘链接）
-async function getTracks(ext) {
-    ext = argsify(ext) // 解析扩展参数
-    let groups = [] // 存储资源分组的数组
-    let url = ext.url // 获取影片的URL
-
-    // 发送请求并获取数据
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    
-
-    // 使用Cheerio解析返回的数据
-    const $ = cheerio.load(data)
-
-    // 提取季数信息
-    const seasonNumbers = []
-    
-    $('.page-links .post-page-numbers').each((_, each) => {
-        const seasonNumber = $(each).text()
-        if (!isNaN(seasonNumber)) {
-            seasonNumbers.push(seasonNumber) // 收集季数信息
-        }
-    })
-
-    // 如果没有季数信息，则处理在线资源
-    if (seasonNumbers.length === 0) {
-        let onlineGroup = {
-            title: '在线',
-            tracks: []
-        }
-
-        // 提取并解析视频播放数据
-        const trackText = $('script.wp-playlist-script').text()
-        const tracks = JSON.parse(trackText).tracks
-
-        // 将每个播放源添加到资源组中
-        tracks.forEach(each => {
-            onlineGroup.tracks.push({
-                name: each.caption, // 播放源的名称
-                pan: '', // 网盘链接为空
-                ext: each // 播放源的详细信息
-            })
-        })
-
-        // 将在线资源添加到资源分组
-        groups.push(onlineGroup)
-    } else {
-        // 如果有季数信息，处理每个季的播放资源
-        for (const season of seasonNumbers) {
-            let seasonGroup = {
-                title: `第${season}季`,
-                tracks: []
-            }
-
-            const seasonUrl = `${url}${season}/`
-            const seasonData = await $fetch.get(seasonUrl, {
-                headers
-            })
-            const season$ = cheerio.load(seasonData.data)
-
-            // 获取并解析季的播放资源
-            const trackText = season$('script.wp-playlist-script').text()
-            const tracks = JSON.parse(trackText).tracks
-
-            tracks.forEach(each => {
-                seasonGroup.tracks.push({
-                    name: each.caption, // 播放源名称
-                    pan: '', // 网盘链接为空
-                    ext: each // 资源的详细信息
-                })
-            })
-
-            groups.push(seasonGroup) // 添加季资源分组
-        }
-    }
-
-    // 添加网盘资源组
-    let group2 = {
-        title: '',
-        tracks: []
-    }
-
-    // 搜索并提取网盘链接
-    $('a').each((_, each) => {
-        const v = $(each).attr('href')
-        if (v.startsWith('https://drive.uc.cn/s')) {
-            group2.tracks.push({
-                name: 'uc网盘',
-                pan: v, // 夸克网盘链接
-            })
-        } else if (v.startsWith('https://pan.quark.cn/s/')) {
-            group2.tracks.push({
-                name: '夸克网盘',
-                pan: v, // 夸克网盘链接
-            })
-        }
-    })
-
-    if (group2.tracks.length > 0) {
-        groups.push(group2) // 如果有网盘链接，则添加网盘资源组
-    }
-
-    // 返回资源分组
-    return jsonify({ list: groups })
-}
-
-
-
-
-
-/*
-// 取得播放列表
-async function getTracks(ext) {
-    ext = argsify(ext)
-    let groups = []
-    let url = ext.url
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const $ = cheerio.load(data)
-
-    const playlist = $('#eps-ul .play-btn')
-    playlist.each((_, e) => {
-        let group = {
-            tracks: [],
-        }
-        const name = $(e).find('a').text()
-        // 網盤的分享連結
-        const ShareUrl = $(e).find('a').attr('href')
-            group.tracks.push({
-                name: `${name}`,
-                pan: '',
-                ext: {
-                    url: ShareUrl,
-                },
-                
-            })
-         groups.push(group)
-        })
-
-return jsonify({
-         list: groups,
-    
-    })
-}
-       
- 
-
-/*
-
-// 取得播放列表
-async function getTracks(ext) {
-    ext = argsify(ext)
-    let tracks = []
-    let url = ext.url
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const $ = cheerio.load(data)
-
-    const playlist = $('.module-player-list .module-row-one')
-    playlist.each((_, e) => {
-        const name = $(e).find('.module-row-title h4').text().replace('- 第1集', '')
-        // 網盤的分享連結
-        const panShareUrl = $(e).find('.module-row-title p').text()
-        tracks.push({
-            name: name.trim(),
-            pan: panShareUrl,
-        })
-    })
-
-    return jsonify({
-        // list 返回一個數組，用於區分不同線路(參考 AGE 動漫及 girigiri 動漫)，但功能未實現目前只會讀取第一項
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
-    })
-}
-
-
-
-
-// 網盤源不需要寫播放
-async function getPlayinfo(ext) {
-    return jsonify({ urls: [] })
-}
-
-// search 的寫法跟 getCards 一樣，唯一不同就是由分類 id 改為關鍵字
-async function search(ext) {
-    ext = argsify(ext)
-    let cards = []
-
-    // 必須把中文編碼否則 iOS 16 會報錯
-    let text = encodeURIComponent(ext.text)
-    let page = ext.page || 1
-    let url = `${appConfig.site}/index.php/vod/search/page/${page}/wd/${text}.html`
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const $ = cheerio.load(data)
-
-    const videos = $('#main .module-search-item')
-    videos.each((_, e) => {
-        const href = $(e).find('.video-info-header h3 a').attr('href')
-        const title = $(e).find('.module-item-pic img').attr('alt')
-        const cover = $(e).find('.module-item-pic img').attr('data-src')
-        const remarks = $(e).find('.video-serial').text()
-        cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            vod_remarks: remarks,
-            ext: {
-                url: `${appConfig.site}${href}`,
-            },
-        })
-    })
-
-    return jsonify({
-        list: cards,
-    })
 }
 
 */

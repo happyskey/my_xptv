@@ -18,7 +18,7 @@ $cache: 可將數據存入緩存
 
 
 
-const _0x5966=['other','国产动漫','Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/124.0.0.0\x20Safari/537.36'];const _0x1f2a=function(_0x596668,_0x1f2a36){_0x596668=_0x596668-0x0;let _0x3259ad=_0x5966[_0x596668];return _0x3259ad;};const cheerio=createCheerio();const UA=_0x1f2a('0x2');const appConfig={'ver':0x1,'title':'樱花动漫','site':'https://yhdm.one','tabs':[{'name':'日本动漫','ext':{'id':'jp'}},{'name':_0x1f2a('0x1'),'ext':{'id':'cn'}},{'name':'欧美动漫','ext':{'id':'us'}},{'name':'其他','ext':{'id':_0x1f2a('0x0')}}]};async function getConfig(){return jsonify(appConfig);}
+const _0x5966=['other','国产动漫','Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/124.0.0.0\x20Safari/537.36'];const _0x1f2a=function(_0x596668,_0x1f2a36){_0x596668=_0x596668-0x0;let _0x3259ad=_0x5966[_0x596668];return _0x3259ad;};const cheerio=createCheerio();const UA=_0x1f2a('0x2');const appConfig={'ver':0x1,'title':'樱花动漫','site':'https://yhdm.one','tabs':[{'name':'日本','ext':{'id':'jp'}},{'name':_0x1f2a('0x1'),'ext':{'id':'cn'}},{'name':'欧美动漫','ext':{'id':'us'}},{'name':'其他','ext':{'id':_0x1f2a('0x0')}}]};async function getConfig(){return jsonify(appConfig);}
 
 
 /*

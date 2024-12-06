@@ -118,8 +118,9 @@ async function getTracks(ext) {
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const idMatch = ext.url.match(/[?&]line_id=([^&]*)/)[1];
-    let get_url = `https://www.taozi008.com/openapi/playline/${idMatch}`
+    let groups = []
+    let get_url = ext.url
+    
    const {data} = await $fetch.get(get_url, {
         headers: {
             'User-Agent': UA,
@@ -127,9 +128,29 @@ async function getPlayinfo(ext) {
     })
 
          if (data) {
+
             const result = JSON.parse(data)
-            let playUrl = result.info.file        
-            return jsonify({ urls: [playUrl] })
+            const playlists  = result.video_plays 
+
+            playlists.forEach( each => {
+                let group = {
+                title: each.src_site,//播放线路
+                  tracks: [],
+                    }
+                 group.tracks.push({
+                      //name: each[0],
+                      pan: '',
+                      ext: {
+                      url: each.play_data
+          }
+        })
+             if (group.tracks.length > 0) {
+      groups.push(group)
+    }    
+                
+            }
+                              
+            return jsonify({ list: groups })
          }
 }
 async function search(ext) {

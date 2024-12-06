@@ -191,7 +191,7 @@ async function search(ext) {
 
     let text = encodeURIComponent(ext.text)
    // let page = ext.page || 1
-    let url = `${appConfig.site}/search?q=${text}`
+    let url = `https://yhdm.one/search?q=${text}`
 
     const { data } = await $fetch.get(url, {
         headers: {

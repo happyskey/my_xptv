@@ -97,7 +97,7 @@ async function getTracks(ext) {
 
         
         const { new_data } = await $fetch.get(ShareUrl, {
-              headers
+             'User-Agent': UA,
           });
   
         const json = argsify(new_data)

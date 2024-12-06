@@ -93,9 +93,12 @@ async function getTracks(ext) {
 
     const playlist = $('.ep-panel.mb-3 a')
     playlist.each((_, e) => {
-        const name = $(e).attr('title')
+        let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
-       const {data_json} = await $fetch.get(ShareUrl, {
+
+
+        
+        const {data_json} = await $fetch.get(ShareUrl, {
         headers: {
             'User-Agent': UA,
         },

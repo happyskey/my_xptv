@@ -76,7 +76,7 @@ async function getTracks(ext) {
     
     ext = argsify(ext)
     let groups = []
-    let  tracks =[]
+    
     let url = ext.url
     
     
@@ -89,6 +89,7 @@ async function getTracks(ext) {
 
     const $ = cheerio.load(data)
 
+    
     const playlist = $('.ep-panel.mb-3 a')
     playlist.each((_, e) => {
         let name = $(e).attr('title')
@@ -100,10 +101,16 @@ async function getTracks(ext) {
           });
   
         const json = argsify(new_data)
-        const playlists = json.video_plays
+    
         
         playlists.forEach( each => {
-      if (each.length == 2) {
+        
+
+        let group = {
+          title: each.src_site,
+          tracks: [],
+    }
+    
         let path = each.play_data
         
         group.tracks.push({
@@ -113,7 +120,7 @@ async function getTracks(ext) {
             url: path
           }
         })
-      }
+      
     })
 
          if (group.tracks.length > 0) {

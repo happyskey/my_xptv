@@ -98,11 +98,6 @@ async function getTracks(ext) {
 
 
         
-        const data_json = await $fetch.get(ShareUrl, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
 
         
         
@@ -135,44 +130,10 @@ async function getTracks(ext) {
     })
 
 
-}
 
 
-
-async function getPlayinfo(ext) {
-    ext = argsify(ext)
-    let groups = []
-    let get_url = ext.url
     
-   const {data} = await $fetch.get(get_url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
 
-         if (data) {
 
-            const result = JSON.parse(data)
-            const playlists  = result.video_plays 
-
-            playlists.forEach( each => {
-                let group = {
-                title: each.src_site,//播放线路
-                  tracks: [],
-                    }
-                 group.tracks.push({
-                      //name: each[0],
-                      pan: '',
-                      ext: {
-                      url: each.play_data
-          }
-        })
-             if (group.tracks.length > 0) {
-      groups.push(group)
-    }    
-                
-            }
-                              
-            return jsonify({ list: groups })
-         }
 }
+

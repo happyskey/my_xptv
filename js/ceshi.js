@@ -78,7 +78,6 @@ async function getCards(ext) {
 async function getTracks(ext) {
     
     ext = argsify(ext)
-   // let tracks = []
     let groups = []
     let url = ext.url
     

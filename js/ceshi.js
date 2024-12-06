@@ -75,7 +75,7 @@ async function getCards(ext) {
 async function getTracks(ext) {
     
     ext = argsify(ext)
-    let groups = []
+   
     
     let url = ext.url
     
@@ -110,10 +110,6 @@ async function getTracks(ext) {
     })
 
 
-
-
-
-
     
 
     return jsonify({
@@ -124,23 +120,10 @@ async function getTracks(ext) {
             },
         ],
     })
-
-
-    
-
-
-        
-
         return jsonify({ list: groups })
-
-
-
    
 }
 
-// return jsonify({ list: groups })
-
-            //      }
 
 
 

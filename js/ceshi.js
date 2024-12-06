@@ -91,15 +91,10 @@ async function getTracks(ext) {
 
     const $ = cheerio.load(data)
 
-    const playlist = $('a')
+    const playlist = $('.ep-panel.mb-3 a')
     playlist.each((_, e) => {
-        const name = $(e).attr('href')
-        const ShareUrl =appConfig.site + $(e).attr('title')
-
-        
-
-
-        
+        const name = $(e).attr('title')
+        const ShareUrl =appConfig.site + $(e).attr('href')    
         tracks.push({
             name:name.trim(),
             pan: '',

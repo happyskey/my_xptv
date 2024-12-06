@@ -78,7 +78,8 @@ async function getCards(ext) {
 async function getTracks(ext) {
     
     ext = argsify(ext)
-    let tracks = []
+   // let tracks = []
+    let groups = []
     let url = ext.url
     
     
@@ -94,7 +95,42 @@ async function getTracks(ext) {
     const playlist = $('.ep-panel.mb-3 a')
     playlist.each((_, e) => {
         const name = $(e).attr('title')
-        const ShareUrl =appConfig.site + $(e).attr('href')    
+        const ShareUrl =appConfig.site + $(e).attr('href')  
+       const {data_json} = await $fetch.get(get_url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+         if (data_json) {
+
+            const result = JSON.parse(data_json)
+            const playlists  = result.video_plays 
+
+            playlists.forEach( each => {
+                let group = {
+                title: each.src_site,//播放线路
+                  tracks: [],
+                    }
+                 group.tracks.push({
+                      name: name,
+                      pan: '',
+                      ext: {
+                      url: each.play_data
+          }
+        })
+             if (group.tracks.length > 0) {
+      groups.push(group)
+    }    
+                
+            }
+                              
+            return jsonify({ list: groups })
+         }
+        
+
+/*
+        
         tracks.push({
             name:name.trim(),
             pan: '',
@@ -104,6 +140,13 @@ async function getTracks(ext) {
         })
     })
 
+
+
+
+
+
+    
+
     return jsonify({
         list: [
             {
@@ -112,6 +155,8 @@ async function getTracks(ext) {
             },
         ],
     })
+
+    */
 }
 
 

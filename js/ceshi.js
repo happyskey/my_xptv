@@ -79,7 +79,7 @@ async function getTracks(ext) {
     
     let url = ext.url
     
-   let  tracks=[]
+   //let  tracks=[]
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -93,52 +93,24 @@ async function getTracks(ext) {
         let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
 
-
-/*
-        
-        const { new_data } = await $fetch.get(ShareUrl, {
-             'User-Agent': UA,
-          });
-  
-        const json = argsify(new_data)
-    
-        
-        playlists.forEach( each => {
-        
-
-        let group = {
-          title: each.src_site,
-          tracks: [],
-    }
-    
-        let path = each.play_data
-        
-        group.tracks.push({
-          name:  name,
-          pan: '',
-          ext: {
-            url: path
-          }
-        })
-      
-    })
-
-         if (group.tracks.length > 0) {
-      groups.push(group)
+     let group = {
+      title: $(e).attr('title') ,
+      tracks: [],
     }
 
+
         
-*/
-
-
-    
-        tracks.push({
+       group.tracks.push({
             name:name.trim(),
             pan: '',
            ext: {
                         url: ShareUrl,
                     }, 
         })
+
+groups.push(group)
+
+        
     })
 
 
@@ -228,5 +200,47 @@ async function search(ext) {
         list: cards,
     })
 }
+
+
+
+
+/*
+        
+        const { new_data } = await $fetch.get(ShareUrl, {
+             'User-Agent': UA,
+          });
+  
+        const json = argsify(new_data)
+    
+        
+        playlists.forEach( each => {
+        
+
+        let group = {
+          title: each.src_site,
+          tracks: [],
+    }
+    
+        let path = each.play_data
+        
+        group.tracks.push({
+          name:  name,
+          pan: '',
+          ext: {
+            url: path
+          }
+        })
+      
+    })
+
+         if (group.tracks.length > 0) {
+      groups.push(group)
+    }
+
+        
+*/
+
+
+
 
 */

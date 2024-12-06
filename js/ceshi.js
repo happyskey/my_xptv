@@ -190,8 +190,8 @@ async function search(ext) {
     let cards = []
 
     let text = encodeURIComponent(ext.text)
-    let page = ext.page || 1
-    let url = `${appConfig.site}/search?q=${text}`
+   // let page = ext.page || 1
+    let url = 'https://yhdm.one/search?q=%E6%9F%AF%E5%8D%97'//`${appConfig.site}/search?q=${text}`
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -205,7 +205,7 @@ async function search(ext) {
     videos.each((_, e) => {
         const href =$(e).attr('href')
         const title = $(e).find('img').attr('alt')
-        const cover =appConfig.site+ $(e).find('img').attr('data-original')
+        const cover =appConfig.site + $(e).find('img').attr('data-original')
 
         cards.push({
             vod_id: href,

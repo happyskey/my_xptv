@@ -98,7 +98,7 @@ async function getTracks(ext) {
 
 
         
-        const {data_json} = await $fetch.get(ShareUrl, {
+        const data_json = await $fetch.get(ShareUrl, {
         headers: {
             'User-Agent': UA,
         },

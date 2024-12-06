@@ -94,7 +94,7 @@ async function getTracks(ext) {
         const ShareUrl =appConfig.site + $(e).attr('href')  
 
 
-
+/*
         
         const { new_data } = await $fetch.get(ShareUrl, {
              'User-Agent': UA,
@@ -128,10 +128,10 @@ async function getTracks(ext) {
     }
 
         
+*/
 
 
-
-        /*
+    
         tracks.push({
             name:name.trim(),
             pan: '',
@@ -167,12 +167,15 @@ async function getTracks(ext) {
 
 
 
-    */
+   
 }
 
- return jsonify({ list: groups })
+// return jsonify({ list: groups })
 
-                  }
+            //      }
+
+
+
 
 
 

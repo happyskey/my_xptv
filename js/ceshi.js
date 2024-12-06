@@ -104,34 +104,10 @@ async function getTracks(ext) {
         },
     })
 
-         if (data_json) {
-
-            const result = JSON.parse(data_json)
-            const playlists  = result.video_plays 
-
-            playlists.forEach( each => {
-                let group = {
-                title: each.src_site,//播放线路
-                  tracks: [],
-                    }
-                 group.tracks.push({
-                      name: name,
-                      pan: '',
-                      ext: {
-                      url: each.play_data
-          }
-        })
-             if (group.tracks.length > 0) {
-      groups.push(group)
-    }    
-                
-            }
-                              
-            return jsonify({ list: groups })
-         }
+        
         
 
-/*
+
         
         tracks.push({
             name:name.trim(),
@@ -158,7 +134,7 @@ async function getTracks(ext) {
         ],
     })
 
-    */
+
 }
 
 
@@ -238,6 +214,35 @@ async function search(ext) {
         list: cards,
     })
 }
+
+
+
+
+ if (data_json) {
+
+            const result = JSON.parse(data_json)
+            const playlists  = result.video_plays 
+
+            playlists.forEach( each => {
+                let group = {
+                title: each.src_site,//播放线路
+                  tracks: [],
+                    }
+                 group.tracks.push({
+                      name: name,
+                      pan: '',
+                      ext: {
+                      url: each.play_data
+          }
+        })
+             if (group.tracks.length > 0) {
+      groups.push(group)
+    }    
+                
+            }
+                              
+            return jsonify({ list: groups })
+         }
 
 
 

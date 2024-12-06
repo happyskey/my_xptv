@@ -88,12 +88,13 @@ async function getTracks(ext) {
     })
 
     const $ = cheerio.load(data)
-
-    
     const playlist = $('.ep-panel.mb-3 a')
     playlist.each((_, e) => {
         let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
+
+
+/*
 
         
         const { new_data } = await $fetch.get(ShareUrl, {
@@ -128,9 +129,9 @@ async function getTracks(ext) {
     }
 
         
-        
+   */     
 
-/*
+
         
         tracks.push({
             name:name.trim(),
@@ -158,8 +159,10 @@ async function getTracks(ext) {
     })
 
 
-    */
+    
 
+
+        
 
         return jsonify({ list: groups })
 }
@@ -176,5 +179,47 @@ async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
     return jsonify({ urls: [url] })
+}
+
+
+
+    
+    
+async function search(ext) {
+    ext = argsify(ext)
+    let cards = []
+
+    let text = encodeURIComponent(ext.text)
+    let page = ext.page || 1
+    let url = `${appConfig.site}/search?q=${text}`
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const videos = $('#search_list a')
+    videos.each((_, e) => {
+        const href =$(e).attr('href')
+        const title = $(e).find('img').attr('alt')
+        const cover = $(e).find('img').attr('src')
+
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            vod_remarks: '',
+
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+    return jsonify({
+        list: cards,
+    })
 }
 

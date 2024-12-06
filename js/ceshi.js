@@ -76,6 +76,7 @@ async function getTracks(ext) {
     
     ext = argsify(ext)
     let groups = []
+    let  tracks =[]
     let url = ext.url
     
     
@@ -126,13 +127,15 @@ async function getTracks(ext) {
         ],
     })
 
-
-
-
-    
-
-
 }
+
+
+
+
+
+
+
+
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)

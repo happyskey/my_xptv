@@ -205,7 +205,7 @@ async function search(ext) {
     videos.each((_, e) => {
         const href =$(e).attr('href')
         const title = $(e).find('img').attr('alt')
-        const cover = $(e).find('img').attr('src')
+        const cover =appConfig.site+ $(e).find('img').attr('src')
 
         cards.push({
             vod_id: href,

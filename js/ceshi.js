@@ -79,7 +79,7 @@ async function getTracks(ext) {
     
     let url = ext.url
     
-    
+   let  tracks=[]
 
     const { data } = await $fetch.get(url, {
         headers: {

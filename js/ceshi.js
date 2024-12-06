@@ -61,7 +61,6 @@ async function getConfig() {
 
 
 
-/*
 
 // 取得分類的影片列表，ext 為 tabs 定義的 ext 加上頁碼(page)
 async function getCards(ext) {
@@ -92,7 +91,7 @@ async function getCards(ext) {
     videos.each((_, e) => {
         const href = $(e).find('a').attr('href')
         const title = $(e).find('h6').text()
-        const cover =appConfig.site + $(e).find('img').attr('src')
+        const cover =appConfig.site + $(e).find('img').attr('data-original')
         //const remarks = $(e).find('.note > span').text()
 
 

@@ -79,7 +79,7 @@ async function getTracks(ext) {
     
     let url = ext.url
     
-   //let  tracks=[]
+   let  tracks=[]
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -93,14 +93,10 @@ async function getTracks(ext) {
         let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
 
-     let group = {
-      title: $(e).attr('title') ,
-      tracks: [],
-    }
 
 
         
-       group.tracks.push({
+        tracks.push({
             name:name.trim(),
             pan: '',
            ext: {
@@ -108,7 +104,7 @@ async function getTracks(ext) {
                     }, 
         })
 
-groups.push(group)
+
 
         
     })

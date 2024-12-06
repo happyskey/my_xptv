@@ -183,7 +183,7 @@ async function getPlayinfo(ext) {
 
 
 
-    
+    /*
     
 async function search(ext) {
     ext = argsify(ext)
@@ -223,3 +223,4 @@ async function search(ext) {
     })
 }
 
+*/

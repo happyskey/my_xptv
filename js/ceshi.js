@@ -153,6 +153,7 @@ async function getPlayinfo(ext) {
             return jsonify({ list: groups })
          }
 }
+/*
 async function search(ext) {
     ext = argsify(ext)
     let cards = []
@@ -192,77 +193,6 @@ async function search(ext) {
 }
 
 
-/*
 
-async function getTracks(ext) {
-    let tracks = [{
-                    name: name,
-                    ext: {
-                        url: 'https://v2.fentvoss.com/sdv2/202412/03/74Y9FgJ2EN24/video/index.m3u8'//'https://ppvod01.blbtgg.com/splitOut/20241130/560085/V2024113012065288633560085/index.m3u8?auth_key=1733289584-e3d35681b5bc40cfad1a512d5a192658-0-b26ab5b2c8ff61bfe5f0a41f6505eb56',
-                    },
-                }]
-
-  
-   return jsonify({
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
-    })
-
-}
-
-/*
-//播放组件没有无法播放
-async function getPlayinfo(ext) {
-    ext = argsify(ext)
-    const url = ext.url
-    return jsonify({ urls: [url] })
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let groups = [ {
-            title: '在线',
-            tracks: [{
-                name: '1', // 播放源的名称
-                pan: '', // 网盘链接为空
-                ext: 'https://v2.fentvoss.com/sdv2/202412/03/74Y9FgJ2EN24/video/index.m3u8' // 播放源的详细信息
-            },{
-                name: '2', // 播放源的名称
-                pan: '', // 网盘链接为空
-                ext: 'https://ppvod01.blbtgg.com/splitOut/20241130/560085/V2024113012065288633560085/index.m3u8?auth_key=1733289584-e3d35681b5bc40cfad1a512d5a192658-0-b26ab5b2c8ff61bfe5f0a41f6505eb56' // 播放源的详细信息
-            }
-                    
-                    ]
-        } ] 
-
-return jsonify({ list: groups })
- 
-}
-
-<div class="lists-content">
-            <ul>
-    <li>
-        <a href="/vod/player.html?cate_id=264&amp;id=79305&amp;type_id=232" class="thumbnail">
-                <img src="https://shandianpic.com/upload/vod/20230911-1/0448dd1ac753bb8f52e514136abb2cca.jpg" class="thumb" alt="名侦探柯南：绯色的不在场证明">提取hrf src alt
-
- $('.lists-content ul li a.thumbnail').each((index, element) => {
-      const href = $(element).attr('href'); // 提取 href 属性
-      const src = $(element).find('img.thumb').attr('src'); // 提取 img 标签中的 src 属性
-      const alt = $(element).find('img.thumb').attr('alt'); // 提取 img 标签中的 alt 属性
 
 */

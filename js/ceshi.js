@@ -75,11 +75,11 @@ async function getCards(ext) {
 async function getTracks(ext) {
     
     ext = argsify(ext)
-   
+   let groups = []
     
     let url = ext.url
     
-    let  tracks=[]
+    
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -93,15 +93,30 @@ async function getTracks(ext) {
     const $ = cheerio.load(data)
     const playlist = $('.ep-panel.mb-3 a')
     playlist.each((_, e) => {
+       
         let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
-        tracks.push({
+         let group = {
+              title:name ,
+              tracks: [],
+        }
+        group.tracks.push({
             name:name.trim(),
             pan: '',
            ext: {
                         url: ShareUrl,
                     }, 
-        })     
+        })    
+
+if (group.tracks.length > 0) {
+      groups.push(group)
+    }
+
+
+
+
+
+        
     })
 
 
@@ -110,14 +125,7 @@ async function getTracks(ext) {
 
     
 
-    return jsonify({
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
-    })
+return jsonify({ list: groups })
       
    
 }

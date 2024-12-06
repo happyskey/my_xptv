@@ -13,6 +13,12 @@
             "api": "csp_ppron",
             "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
 },
+         {
+            "name": "樱花动漫",
+            "type": 3,
+            "api": "csp_yhdm",
+            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/yhdm.js" 
+},
         {
             "name": "编译中",
             "type": 3,

@@ -60,7 +60,7 @@ async function getConfig() {
 
 
 
-
+/*
 
 // 取得分類的影片列表，ext 為 tabs 定義的 ext 加上頁碼(page)
 async function getCards(ext) {

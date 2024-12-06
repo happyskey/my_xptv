@@ -86,7 +86,7 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
 
     // 用 css 選擇器選出影片列表
-    const videos = $('.lists-content ul li')
+    const videos = $('ul.list-unstyled li')
     // 遍歷所有影片
     videos.each((_, e) => {
         const href = $(e).find('a').attr('href')

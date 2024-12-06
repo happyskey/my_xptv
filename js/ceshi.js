@@ -74,7 +74,7 @@ async function getCards(ext) {
     let { page = 1, id } = ext
 
     // 定義請求的 URL
-    const url = 'https://yhdm.one/list/?country=other&page=1'//appConfig.site + `/list/?country=${id}&page=${page}`     //`/index.php/vod/show/id/${id}/page/${page}.html`
+    const url =appConfig.site + `/list/?country=${id}&page=${page}`     //`/index.php/vod/show/id/${id}/page/${page}.html`
     // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {
         headers: {
@@ -91,7 +91,7 @@ async function getCards(ext) {
     videos.each((_, e) => {
         const href = $(e).find('a').attr('href')
         const title = $(e).find('h6').text()
-        const cover = $(e).find('img').attr('src')
+        const cover =appConfig.site + $(e).find('img').attr('src')
         //const remarks = $(e).find('.note > span').text()
 
 

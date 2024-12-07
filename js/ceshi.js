@@ -96,28 +96,52 @@ async function getTracks(ext) {
        
         let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
-         let group = {
-              title:name ,
-              tracks: [],
-        }
-        group.tracks.push({
-            name:name.trim(),
-            pan: '',
-           ext: {
-                        url: ShareUrl,
-                    }, 
-        })    
 
-if (group.tracks.length > 0) {
+       
+        let group = {
+          title: name,
+          tracks: [],
+    }
+        
+
+        
+        
+        const new_data  = await $fetch.get(ShareUrl, {
+                     'User-Agent': UA,
+                          });
+  
+        const json = argsify(new_data)
+        const playlists = json.video_plays
+        playlists.forEach( each => {
+        
+
+        let line = each.src_site
+        let path = each.play_data
+        
+        group.tracks.push({
+          name:  line,
+          pan: '',
+          ext: {
+            url: path
+          }
+        })
+
+
+            if (group.tracks.length > 0) {
       groups.push(group)
     }
 
-
+    })
 
 
 
         
-    })
+
+
+        
+     
+        })    
+
 
 
 

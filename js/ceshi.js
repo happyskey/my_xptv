@@ -92,7 +92,7 @@ async function getTracks(ext) {
 
     const $ = cheerio.load(data)
     const playlist = $('.ep-panel.mb-3 a')
-  //  playlist.each((_, e) => {
+ 
        for(let i =0; i <playlist.length; i++){
            
         let title = $(e).attr('title')
@@ -113,15 +113,15 @@ async function getTracks(ext) {
   
         const json = JSON.parse(new_data)
         const playlists = json.video_plays
-  playlists.forEach( child => {
+        playlists.forEach( child => {
         
-        group.tracks.push({
-          name:  child.src_site,
-          pan: '',
-          ext: {
-            url: child.play_data
-          }
-        })
+            group.tracks.push({
+              name:  child.src_site,
+              pan: '',
+              ext: {
+                url: child.play_data
+              }
+            })
    
 
     })

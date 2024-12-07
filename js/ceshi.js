@@ -111,7 +111,7 @@ async function getTracks(ext) {
                           });
         
   
-        const json = argsify(new_data)
+        const json = JSON.parse(new_data)
         const playlists = json.video_plays
   playlists.forEach( child => {
         

@@ -76,7 +76,7 @@ async function getTracks(ext) {
 
 
 
-    /*
+
     
     ext = argsify(ext)
     let groups = []
@@ -145,11 +145,10 @@ return jsonify({ list: groups })
 
 
 
-   */
 
 
 
-    return jsonify({"list":[{"title":"第01集","tracks":[{"name":"lzzy","pan":"","ext":{"url":"https://v.lzcdn23.com/20241108/7572_ee376b18/index.m3u8"}}]},{"title":"预告","tracks":[{"name":"tkzy2","pan":"","ext":{"url":"https://v10.dious.cc/20240329/8sSjB4Uz/index.m3u8"}}]}]})
+ //   return jsonify({"list":[{"title":"第01集","tracks":[{"name":"lzzy","pan":"","ext":{"url":"https://v.lzcdn23.com/20241108/7572_ee376b18/index.m3u8"}}]},{"title":"预告","tracks":[{"name":"tkzy2","pan":"","ext":{"url":"https://v10.dious.cc/20240329/8sSjB4Uz/index.m3u8"}}]}]})
 }
 
 

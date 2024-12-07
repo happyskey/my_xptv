@@ -136,27 +136,18 @@ async function getTracks(ext) {
    
 
     })
+
+
+                  
         
 
          if (group.tracks.length > 0) {
       groups.push(group)
     }
 
-        
 
-
-        
-
-        
-     
         })    
 
-
-
-
-
-
-    
 
 return jsonify({ list: groups })
       

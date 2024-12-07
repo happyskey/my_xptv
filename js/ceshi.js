@@ -75,7 +75,7 @@ async function getCards(ext) {
 async function getTracks(ext) {
     
     ext = argsify(ext)
-   let groups = []
+    let groups = []
     
     let url = ext.url
     
@@ -170,83 +170,3 @@ async function getPlayinfo(ext) {
 
 
 
-    /*
-    
-async function search(ext) {
-    ext = argsify(ext)
-    let cards = []
-
-    let text = encodeURIComponent(ext.text)
-   // let page = ext.page || 1
-    let url = `https://yhdm.one/search?q=${text}`
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const $ = cheerio.load(data)
-
-    const videos = $('#search_list a')
-    videos.each((_, e) => {
-        const href =$(e).attr('href')
-        const title = $(e).find('img').attr('alt')
-        const cover =appConfig.site + $(e).find('img').attr('data-original')
-
-        cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            vod_remarks: '',
-
-            ext: {
-                url: `${appConfig.site}${href}`,
-            },
-        })
-    })
-    return jsonify({
-        list: cards,
-    })
-}
-
-
-
-
-        const { new_data } = await $fetch.get(ShareUrl, {
-             'User-Agent': UA,
-          });
-  
-        const json = argsify(new_data)
-    
-        
-        playlists.forEach( each => {
-        
-
-        let group = {
-          title: each.src_site,
-          tracks: [],
-    }
-    
-        let path = each.play_data
-        
-        group.tracks.push({
-          name:  name,
-          pan: '',
-          ext: {
-            url: path
-          }
-        })
-      
-    })
-
-         if (group.tracks.length > 0) {
-      groups.push(group)
-    }
-
-        
-
-
-
-
-*/

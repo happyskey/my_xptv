@@ -97,15 +97,16 @@ async function getTracks(ext) {
         let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
 
-       
+
+
+
+        
         let group = {
           title: name,
           tracks: [],
     }
         
 
-        
-        
         const new_data  = await $fetch.get(ShareUrl, {
                      'User-Agent': UA,
                           });
@@ -127,16 +128,19 @@ async function getTracks(ext) {
         })
 
 
-            if (group.tracks.length > 0) {
+   
+
+    })
+        
+
+         if (group.tracks.length > 0) {
       groups.push(group)
     }
 
-    })
-
+        
 
 
         
-
 
         
      

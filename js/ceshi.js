@@ -95,7 +95,7 @@ async function getTracks(ext) {
     
 
     const $ = cheerio.load(data)
-    const playlist = $('.ep-panel.mb-3 a')
+    const playlist =$('ul.row.list-unstyled.gutters-1 li a') //$('.ep-panel.mb-3 a')
  
        for(let i =0; i <playlist.length; i++){
            

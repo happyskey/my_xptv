@@ -98,7 +98,7 @@ async function getTracks(ext) {
     // 遍历 playlist 中的每个元素
     for (const e of playlist) {
         let name = $(e).attr('title');
-        const href = $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/);
+        const href = $(e).attr('href')//.match(/\/vod-play\/([\d\/]+)\.html/);
 
         console.log("Href matched:", href);  // 打印 href 的匹配结果
 

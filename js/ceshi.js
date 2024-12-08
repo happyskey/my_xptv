@@ -34,6 +34,14 @@ const appConfig = {
 async function getConfig() {
     return jsonify(appConfig)
 }
+
+
+
+
+
+
+
+
 async function getCards(ext) {
     ext = argsify(ext)
     let cards = []

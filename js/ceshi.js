@@ -115,6 +115,9 @@ async function getTracks(ext) {
  
 
             const Data = typeof new_data === 'string' ? JSON.parse(new_data) : new_data;
+            Data = JSON.parse({ "video_plays": [ { "play_data": "https://v.lzcdn23.com/20241108/7572_ee376b18/index.m3u8", "src_site": "lzzy" } ], "html_content": "\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t
+\n\t\t\t\t\t\t\t\tLZ\n\t\t\t\t\t\t\t
+\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t" })
             const playlists = Data.video_plays;
 
             for (const d of playlists) {

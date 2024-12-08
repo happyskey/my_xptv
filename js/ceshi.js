@@ -69,83 +69,56 @@ async function getCards(ext) {
 
 
 //
-
-
-
 async function getTracks(ext) {
-    
-    ext = argsify(ext)
-   let groups = []
-    
-    let url = ext.url
-    
-    
+    ext = argsify(ext);
+    let groups = [];
+    let url = ext.url;
 
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },
-    })
+    });
 
+    const $ = cheerio.load(data);
+    const playlist = $('.ep-panel.mb-3 a');
 
-    
+    for (const e of playlist) {
+        let name = $(e).attr('title');
+        const getID = appConfig.site + $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/)[1]; // 获取标号
+        let new_url = 'https://yhdm.one/_get_plays/' + getID;
 
-    const $ = cheerio.load(data)
-    const playlist = $('.ep-panel.mb-3 a')
-    playlist.each((_, e) => {
-       
-        let name = $(e).attr('title')
-        const getID =appConfig.site + $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/)//获取标号
-        let new_url =' https://yhdm.one/_get_plays/' + getID
-        
-    const new_data = await $fetch.get(new_url , {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
+        // Fetch new data with await
+        const new_data = await $fetch.get(new_url, {
+            headers: {
+                'User-Agent': UA,
+            },
+        });
 
+        let group = {
+            title: name, // 集数
+            tracks: [],
+        };
 
-        
-
-      
-
-        
-         let group = {
-              title:name ,//集数
-              tracks: [],
-        }
         group.tracks.push({
-            name:new_url,
+            name: new_url,
             pan: '',
-           ext: {
-                        url: ShareUrl,
-                    }, 
-        })    
+            ext: {
+                url: ShareUrl,
+            },
+        });
 
-if (group.tracks.length > 0) {
-      groups.push(group)
+        if (group.tracks.length > 0) {
+            groups.push(group);
+        }
     }
 
-
-
-
-
-        
-    })
-
-
-
-
-
-    
-
-return jsonify({ list: groups })
-      
-   
+    return jsonify({ list: groups });
 }
 
 
 
+//
 
 
 

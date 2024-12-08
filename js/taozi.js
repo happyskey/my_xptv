@@ -1,3 +1,4 @@
+//昊
 const cheerio = createCheerio()
 
 // 預先定義請求使用的 user-agent
@@ -5,7 +6,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 const appConfig = {
     ver: 1,
-    title: '桃子视频',
+    title: '桃子视频|昊',
     site: 'https://www.taozi008.com',
     tabs: [
         {

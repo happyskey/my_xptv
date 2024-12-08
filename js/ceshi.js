@@ -96,7 +96,7 @@ async function getTracks(ext) {
     for (const e of playlist) {
        
         let name = $(e).attr('title')
-        const regex = /\/vod-play\/([^/]+\/ep\d+)\.html/;
+        const regex = /\/vod-play\/(*.?)\.html/;
 
         const ShareUrl = 'https://yhdm.one/_get_plays/' +  $(e).attr('href').match(regex)[1];
 

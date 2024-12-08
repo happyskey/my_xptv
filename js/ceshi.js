@@ -96,7 +96,9 @@ async function getTracks(ext) {
     for (const e of playlist) {
        
         let name = $(e).attr('title')
-        const ShareUrl = $(e).attr('href')//.match(/\/vod-play\/([\d\/]+)\.html/)  
+        const regex = /\/vod-play\/([^/]+\/ep\d+)\.html/;
+
+        const ShareUrl = $(e).attr('href').match(regex);
          let group = {
               title:name ,
               tracks: [],

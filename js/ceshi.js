@@ -99,7 +99,10 @@ async function getTracks(ext) {
 
         try {
 
-            
+              let group = {
+                title: name, // 集数
+                tracks: [],
+            };
             const new_data = await $fetch.get(new_url, {
                 headers: {
                     'User-Agent': UA,
@@ -107,22 +110,31 @@ async function getTracks(ext) {
             });
             console.log("new_data:", new_data); // 打印调试
 
-            let group = {
-                title: name, // 集数
-                tracks: [],
-            };
+          
+           const Data = JSON.parse(new_data)
 
+            const  playlists = Data.video_plays
+
+            for (const d of playlist){
+            
             group.tracks.push({
-                name: new_url,
+                name: d.src_site,
                 pan: '',
                 ext: {
-                    url: new_url,
+                    url: d.play_data,
                 },
             });
 
+
+            }
+            
             if (group.tracks.length > 0) {
                 groups.push(group);
             }
+
+
+
+                
         } catch (error) {
             console.error("Error fetching new_url:", new_url, error);
         }

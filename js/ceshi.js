@@ -36,10 +36,42 @@ async function getConfig() {
 }
 
 
+async function getCards(ext) {
+    ext = argsify(ext)
+    let cards = []
+    let { page = 1, id } = ext
+    const url =appConfig.site + `/list/?country=${id}&page=${page}` 
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+    const $ = cheerio.load(data)
+    const videos = $('ul.list-unstyled li')
+    videos.each((_, e) => {
+        const href = $(e).find('a').attr('href')
+        const title = $(e).find('h6').text()
+        const cover =appConfig.site + $(e).find('img').attr('data-original')
+        //const remarks = $(e).find('.note > span').text()
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            //vod_remarks: remarks, // 海報右上角的子標題
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+
+    return jsonify({
+        list: cards,
+    })
+}
 
 
 
-
+/*
 
 
 async function getCards(ext) {
@@ -97,7 +129,7 @@ async function getCards(ext) {
 }
 
 
-
+*/
 
 
 

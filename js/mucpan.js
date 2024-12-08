@@ -131,28 +131,31 @@ async function search(ext) {
 		},
 	})
 
-	const $ = cheerio.load(data)
+const $ = cheerio.load(data);
 
-	const videos = $('div.module-search-item')
-	videos.each((_, e) => {
-		const img = $(e).find('div.module-item-pic img')
-		const title =  img.attr('alt')//
-		const cover = img.find('div.module-item-pic img')//
-		
-		const serialLink = $(e).find('div.video-info div.video-info-header a.video-serial');
-		const href = serialLink.attr('href')
-		const remarks =serialLink.serialLink.text()
-		cards.push({
-			vod_id: href,
-			vod_name: title,
-			vod_pic: cover,
-			vod_remarks: remarks,
+const videos = $('div.module-search-item');
+videos.each((_, e) => {
+    const img = $(e).find('div.module-item-pic img');
+    const title = img.attr('alt'); // 提取标题
+    const cover = img.attr('data-src') || img.attr('src'); // 提取封面地址
 
-			ext: {
-				url: `${appConfig.site}${href}`,
-			},
-		})
-	})
+    const serialLink = $(e).find('div.video-info div.video-info-header a.video-serial');
+    const href = serialLink.attr('href'); // 提取链接
+    const remarks = serialLink.text().trim(); // 提取更新信息
+
+    cards.push({
+        vod_id: href,
+        vod_name: title,
+        vod_pic: cover,
+        vod_remarks: remarks,
+        ext: {
+            url: href.startsWith('http') ? href : `${appConfig.site}${href}`, // 拼接完整链接
+        },
+    });
+});
+
+
+	
 	return jsonify({
 		list: cards,
 	})

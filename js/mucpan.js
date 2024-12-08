@@ -9,7 +9,7 @@ const appConfig = {
     site: 'http://www.mucpan.cc',
     tabs: [
         {
-            name: '小米电影片库',
+            name: '全部小米电影',
             ext: {
                 id: 20,
             },

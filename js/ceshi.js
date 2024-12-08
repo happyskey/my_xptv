@@ -112,6 +112,8 @@ async function getTracks(ext) {
          const new_data = await $fetch.get(ShareUrl, {
                 headers: {
                     'User-Agent': UA,
+                      'Referer': 'https://yhdm.one/',
+                        'Origin': 'https://yhdm.one',
                 },
             });
 

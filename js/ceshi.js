@@ -82,39 +82,53 @@ async function getTracks(ext) {
 
     const $ = cheerio.load(data);
     const playlist = $('.ep-panel.mb-3 a');
+    console.log("playlist length:", playlist.length); // 打印调试
 
     for (const e of playlist) {
         let name = $(e).attr('title');
-        const getID = appConfig.site + $(e).attr('href')//.match(/\/vod-play\/([\d\/]+)\.html/)[1]; // 获取标号
+        const href = $(e).attr('href');
+        console.log("href:", href); // 打印调试
+
+        if (!href) continue; // 如果 href 为空，跳过
+
+        const getID = appConfig.site + href;
+        console.log("getID:", getID); // 打印调试
+
         let new_url = 'https://yhdm.one/_get_plays/' + getID;
+        console.log("new_url:", new_url); // 打印调试
 
-        // Fetch new data with await
-        const new_data = await $fetch.get(new_url, {
-            headers: {
-                'User-Agent': UA,
-            },
-        });
+        try {
+            const new_data = await $fetch.get(new_url, {
+                headers: {
+                    'User-Agent': UA,
+                },
+            });
+            console.log("new_data:", new_data); // 打印调试
 
-        let group = {
-            title: name, // 集数
-            tracks: [],
-        };
+            let group = {
+                title: name, // 集数
+                tracks: [],
+            };
 
-        group.tracks.push({
-            name: new_url,
-            pan: '',
-            ext: {
-                url: new_url,
-            },
-        });
+            group.tracks.push({
+                name: new_url,
+                pan: '',
+                ext: {
+                    url: new_url,
+                },
+            });
 
-        if (group.tracks.length > 0) {
-            groups.push(group);
+            if (group.tracks.length > 0) {
+                groups.push(group);
+            }
+        } catch (error) {
+            console.error("Error fetching new_url:", new_url, error);
         }
     }
 
     return jsonify({ list: groups });
 }
+
 
 
 

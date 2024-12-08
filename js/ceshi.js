@@ -104,7 +104,7 @@ async function getTracks(ext) {
             name: new_url,
             pan: '',
             ext: {
-                url: ShareUrl,
+                url: new_url,
             },
         });
 

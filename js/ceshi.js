@@ -101,13 +101,28 @@ async function getTracks(ext) {
               title:name ,
               tracks: [],
         }
-        group.tracks.push({
-            name:name.trim(),
-            pan: '',
-           ext: {
-                        url: ShareUrl,
-                    }, 
-        })    
+
+
+       const playlists = [
+            { "play_data": "https://hd.ijycnd.com/play/9b6589Na/index.m3u8", "src_site": "jyzy" },
+            { "play_data": "https://hn.bfvvs.com/play/Le351wpb/index.m3u8", "src_site": "hnzy" },
+            { "play_data": "https://play.xluuss.com/play/7e55yLXe/index.m3u8", "src_site": "xlzy" }
+        ];
+
+
+
+         for (const d of playlists) {
+            group.tracks.push({
+                name: d.src_site,
+                pan: '',
+                ext: {
+                    url: d.play_data,
+                },
+            });
+        }
+
+        
+     
 
 if (group.tracks.length > 0) {
       groups.push(group)

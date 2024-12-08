@@ -200,15 +200,15 @@ async function search(ext) {
     const videos = $('#search_list li')
     videos.each((_, e) => {
         const link = $(e).find('a');
-        const href = appConfig.site + link.attr('href')
-        const title =link.attr('title')
+        const href =  link.attr('href')
+        const title = link.attr('title')
         const img = $(e).find('img');
-        const cover =img.attr('src'); 
+        const cover = img.attr('src'); 
 
         cards.push({
             vod_id: href,
             vod_name: title,
-            vod_pic: cover,
+            vod_pic: appConfig.site + cover,
             vod_remarks: '',
 
             ext: {

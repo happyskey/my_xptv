@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://yhdm.one',
     tabs: [
         {
-            name: '日本动漫',
+            name: '日本动漫|昊',
             ext: {
                 id: 'jp',
             },
@@ -43,6 +43,8 @@ async function getCards(ext) {
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
+            'Referer': 'https://yhdm.one/',
+            'Origin': 'https://yhdm.one',
         },
     })
     const $ = cheerio.load(data)
@@ -69,18 +71,17 @@ async function getCards(ext) {
 }
 
 
-
-
-
+//
+//
 
 async function getTracks(ext) {
     
     ext = argsify(ext)
-   
+   let groups = []
     
     let url = ext.url
     
-    let  tracks=[]
+    
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -93,17 +94,67 @@ async function getTracks(ext) {
 
     const $ = cheerio.load(data)
     const playlist = $('.ep-panel.mb-3 a')
-    playlist.each((_, e) => {
+    for (const e of playlist) {
+       
         let name = $(e).attr('title')
-        const ShareUrl =appConfig.site + $(e).attr('href')  
-        tracks.push({
-            name:name.trim(),
-            pan: '',
-           ext: {
-                        url: ShareUrl,
-                    }, 
-        })     
-    })
+        const regex = /\/vod-play\/(.*?)\.html/;
+
+        const ShareUrl = 'https://yhdm.one/_get_plays/' +  $(e).attr('href').match(regex)[1];
+
+
+        
+         let group = {
+              title:name ,
+              tracks: [],
+        }
+
+
+//后加
+        
+         const new_data = await $fetch.get(ShareUrl, {
+                headers: {
+                    'User-Agent': UA,
+                      'Referer': 'https://yhdm.one/',
+                        'Origin': 'https://yhdm.one',
+                },
+            });
+
+        const playlists = argsify(new_data.data).video_plays
+
+/*
+        
+
+     let  playlists = [
+            { "play_data": "https://hd.ijycnd.com/play/9b6589Na/index.m3u8", "src_site": "jyzy" },
+            { "play_data": "https://hn.bfvvs.com/play/Le351wpb/index.m3u8", "src_site": "hnzy" },
+            { "play_data": "https://play.xluuss.com/play/7e55yLXe/index.m3u8", "src_site": "xlzy" }
+        ];
+
+
+*/
+         for (const d of playlists) {
+            group.tracks.push({
+                name: d.src_site,
+                pan: '',
+                ext: {
+                    url: d.play_data,
+                },
+            });
+        }
+
+        
+     
+
+if (group.tracks.length > 0) {
+      groups.push(group)
+    }
+
+
+
+
+
+        
+    }
 
 
 
@@ -111,19 +162,10 @@ async function getTracks(ext) {
 
     
 
-    return jsonify({
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
-    })
+return jsonify({ list: groups })
       
    
 }
-
-
 
 
 
@@ -139,15 +181,13 @@ async function getPlayinfo(ext) {
 
 
 
-    /*
-    
 async function search(ext) {
     ext = argsify(ext)
     let cards = []
 
     let text = encodeURIComponent(ext.text)
-   // let page = ext.page || 1
-    let url = `https://yhdm.one/search?q=${text}`
+    let page = ext.page || 1
+    let url = `${appConfig.site}/search?q=%E5%90%8D=${text}`//https://yhdm.one/search?q=%E5%90%8D
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -157,11 +197,13 @@ async function search(ext) {
 
     const $ = cheerio.load(data)
 
-    const videos = $('#search_list a')
+    const videos = $('#search_list li')
     videos.each((_, e) => {
-        const href =$(e).attr('href')
-        const title = $(e).find('img').attr('alt')
-        const cover =appConfig.site + $(e).find('img').attr('data-original')
+        const link = $(e).find('a');
+        const href = link.attr('href')
+        const title =link.attr('title')
+        const img = $(e).find('img');
+        const cover =img.attr('src'); 
 
         cards.push({
             vod_id: href,
@@ -178,44 +220,3 @@ async function search(ext) {
         list: cards,
     })
 }
-
-
-
-
-        const { new_data } = await $fetch.get(ShareUrl, {
-             'User-Agent': UA,
-          });
-  
-        const json = argsify(new_data)
-    
-        
-        playlists.forEach( each => {
-        
-
-        let group = {
-          title: each.src_site,
-          tracks: [],
-    }
-    
-        let path = each.play_data
-        
-        group.tracks.push({
-          name:  name,
-          pan: '',
-          ext: {
-            url: path
-          }
-        })
-      
-    })
-
-         if (group.tracks.length > 0) {
-      groups.push(group)
-    }
-
-        
-
-
-
-
-*/

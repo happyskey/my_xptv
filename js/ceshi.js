@@ -108,7 +108,7 @@ async function getTracks(ext) {
         }
 
 
-
+//后加
          const new_data = await $fetch.get(ShareUrl, {
                 headers: {
                     'User-Agent': UA,
@@ -116,6 +116,8 @@ async function getTracks(ext) {
             });
 
         const playlists = JSON.perse(new_data).video_plays
+
+
         
 /*
        const playlists = [
@@ -128,7 +130,7 @@ async function getTracks(ext) {
 
          for (const d of playlists) {
             group.tracks.push({
-                name:ShareUrl,// d.src_site,
+                name: d.src_site,
                 pan: '',
                 ext: {
                     url: d.play_data,

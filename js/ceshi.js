@@ -101,7 +101,7 @@ async function getTracks(ext) {
 
         const getID = appConfig.site + href;
         
-        let new_url = 'https://yhdm.one/_get_plays/' + getID;
+        let new_url ='https://yhdm.one/_get_plays/2024684901/ep1'// 'https://yhdm.one/_get_plays/' + getID;
       
 
         try {
@@ -121,9 +121,7 @@ async function getTracks(ext) {
  
 
             const Data = typeof new_data === 'string' ? JSON.parse(new_data) : new_data;
-            Data = { "video_plays": [ { "play_data": "https://v.lzcdn23.com/20241108/7572_ee376b18/index.m3u8", "src_site": "lzzy" } ], "html_content": "\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t
-\n\t\t\t\t\t\t\t\tLZ\n\t\t\t\t\t\t\t
-\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t" }
+ 
             const playlists = Data.video_plays;
 
             for (const d of playlists) {

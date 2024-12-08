@@ -84,6 +84,11 @@ async function getTracks(ext) {
     const playlist = $('.ep-panel.mb-3 a');
     console.log("playlist length:", playlist.length); // 打印调试
 
+    if (playlist.length === 0) {
+        console.error("No elements found for selector '.ep-panel.mb-3 a'");
+        return jsonify({ list: groups });
+    }
+
     for (const e of playlist) {
         let name = $(e).attr('title');
         const href = $(e).attr('href');
@@ -94,47 +99,39 @@ async function getTracks(ext) {
         const getID = appConfig.site + href;
         console.log("getID:", getID); // 打印调试
 
-        let new_url = 'https://yhdm.one/_get_plays/2024684901/ep1'//'https://yhdm.one/_get_plays/' + getID;
+        let new_url = 'https://yhdm.one/_get_plays/' + getID;
         console.log("new_url:", new_url); // 打印调试
 
         try {
-
-              let group = {
+            let group = {
                 title: name, // 集数
                 tracks: [],
             };
+
             const new_data = await $fetch.get(new_url, {
                 headers: {
                     'User-Agent': UA,
                 },
             });
+
             console.log("new_data:", new_data); // 打印调试
 
-          
-           const Data = JSON.parse(new_data)
+            const Data = typeof new_data === 'string' ? JSON.parse(new_data) : new_data;
+            const playlists = Data.video_plays;
 
-            const  playlists = Data.video_plays
-
-            for (const d of playlist){
-            
-            group.tracks.push({
-                name: d.src_site,
-                pan: '',
-                ext: {
-                    url: d.play_data,
-                },
-            });
-
-
+            for (const d of playlists) {
+                group.tracks.push({
+                    name: d.src_site,
+                    pan: '',
+                    ext: {
+                        url: d.play_data,
+                    },
+                });
             }
-            
+
             if (group.tracks.length > 0) {
                 groups.push(group);
             }
-
-
-
-                
         } catch (error) {
             console.error("Error fetching new_url:", new_url, error);
         }
@@ -142,7 +139,6 @@ async function getTracks(ext) {
 
     return jsonify({ list: groups });
 }
-
 
 
 

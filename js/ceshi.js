@@ -61,7 +61,7 @@ async function getCards(ext) {
     })
 
         
-        //const remarks = $(e).find('.note > span').text() //右上更新
+        
         cards.push({
             vod_id: href,
             vod_name: href,

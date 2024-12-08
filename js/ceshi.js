@@ -53,12 +53,12 @@ async function getCards(ext) {
         const title = $(e).find('h6').text()    //标题
         const cover =appConfig.site + $(e).find('img').attr('data-original') //图片
         
-        const new_url = 'https://yhdm.one/vod-play/2024175651/ep1.html' + href
+       
 
         
         
         cards.push({
-            vod_id: href,
+            vod_hrf: 'https://yhdm.one/vod/' + href,
             vod_name: href,
             vod_pic: cover,
             //vod_remarks: remarks, // 海報右上角的子標題

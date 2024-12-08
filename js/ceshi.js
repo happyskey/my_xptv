@@ -99,19 +99,32 @@ async function getTracks(ext) {
         const regex = /\/vod-play\/([^/]+\/ep\d+)\.html/;
 
         const ShareUrl = 'https://yhdm.one/_get_plays/' +  $(e).attr('href').match(regex)[1];
+
+
+        
          let group = {
               title:name ,
               tracks: [],
         }
 
 
+
+         const new_data = await $fetch.get(ShareUrl, {
+                headers: {
+                    'User-Agent': UA,
+                },
+            });
+
+        const playlists = JSON.perse(new_data).video_plays
+        
+/*
        const playlists = [
             { "play_data": "https://hd.ijycnd.com/play/9b6589Na/index.m3u8", "src_site": "jyzy" },
             { "play_data": "https://hn.bfvvs.com/play/Le351wpb/index.m3u8", "src_site": "hnzy" },
             { "play_data": "https://play.xluuss.com/play/7e55yLXe/index.m3u8", "src_site": "xlzy" }
         ];
 
-
+*/
 
          for (const d of playlists) {
             group.tracks.push({

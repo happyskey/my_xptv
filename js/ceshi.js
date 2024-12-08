@@ -119,14 +119,14 @@ async function getTracks(ext) {
 
 
         
-/*
-       const playlists = [
+
+       playlists = [
             { "play_data": "https://hd.ijycnd.com/play/9b6589Na/index.m3u8", "src_site": "jyzy" },
             { "play_data": "https://hn.bfvvs.com/play/Le351wpb/index.m3u8", "src_site": "hnzy" },
             { "play_data": "https://play.xluuss.com/play/7e55yLXe/index.m3u8", "src_site": "xlzy" }
         ];
 
-*/
+
 
          for (const d of playlists) {
             group.tracks.push({

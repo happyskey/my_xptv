@@ -116,3 +116,44 @@ async function getTracks(ext) {
 async function getPlayinfo(ext) {
 	return jsonify({ urls: [] })
 }
+
+async function search(ext) {
+	ext = argsify(ext)
+	let cards = []
+
+	let text = encodeURIComponent(ext.text)
+	//let page = ext.page || 1
+	let url = `${appConfig.site}/index.php/vod/search.html?wd=${text}`
+
+	const { data } = await $fetch.get(url, {
+		headers: {
+			'User-Agent': UA,
+		},
+	})
+
+	const $ = cheerio.load(data)
+
+	const videos = $('div.module-search-item')
+	videos.each((_, e) => {
+		const img = $(e).find('div.module-item-pic img')
+		const title =  img.attr('alt')//
+		const cover = img.find('div.module-item-pic img')//
+		
+		const serialLink = $(e).find('div.video-info div.video-info-header a.video-serial');
+		const href = serialLink.attr('href')
+		const remarks =serialLink.serialLink.text()
+		cards.push({
+			vod_id: href,
+			vod_name: title,
+			vod_pic: cover,
+			vod_remarks: remarks,
+
+			ext: {
+				url: `${appConfig.site}${href}`,
+			},
+		})
+	})
+	return jsonify({
+		list: cards,
+	})
+}

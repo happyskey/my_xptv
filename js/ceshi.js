@@ -49,13 +49,16 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
     const videos = $('ul.list-unstyled li')
     videos.each((_, e) => {
-        const href = $(e).find('a').attr('href')
-        const title = $(e).find('h6').text()
-        const cover =appConfig.site + $(e).find('img').attr('data-original')
-        //const remarks = $(e).find('.note > span').text()
+        const href = $(e).find('a').attr('href') //视频连接后缀
+        const title = $(e).find('h6').text()    //标题
+        const cover =appConfig.site + $(e).find('img').attr('data-original') //图片
+
+
+        
+        //const remarks = $(e).find('.note > span').text() //右上更新
         cards.push({
             vod_id: href,
-            vod_name: title,
+            vod_name: href,
             vod_pic: cover,
             //vod_remarks: remarks, // 海報右上角的子標題
             ext: {

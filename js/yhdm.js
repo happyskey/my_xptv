@@ -200,7 +200,7 @@ async function search(ext) {
     const videos = $('#search_list li')
     videos.each((_, e) => {
         const link = $(e).find('a');
-        const href = link.attr('href')
+        const href = appConfig.site + link.attr('href')
         const title =link.attr('title')
         const img = $(e).find('img');
         const cover =img.attr('src'); 

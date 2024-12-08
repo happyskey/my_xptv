@@ -6,7 +6,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 const appConfig = {
     ver: 1,
-    title: '桃子视频|昊',
+    title: '桃子视频',
     site: 'https://www.taozi008.com',
     tabs: [
         {

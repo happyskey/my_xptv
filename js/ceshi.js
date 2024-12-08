@@ -96,12 +96,16 @@ async function getTracks(ext) {
        
         let name = $(e).attr('title')
         const ShareUrl =appConfig.site + $(e).attr('href')  
+
+
+
+        
          let group = {
               title:name ,
               tracks: [],
         }
         group.tracks.push({
-            name:name.trim(),
+            name:ShareUrl+name.trim(),
             pan: '',
            ext: {
                         url: ShareUrl,

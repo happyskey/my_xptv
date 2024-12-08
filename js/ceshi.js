@@ -93,7 +93,7 @@ async function getCards(ext) {
         const title = $(e).find('h6').text()
         const cover =appConfig.site + $(e).find('img').attr('data-original')
 
-/*
+
    const new_data  = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
@@ -106,8 +106,7 @@ async function getCards(ext) {
         const firstEpisode = next('ul.row.list-unstyled.gutters-1 li.ep-col a').first(); // 获取第一个剧集链接
 
         const href = firstEpisode.attr('href'); // 第一个 href
-      
-*/
+
 
 
         

@@ -91,7 +91,7 @@ async function getTracks(ext) {
 
     for (const e of playlist) {
         let name = $(e).attr('title');
-        const href = $(e).attr('href');
+        const href = $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/);
         console.log("href:", href); // 打印调试
 
         if (!href) continue; // 如果 href 为空，跳过
@@ -99,7 +99,7 @@ async function getTracks(ext) {
         const getID = appConfig.site + href;
         console.log("getID:", getID); // 打印调试
 
-        let new_url ='https://yhdm.one/_get_plays/2024684901/ep1'// 'https://yhdm.one/_get_plays/' + getID;
+        let new_url = 'https://yhdm.one/_get_plays/' + getID;
         console.log("new_url:", new_url); // 打印调试
 
         try {

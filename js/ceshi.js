@@ -53,7 +53,7 @@ async function getCards(ext) {
         const title = $(e).find('h6').text()
         const cover =appConfig.site + $(e).find('img').attr('data-original')
 
-
+/*
    const new_data  = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
@@ -67,16 +67,16 @@ async function getCards(ext) {
 
         const href = firstEpisode.attr('href'); // 第一个 href
       
-
+*/
 
 
         
         //const remarks = $(e).find('.note > span').text()
         cards.push({
-            vod_id: href,
+            vod_id: new_url,
             vod_name: title,
             vod_pic: cover,
-            vod_remarks: updateInfo, // 海報右上角的子標題
+           // vod_remarks: updateInfo, // 海報右上角的子標題
             ext: {
                 url: `${appConfig.site}${href}`,
             },

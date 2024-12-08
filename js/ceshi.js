@@ -82,24 +82,23 @@ async function getTracks(ext) {
 
     const $ = cheerio.load(data);
     const playlist = $('.ep-panel.mb-3 a');
-    console.log("playlist length:", playlist.length); // 打印调试
+   
 
     if (playlist.length === 0) {
-        console.error("No elements found for selector '.ep-panel.mb-3 a'");
+
         return jsonify({ list: groups });
     }
 
     for (const e of playlist) {
         let name = $(e).attr('title');
         const href = $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/);
-        console.log("href:", href); // 打印调试
-
+        
         if (!href) continue; // 如果 href 为空，跳过
 
         const getID = appConfig.site + href;
-        console.log("getID:", getID); // 打印调试
+        
         let new_url = 'https://yhdm.one/_get_plays/' + getID;
-        console.log("new_url:", new_url); // 打印调试
+      
 
         try {
             let group = {
@@ -113,7 +112,7 @@ async function getTracks(ext) {
                 },
             });
 
-            console.log("new_data:", new_data); // 打印调试
+ 
 
             const Data = typeof new_data === 'string' ? JSON.parse(new_data) : new_data;
             const playlists = Data.video_plays;

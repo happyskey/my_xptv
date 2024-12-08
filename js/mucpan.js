@@ -92,7 +92,7 @@ async function getTracks(ext) {
 
     const playlist = $('.module-row-one .module-row-info .module-row-text')
     playlist.each((_, e) => {
-        const name = $(e).attr('title')
+        const name = $(e).attr('title').replace('复制', '').replace('第1集下载地址', '')
         const ShareUrl = $(e).attr('data-clipboard-text')   
         tracks.push({
             name:name.trim(),

@@ -117,7 +117,7 @@ async function getTracks(ext) {
                 },
             });
 
-        const playlists = JSON.parse(new_data).video_plays
+        const playlists = new_data.video_plays
 
 
         

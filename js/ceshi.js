@@ -47,15 +47,36 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
     const videos = $('ul.list-unstyled li')
     videos.each((_, e) => {
-        const href = $(e).find('a').attr('href')
+        const new_url =appConfig.sit + $(e).find('a').attr('href')//
+
+        
         const title = $(e).find('h6').text()
         const cover =appConfig.site + $(e).find('img').attr('data-original')
+
+
+   const new_data  = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+        const next = cheerio.load(new_data)
+
+        const updateInfo = next('div.small .mb-1').text().trim(); // 获取 "更新至 第10集"
+        const firstEpisode = next('ul.row.list-unstyled.gutters-1 li.ep-col a').first(); // 获取第一个剧集链接
+
+        const href = firstEpisode.attr('href'); // 第一个 href
+      
+
+
+
+        
         //const remarks = $(e).find('.note > span').text()
         cards.push({
             vod_id: href,
             vod_name: title,
             vod_pic: cover,
-            //vod_remarks: remarks, // 海報右上角的子標題
+            vod_remarks: updateInfo, // 海報右上角的子標題
             ext: {
                 url: `${appConfig.site}${href}`,
             },
@@ -69,83 +90,6 @@ async function getCards(ext) {
 
 
 
-
-
-
-async function getTracks(ext) {
-
-
-
-
-    
-    ext = argsify(ext)
-    let groups = []
-    
-    let url = ext.url
-    
-    let tacks = []
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-
-    
-
-    const $ = cheerio.load(data)
-    const playlist =$('ul.row.list-unstyled.gutters-1 li a') 
- 
-       for(let i =0; i <playlist.length; i++){
-           
-        let title = $(e).attr('title')
-        const href = $(e).attr('href').match(/\/vod-play\/([^\/]+\/[^\.]+)/)[1]
-        const ShareUrl = appConfig.site`/vod-play/${href}.html`
-
-
-
-     
-        playlists.forEach( child => {
-        
-           tracks.push({
-              name:  ShareUrl,
-              pan: '',
-              ext: {
-                url: ShareUrl,
-              }
-            })
-   
-
-    })
-
-
-       }
-    return jsonify({
-        list: [
-            {
-                title: '默认分组',
-                tracks,
-            },
-        ],
-    })
-      
-
-}
-
-
-
-
-
-
-
-
-
-async function getPlayinfo(ext) {
-    ext = argsify(ext)
-    const url = ext.url
-    return jsonify({ urls: [url] })
-}
 
 
 

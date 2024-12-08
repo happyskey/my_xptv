@@ -34,8 +34,6 @@ const appConfig = {
 async function getConfig() {
     return jsonify(appConfig)
 }
-
-
 async function getCards(ext) {
     ext = argsify(ext)
     let cards = []
@@ -49,17 +47,13 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
     const videos = $('ul.list-unstyled li')
     videos.each((_, e) => {
-        const href = $(e).find('a').attr('href').match(/\/vod-play\/([^/]+\/[^.]+\.html)/) //视频连接后缀
-        const title = $(e).find('h6').text()    //标题
-        const cover =appConfig.site + $(e).find('img').attr('data-original') //图片
-        
-       
-
-        
-        
+        const href = $(e).find('a').attr('href')
+        const title = $(e).find('h6').text()
+        const cover =appConfig.site + $(e).find('img').attr('data-original')
+        //const remarks = $(e).find('.note > span').text()
         cards.push({
-            vod_hrf: 'https://yhdm.one/vod/' + href,
-            vod_name: href,
+            vod_id: href,
+            vod_name: title,
             vod_pic: cover,
             //vod_remarks: remarks, // 海報右上角的子標題
             ext: {
@@ -77,3 +71,158 @@ async function getCards(ext) {
 
 
 
+
+async function getTracks(ext) {
+    
+    ext = argsify(ext)
+   let groups = []
+    
+    let url = ext.url
+    
+    
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+
+    
+
+    const $ = cheerio.load(data)
+    const playlist = $('.ep-panel.mb-3 a')
+    playlist.each((_, e) => {
+       
+        let name = $(e).attr('title')
+        const ShareUrl =appConfig.site + $(e).attr('href')  
+         let group = {
+              title:name ,
+              tracks: [],
+        }
+        group.tracks.push({
+            name:name.trim(),
+            pan: '',
+           ext: {
+                        url: ShareUrl,
+                    }, 
+        })    
+
+if (group.tracks.length > 0) {
+      groups.push(group)
+    }
+
+
+
+
+
+        
+    })
+
+
+
+
+
+    
+
+return jsonify({ list: groups })
+      
+   
+}
+
+
+
+
+
+
+
+
+
+async function getPlayinfo(ext) {
+    ext = argsify(ext)
+    const url = ext.url
+    return jsonify({ urls: [url] })
+}
+
+
+
+    /*
+    
+async function search(ext) {
+    ext = argsify(ext)
+    let cards = []
+
+    let text = encodeURIComponent(ext.text)
+   // let page = ext.page || 1
+    let url = `https://yhdm.one/search?q=${text}`
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const videos = $('#search_list a')
+    videos.each((_, e) => {
+        const href =$(e).attr('href')
+        const title = $(e).find('img').attr('alt')
+        const cover =appConfig.site + $(e).find('img').attr('data-original')
+
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            vod_remarks: '',
+
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+    return jsonify({
+        list: cards,
+    })
+}
+
+
+
+
+        const { new_data } = await $fetch.get(ShareUrl, {
+             'User-Agent': UA,
+          });
+  
+        const json = argsify(new_data)
+    
+        
+        playlists.forEach( each => {
+        
+
+        let group = {
+          title: each.src_site,
+          tracks: [],
+    }
+    
+        let path = each.play_data
+        
+        group.tracks.push({
+          name:  name,
+          pan: '',
+          ext: {
+            url: path
+          }
+        })
+      
+    })
+
+         if (group.tracks.length > 0) {
+      groups.push(group)
+    }
+
+        
+
+
+
+
+*/

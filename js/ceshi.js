@@ -133,7 +133,7 @@ async function getTracks(ext) {
 
          for (const d of playlists) {
             group.tracks.push({
-                name: d.src_site,
+                name: ShareUrl,//d.src_site,
                 pan: '',
                 ext: {
                     url: d.play_data,

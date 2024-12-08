@@ -85,7 +85,7 @@ async function getTracks(ext) {
 
     for (const e of playlist) {
         let name = $(e).attr('title');
-        const getID = appConfig.site + $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/)[1]; // 获取标号
+        const getID = appConfig.site + $(e).attr('href')//.match(/\/vod-play\/([\d\/]+)\.html/)[1]; // 获取标号
         let new_url = 'https://yhdm.one/_get_plays/' + getID;
 
         // Fetch new data with await

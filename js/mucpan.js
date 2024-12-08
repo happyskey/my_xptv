@@ -1,3 +1,4 @@
+//昊
 const cheerio = createCheerio()
 
 // 預先定義請求使用的 user-agent
@@ -46,7 +47,6 @@ async function getConfig() {
 async function getCards(ext) {
     ext = argsify(ext)
     let cards = []
-   //http://www.mucpan.cc/index.php/vod/show/id/21/page/2.html
     // let page = ext.page
     // let id = ext.id
     let { page = 1, id } = ext

@@ -52,7 +52,12 @@ async function getCards(ext) {
         const href = $(e).find('a').attr('href') //视频连接后缀
         const title = $(e).find('h6').text()    //标题
         const cover =appConfig.site + $(e).find('img').attr('data-original') //图片
-
+        const new_url = appConfig.site + href
+          const  new_data  = await $fetch.get(new_url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
 
         
         //const remarks = $(e).find('.note > span').text() //右上更新

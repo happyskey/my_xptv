@@ -96,7 +96,7 @@ async function getTracks(ext) {
     for (const e of playlist) {
        
         let name = $(e).attr('title')
-        const ShareUrl =appConfig.site + $(e).attr('href')  
+        const ShareUrl = $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/)  
          let group = {
               title:name ,
               tracks: [],
@@ -113,7 +113,7 @@ async function getTracks(ext) {
 
          for (const d of playlists) {
             group.tracks.push({
-                name: d.src_site,
+                name:ShareUrl,// d.src_site,
                 pan: '',
                 ext: {
                     url: d.play_data,

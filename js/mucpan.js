@@ -78,4 +78,41 @@ async function getCards(ext) {
         list: cards,
     })
 }
+async function getTracks(ext) {
+    ext = argsify(ext)
+    let tracks = []
+    let url = ext.url
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
 
+    const $ = cheerio.load(data)
+
+    const playlist = $('.module-row-one .module-row-info .module-row-text')
+    playlist.each((_, e) => {
+        const name = $(e).attr('title')
+        const ShareUrl = $(e).attr('data-clipboard-text')   
+        tracks.push({
+            name:name.trim(),
+            pan: ShareUrl ,
+           ext: {
+                        url: '',
+                    }, 
+        })
+    })
+
+    return jsonify({
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
+    })
+}
+
+async function getPlayinfo(ext) {
+	return jsonify({ urls: [] })
+}

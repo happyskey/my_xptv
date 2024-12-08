@@ -68,7 +68,7 @@ async function getCards(ext) {
 }
 
 
-
+//
 
 
 
@@ -95,13 +95,23 @@ async function getTracks(ext) {
     playlist.each((_, e) => {
        
         let name = $(e).attr('title')
-        const ShareUrl =appConfig.site + $(e).attr('href')  
-
+        const getID =appConfig.site + $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/)//获取标号
+        let new_url =' https://yhdm.one/_get_plays/' + getID
+        
+    const new_data = await $fetch.get(new_url , {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
 
 
         
+
+      
+
+        
          let group = {
-              title:name ,
+              title:name ,//集数
               tracks: [],
         }
         group.tracks.push({

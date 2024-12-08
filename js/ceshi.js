@@ -42,6 +42,8 @@ async function getCards(ext) {
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
+            'Referer': 'https://yhdm.one/',
+            'Origin': 'https://yhdm.one',
         },
     })
     const $ = cheerio.load(data)
@@ -77,6 +79,8 @@ async function getTracks(ext) {
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
+             'Referer': 'https://yhdm.one/',
+            'Origin': 'https://yhdm.one',
         },
     });
 
@@ -109,6 +113,8 @@ async function getTracks(ext) {
             const new_data = await $fetch.get(new_url, {
                 headers: {
                     'User-Agent': UA,
+                     'Referer': 'https://yhdm.one/',
+                    'Origin': 'https://yhdm.one',
                 },
             });
 

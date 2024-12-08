@@ -99,14 +99,14 @@ async function getTracks(ext) {
 
         try {
 
-            /*
+            
             const new_data = await $fetch.get(new_url, {
                 headers: {
                     'User-Agent': UA,
                 },
             });
             console.log("new_data:", new_data); // 打印调试
-*/
+
             let group = {
                 title: name, // 集数
                 tracks: [],

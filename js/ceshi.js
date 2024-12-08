@@ -76,76 +76,66 @@ async function getTracks(ext) {
     let groups = [];
     let url = ext.url;
 
+    // 获取页面数据
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
-             'Referer': 'https://yhdm.one/',
+            'Referer': 'https://yhdm.one/',
             'Origin': 'https://yhdm.one',
         },
     });
 
+    // 使用 cheerio 解析 HTML
     const $ = cheerio.load(data);
     const playlist = $('.ep-panel.mb-3 a');
-   
+
+    console.log("Playlist length:", playlist.length);  // 打印 playlist 长度，确认是否匹配到元素
 
     if (playlist.length === 0) {
-
         return jsonify({ list: groups });
     }
 
+    // 遍历 playlist 中的每个元素
     for (const e of playlist) {
         let name = $(e).attr('title');
         const href = $(e).attr('href').match(/\/vod-play\/([\d\/]+)\.html/);
-        
+
+        console.log("Href matched:", href);  // 打印 href 的匹配结果
+
         if (!href) continue; // 如果 href 为空，跳过
 
-        const getID = appConfig.site + href;
-        
-        let new_url ='https://yhdm.one/_get_plays/2024684901/ep1'// 'https://yhdm.one/_get_plays/' + getID;
-      
+        const getID = appConfig.site + href[1];  // 获取ID
+        let new_url = 'https://yhdm.one/_get_plays/' + getID;
 
-        try {
-            let group = {
-                title: name, // 集数
-                tracks: [],
-            };
+        // 使用静态数据测试
+        const playlists = [
+            { "play_data": "https://hd.ijycnd.com/play/9b6589Na/index.m3u8", "src_site": "jyzy" },
+            { "play_data": "https://hn.bfvvs.com/play/Le351wpb/index.m3u8", "src_site": "hnzy" },
+            { "play_data": "https://play.xluuss.com/play/7e55yLXe/index.m3u8", "src_site": "xlzy" }
+        ];
 
+        // 为每个播放源添加到 tracks 中
+        let group = {
+            title: name, // 集数
+            tracks: [],
+        };
 
-            /*
-            const new_data = await $fetch.get(new_url, {
-                headers: {
-                    'User-Agent': UA,
-                     'Referer': 'https://yhdm.one/',
-                    'Origin': 'https://yhdm.one',
+        for (const d of playlists) {
+            group.tracks.push({
+                name: d.src_site,
+                pan: '',
+                ext: {
+                    url: d.play_data,
                 },
             });
+        }
 
- 
-
-            const Data = typeof new_data === 'string' ? JSON.parse(new_data) : new_data;
- 
-            const playlists = Data.video_plays;
-*/
-            const playlists =[ { "play_data": "https://hd.ijycnd.com/play/9b6589Na/index.m3u8", "src_site": "jyzy" }, { "play_data": "https://hn.bfvvs.com/play/Le351wpb/index.m3u8", "src_site": "hnzy" }, { "play_data": "https://play.xluuss.com/play/7e55yLXe/index.m3u8", "src_site": "xlzy" }, { "play_data": "https://v.gsuus.com/play/Rb47xLJa/index.m3u8", "src_site": "gszy" }, { "play_data": "https://bfikuncdn.com/20240815/F51PgYkC/index.m3u8", "src_site": "ikzy" }, { "play_data": "https://v2.tlkqc.com/wjv2/202408/15/Qj0JuMsr0074/video/index.m3u8", "src_site": "wjzy2" }, { "play_data": "https://v.cdnlz22.com/20240815/3725_2916c479/index.m3u8", "src_site": "lzzy" }, { "play_data": "https://svipsvip.ffzy-online5.com/20240815/31398_eba62c42/index.m3u8", "src_site": "ffzy" }, { "play_data": "https://v10.dious.cc/20240815/hCrqkIxB/index.m3u8", "src_site": "tkzy2" }, { "play_data": "https://vod12.wgslsw.com/20240816/Qj0JuMsr0074/index.m3u8", "src_site": "yhzy" }, { "play_data": "https://v5.qrssv.com/202408/15/8uVCszsjeF7/video/index.m3u8", "src_site": "snzy" }, { "play_data": "https://vv.jisuzyv.com/play/yb852Erd/index.m3u8", "src_site": "jszy" }, { "play_data": "https://play.modujx15.com/20240815/g71ZekcK/index.m3u8", "src_site": "mdzy" } ]
-
-            for (const d of playlists) {
-                group.tracks.push({
-                    name: d.src_site,
-                    pan: '',
-                    ext: {
-                        url: d.play_data,
-                    },
-                });
-            }
-
-            if (group.tracks.length > 0) {
-                groups.push(group);
-            }
-        } catch (error) {
-            console.error("Error fetching new_url:", new_url, error);
+        if (group.tracks.length > 0) {
+            groups.push(group);
         }
     }
 
+    // 返回最终的数据
     return jsonify({ list: groups });
 }
 

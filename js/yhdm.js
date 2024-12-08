@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://yhdm.one',
     tabs: [
         {
-            name: '日本动漫|昊',
+            name: '日本动漫',
             ext: {
                 id: 'jp',
             },

@@ -75,7 +75,7 @@ const Url = `${appConfig.site}${href}`
     
     cards.push({
         vod_id: href,
-        vod_name: title,
+        vod_name: remarks ,
         vod_pic: cover,
         vod_remarks: remarks,
         ext: {

@@ -57,7 +57,7 @@ for (let i = 0; i < videos.length; i++) {
     const cover = appConfig.site + $(e).find('img').attr('data-original');
 
 const Url = `${appConfig.site}${href}`
-    /*
+    
   const remarks_data  = await $fetch.get(Url, {
         headers: {
             'User-Agent': UA,
@@ -69,7 +69,7 @@ const Url = `${appConfig.site}${href}`
 
      const remarks = remarks_html('div.mb-1[style="color: red;"]').text().trim(); 
 
-*/
+
     
     
     
@@ -77,7 +77,7 @@ const Url = `${appConfig.site}${href}`
         vod_id: href,
         vod_name: title,
         vod_pic: cover,
-        vod_remarks: '',
+        vod_remarks: remarks,
         ext: {
             url: Url,
         },

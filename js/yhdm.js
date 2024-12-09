@@ -200,7 +200,7 @@ async function search(ext) {
     const videos = $('#search_list li')
     videos.each((_, e) => {
 
-        const item = $(li);
+        const item = $(e);
 
         // 提取 href 和 title
         const link = item.find('a').first(); // 找到第一个 <a>

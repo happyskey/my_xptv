@@ -200,19 +200,14 @@ async function search(ext) {
     const videos = $('#search_list li')
     videos.each((_, e) => {
 
-        const item = $(li);
-
-        // 提取 href 和 title
-        const link = item.find('a').first(); // 找到第一个 <a>
+        const link = $(li).find('a').first();
+        
         const href = link.attr('href');
 
-
-
-        const img = item.find('img').first(); // 找到第一个 <img>
         
-        const cover = img.attr('data-original') || img.attr('src'); // 使用 || 处理优先级
-
-        // 提取图片的 alt 标题
+        const img = $(li).find('img').first(); 
+        
+        const cover == img.attr('data-original') || img.attr('src');
         const title = img.attr('alt');
 
 

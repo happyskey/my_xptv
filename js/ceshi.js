@@ -136,7 +136,7 @@ async function search(ext) {
         
 
         // 提取 href 和 title
-        const link = $(e).find('a.module-card-item-poster').attr('href'); // 找到第一个 <a>
+        const herf = $(e).find('a.module-card-item-poster').attr('href'); // 找到第一个 <a>
         
 
 

@@ -85,7 +85,7 @@ async function getCards(ext) {
     videos.each((_, e) => {
         const href = $(e).attr('href')
         const title = $(e).attr('title')
-        const cover =appConfig.site + $(e).find('img').attr('data-original')
+        const cover = $(e).find('img').attr('data-original')
         const remarks = $(e).find('.module-item-note').text().trim()
         cards.push({
             vod_id: href,

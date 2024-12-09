@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://yhdm.one',
     tabs: [
         {
-            name: '日漫',
+            name: '日本动漫',
             ext: {
                 id: 'jp',
             },
@@ -197,17 +197,22 @@ async function search(ext) {
 
     const $ = cheerio.load(data)
 
-    const videos = $('.list-unstyled li')
+    const videos = $('#search_list li')
     videos.each((_, e) => {
 
-        const link = $(li).find('a').first();
-        
+        const item = $(e);
+
+        // 提取 href 和 title
+        const link = item.find('a').first(); // 找到第一个 <a>
         const href = link.attr('href');
 
+
+
+        const img = item.find('img').first(); // 找到第一个 <img>
         
-        const img = $(li).find('img').first(); 
-        
-        const cover = img.attr('data-original') || img.attr('src');
+        const cover = img.attr('data-original') || img.attr('src'); // 使用 || 处理优先级
+
+        // 提取图片的 alt 标题
         const title = img.attr('alt');
 
 

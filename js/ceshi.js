@@ -1,8 +1,9 @@
+//昊
 const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 const appConfig = {
     ver: 1,
-    title: '樱花动漫',
+    title: '樱花漫',
     site: 'https://yhdm.one',
     tabs: [
         {
@@ -186,7 +187,7 @@ async function search(ext) {
 
     let text = encodeURIComponent(ext.text)
     let page = ext.page || 1
-    let url = `${appConfig.site}/search?q=%E5%90%8D=${text}`//https://yhdm.one/search?q=%E5%90%8D
+    let url = `${appConfig.site}/search?q=${text}`//https://yhdm.one/search?q=%E5%90%8D
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -199,15 +200,15 @@ async function search(ext) {
     const videos = $('#search_list li')
     videos.each((_, e) => {
         const link = $(e).find('a');
-        const href = link.attr('href')
-        const title =link.attr('title')
+        const href =  link.attr('href')
+        const title = link.attr('title')
         const img = $(e).find('img');
-        const cover =img.attr('src'); 
+        const cover = img.attr('data-original'); 
 
         cards.push({
             vod_id: href,
             vod_name: title,
-            vod_pic: cover,
+            vod_pic: appConfig.site + cover,
             vod_remarks: '',
 
             ext: {
@@ -219,12 +220,3 @@ async function search(ext) {
         list: cards,
     })
 }
-
-
-
-
-
-
-
-
-

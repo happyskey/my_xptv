@@ -132,10 +132,12 @@ async function search(ext) {
 
     const videos = $('.module-card-item')
     videos.each((_, e) => {
-        const href = $(e).attr('href')
-        const title = $(e).attr('title')
-        const cover =appConfig.site + $(e).find('img').attr('data-original')
-        const remarks = $(e).find('.module-item-note').text().trim()
+        const href = $(e).find('a.module-card-item-poster').attr('href') || '';
+        
+        const title =  $(e).find('.module-card-item-title strong').text().trim() || '';
+        
+        const cover =$(e).find('.module-item-pic img').attr('data-original') || '';  
+        const remarks = $(e).find('.module-item-note').text().trim() || '';
 
         
         cards.push({

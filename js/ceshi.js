@@ -132,23 +132,10 @@ async function search(ext) {
 
     const videos = $('.module-card-item')
     videos.each((_, e) => {
-
-        
-
-        // 提取 href 和 title
-        const herf = $(e).find('a.module-card-item-poster').attr('href'); // 找到第一个 <a>
-        
-
-
-
-        
-        
-        const cover = $(e).find('.module-item-pic img').attr('data-original') || $(e).find('.module-item-pic img').attr('src'); // 使用 || 处理优先级
+        const href = $(e).attr('href')
+        const title = $(e).attr('title')
+        const cover =appConfig.site + $(e).find('img').attr('data-original')
         const remarks = $(e).find('.module-item-note').text().trim()
-        // 提取图片的 alt 标题
-        const title = $(e).find('.module-card-item-title strong').text().trim();
-
-
 
         
         cards.push({

@@ -55,13 +55,30 @@ for (let i = 0; i < videos.length; i++) {
     const href = $(e).find('a').attr('href');
     const title = $(e).find('h6').text().trim();
     const cover = appConfig.site + $(e).find('img').attr('data-original');
+
+const Url = ${appConfig.site}${href}
+  const remarks_data  = await $fetch.get(Url, {
+        headers: {
+            'User-Agent': UA,
+            'Referer': 'https://yhdm.one/',
+            'Origin': 'https://yhdm.one',
+        },
+    })
+    const remarks_html = cheerio.load(remarks_data)
+
+     const remarks = $('.mb-1').text().trim(); 
+
+
+    
+    
     
     cards.push({
         vod_id: href,
         vod_name: title,
         vod_pic: cover,
+        vod_remarks: remarks,
         ext: {
-            url: `${appConfig.site}${href}`,
+            url: Url,
         },
     });
 }

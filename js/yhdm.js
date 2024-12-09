@@ -199,12 +199,25 @@ async function search(ext) {
 
     const videos = $('#search_list li')
     videos.each((_, e) => {
-        const link = $(e).find('a');
-        const href =  link.attr('href')
-        const title = link.attr('title')
-        const img = $(e).find('img');
-        const cover = img.attr('data-original'); 
 
+        const item = $(li);
+
+        // 提取 href 和 title
+        const link = item.find('a').first(); // 找到第一个 <a>
+        const href = link.attr('href');
+
+
+
+        const img = item.find('img').first(); // 找到第一个 <img>
+        
+        const cover = img.attr('data-original') || img.attr('src'); // 使用 || 处理优先级
+
+        // 提取图片的 alt 标题
+        const title = img.attr('alt');
+
+
+
+        
         cards.push({
             vod_id: href,
             vod_name: title,

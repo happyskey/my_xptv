@@ -65,3 +65,41 @@ const appConfig = {
 async function getConfig() {
     return jsonify(appConfig)
 }
+
+
+//https://www.j00j.com/index.php/vod/show/id/20/page/2.html
+
+
+async function getCards(ext) {
+    ext = argsify(ext)
+    let cards = []
+    let { page = 1, id } = ext
+    const url =appConfig.site + `/index.php/vod/show/id/${id}/page/${page}.html` 
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+    const $ = cheerio.load(data)
+    const videos = $('.module-poster-item')
+    videos.each((_, e) => {
+        const href = $(e).attr('href')
+        const title = $(e).attr('title')
+        const cover =appConfig.site + $(e).find('img').attr('data-original')
+        const remarks = $(e).find('.module-item-note').text().trim()
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            vod_remarks: remarks, // 海報右上角的子標題
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+
+    return jsonify({
+        list: cards,
+    })
+}
+

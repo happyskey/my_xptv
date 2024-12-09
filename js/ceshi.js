@@ -207,7 +207,7 @@ async function search(ext) {
         
         const img = $(li).find('img').first(); 
         
-        const cover == img.attr('data-original') || img.attr('src');
+        const cover = img.attr('data-original') || img.attr('src');
         const title = img.attr('alt');
 
 

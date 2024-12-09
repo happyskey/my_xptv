@@ -3,11 +3,11 @@ const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 const appConfig = {
     ver: 1,
-    title: '樱花漫',
+    title: '樱花动漫',
     site: 'https://yhdm.one',
     tabs: [
         {
-            name: '日本动漫',
+            name: '日漫',
             ext: {
                 id: 'jp',
             },
@@ -199,12 +199,25 @@ async function search(ext) {
 
     const videos = $('#search_list li')
     videos.each((_, e) => {
-        const link = $(e).find('a');
-        const href =  link.attr('href')
-        const title = link.attr('title')
-        const img = $(e).find('img');
-        const cover = img.attr('data-original'); 
 
+        const item = $(li);
+
+        // 提取 href 和 title
+        const link = item.find('a').first(); // 找到第一个 <a>
+        const href = link.attr('href');
+
+
+
+        const img = item.find('img').first(); // 找到第一个 <img>
+        
+        const cover = img.attr('data-original') || img.attr('src'); // 使用 || 处理优先级
+
+        // 提取图片的 alt 标题
+        const title = img.attr('alt');
+
+
+
+        
         cards.push({
             vod_id: href,
             vod_name: title,

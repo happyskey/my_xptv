@@ -203,7 +203,7 @@ async function search(ext) {
         const href =  link.attr('href')
         const title = link.attr('title')
         const img = $(e).find('img');
-        const cover = img.attr('src'); 
+        const cover = img.attr('data-original'); 
 
         cards.push({
             vod_id: href,

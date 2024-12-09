@@ -103,3 +103,66 @@ async function getCards(ext) {
     })
 }
 
+
+
+
+
+
+
+
+
+
+
+//https://www.j00j.com/index.php/vod/search/page/2/wd/柯南.html
+async function search(ext) {
+    ext = argsify(ext)
+    let cards = []
+
+    let text = encodeURIComponent(ext.text)
+    let page = ext.page || 1
+    let url = `${appConfig.site}/index.php/vod/search/page/${page}/wd/${text}.html`//https://yhdm.one/search?q=%E5%90%8D
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const videos = $('.module-card-item')
+    videos.each((_, e) => {
+
+        
+
+        // 提取 href 和 title
+        const link = $(e).find('a.module-card-item-poster').attr('href'); // 找到第一个 <a>
+        
+
+
+
+        
+        
+        const cover = $(e).find('.module-item-pic img').attr('data-original') || $(e).find('.module-item-pic img').attr('src'); // 使用 || 处理优先级
+        const remarks = $(e).find('.module-item-note').text().trim()
+        // 提取图片的 alt 标题
+        const title = $(e).find('.module-card-item-title strong').text().trim();
+
+
+
+        
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            vod_remarks: remarks,
+
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+    return jsonify({
+        list: cards,
+    })
+}

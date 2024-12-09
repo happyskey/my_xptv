@@ -56,7 +56,7 @@ for (let i = 0; i < videos.length; i++) {
     const title = $(e).find('h6').text().trim();
     const cover = appConfig.site + $(e).find('img').attr('data-original');
 
-const Url = ${appConfig.site}${href}
+const Url = ${appConfig.site} + ${href}
     /*
   const remarks_data  = await $fetch.get(Url, {
         headers: {

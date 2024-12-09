@@ -197,7 +197,7 @@ async function search(ext) {
 
     const $ = cheerio.load(data)
 
-    const videos = $('#search_list li')
+    const videos = $('.list-unstyled li')
     videos.each((_, e) => {
 
         const link = $(li).find('a').first();

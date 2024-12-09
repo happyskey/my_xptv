@@ -66,7 +66,7 @@ const Url = ${appConfig.site}${href}
     })
     const remarks_html = cheerio.load(remarks_data)
 
-     const remarks = $('.mb-1').text().trim(); 
+     const remarks = remarks_html('div.mb-1[style="color: red;"]').text().trim(); 
 
 
     

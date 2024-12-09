@@ -49,21 +49,22 @@ async function getCards(ext) {
     })
     const $ = cheerio.load(data)
     const videos = $('ul.list-unstyled li')
-    videos.each((_, e) => {
-        const href = $(e).find('a').attr('href')
-        const title = $(e).find('h6').text()
-        const cover =appConfig.site + $(e).find('img').attr('data-original')
-        //const remarks = $(e).find('.note > span').text()
-        cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            //vod_remarks: remarks, // 海報右上角的子標題
-            ext: {
-                url: `${appConfig.site}${href}`,
-            },
-        })
-    })
+for (let i = 0; i < videos.length; i++) {
+    const e = videos[i];  // 当前的列表项
+    
+    const href = $(e).find('a').attr('href');
+    const title = $(e).find('h6').text().trim();
+    const cover = appConfig.site + $(e).find('img').attr('data-original');
+    
+    cards.push({
+        vod_id: href,
+        vod_name: title,
+        vod_pic: cover,
+        ext: {
+            url: `${appConfig.site}${href}`,
+        },
+    });
+}
 
     return jsonify({
         list: cards,

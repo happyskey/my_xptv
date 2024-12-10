@@ -156,10 +156,10 @@ async function getTracks(ext) {
       
         
             group.tracks.push({
-                name: name,
+                name: tabName,
                 pan: '',
                 ext: {
-                    url: playerData,
+                    url: i,
                 },
             });
         

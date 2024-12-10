@@ -154,16 +154,10 @@ async function getTracks(ext) {
 
         const ShareUrl = appConfig.site +  $(element).attr('href').match(regex);
 
-//https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html
+   //https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html
         
 
-       //
-
-
-        const regex_sid = /sid\/(\d+)\/nid\/(\d+)/;
-        const url_id = url.match(regex_sid)[1];
     
-
 
 
       

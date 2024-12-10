@@ -171,6 +171,11 @@ async function getTracks(ext) {
                 },
             });
 
+
+           if (group.tracks.length > 0) {
+      groups.push(group)
+    }
+           
        }else{
        break;
        }
@@ -179,9 +184,7 @@ async function getTracks(ext) {
         
        }//内层for
 
-if (group.tracks.length > 0) {
-      groups.push(group)
-    }
+
 
 
 

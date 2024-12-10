@@ -135,7 +135,7 @@ async function getTracks(ext) {
         const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
         
         // 将 tabName 和对应的索引 i+1 添加到字典中
-        
+        key = key + 1
   
      let group = {
               title:tabName  ,//线路名上拉菜单
@@ -193,7 +193,7 @@ if (group.tracks.length > 0) {
 
    }//外循环
 
-     key = key + 1
+     
 
 return jsonify({ list: groups })
       

@@ -167,7 +167,7 @@ async function getTracks(ext) {
                 name: id_key,
                 pan: '',
                 ext: {
-                    url:' 1',
+                    url:appConfig.site + href,
                 },
             });
         //

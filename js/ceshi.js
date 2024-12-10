@@ -144,7 +144,7 @@ async function getTracks(ext) {
 
 
     
-/*
+
        const playlist = $('.module-play-list-link')
     for (let i = 0; i < playlist.length; i++) {
        const element = playlist[i];
@@ -157,7 +157,7 @@ async function getTracks(ext) {
         
 
        
-*/
+
 
         
 
@@ -175,7 +175,7 @@ async function getTracks(ext) {
         
 
         
-     
+       }//内层for
 
 if (group.tracks.length > 0) {
       groups.push(group)

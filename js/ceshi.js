@@ -157,10 +157,10 @@ async function getTracks(ext) {
       
         
             group.tracks.push({
-                name: 1,
+                name: '1',
                 pan: '',
                 ext: {
-                    url: 1,
+                    url:' 1',
                 },
             });
         

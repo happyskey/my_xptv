@@ -137,7 +137,7 @@ async function getTracks(ext) {
         tabDict[tabName] = i + 1; 
   
      let group = {
-              title:tabName  ,
+              title:tabName  ,//线路名
               tracks: [],
         }
 
@@ -156,7 +156,7 @@ async function getTracks(ext) {
       
         
             group.tracks.push({
-                name: tabName,
+                name: i,
                 pan: '',
                 ext: {
                     url: i,

@@ -32,7 +32,7 @@
 },{
             "name": "美剧网|80%",
             "type": 3,
-            "api": "csp_js/mucpan",
+            "api": "csp_js/mmjw",
             "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mjw.js" 
 }
        

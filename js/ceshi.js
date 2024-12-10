@@ -160,7 +160,7 @@ async function getTracks(ext) {
                 name: key,
                 pan: '',
                 ext: {
-                    url: tabDict[tabName],
+                    url: key,
                 },
             });
         

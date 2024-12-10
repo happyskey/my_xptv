@@ -149,17 +149,20 @@ async function getTracks(ext) {
     for (let i = 0; i < playlist.length; i++) {
        const element = playlist[i];
         let name = $(element).attr('title')
-        const regex = $(element).attr('href')[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
+      
+        const regex = $(element).attr('href')[1]//.replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
 
         const ShareUrl = appConfig.site +  $(element).attr('href').match(regex);
 
 //https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html
         
 
-       
+       //
 
 
-        
+        const regex_sid = /sid\/(\d+)\/nid\/(\d+)/;
+        const url_id = url.match(regex_sid)[1];
+        if (url_id ==key){
 
 
 
@@ -172,8 +175,8 @@ async function getTracks(ext) {
                     url:' 1',
                 },
             });
-        
-
+        //
+        }
         
        }//内层for
 

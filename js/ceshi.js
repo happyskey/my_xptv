@@ -141,63 +141,19 @@ async function getTracks(ext) {
               tracks: [],
         }
 
-    //提取href 剧集按钮
-    
-    const playlist = $('.module-play-list-link').toArray()
-    for (let i = 0; i < playlist.length; i++) {
-       const element = playlist[i];
-        let name = $(element).attr('title')
-        const regex = $(element).attr('href')[1].replace(/sid\/\d+/g, `sid/${tabValue}`).replace(/nid\/\d+/g, `nid/${tabValue}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
 
-        const ShareUrl = appConfig.site +  $(e).attr('href').match(regex);
-
-//https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html
-        
     
+
+       
+
+       
 
 
         
-         const new_data = await $fetch.get(ShareUrl, {
-                headers: {
-                    'User-Agent': UA,
-                
-                },
-            });
 
 
-        /*
 
-
-player_aaaa 数据: {
-  flag: "play",
-  encrypt: 0,
-  trysee: 0,
-  points: 0,
-  link: "/index.php/vod/play/id/106815/sid/1/nid/1.html",
-  link_next: "/index.php/vod/play/id/106815/sid/1/nid/2.html",
-  link_pre: "",
-  vod_data: {
-    vod_name: "触击手",
-    vod_actor: "铜木亨之,仓科加奈,平原哲,阿久江仁爱,石川轩华,和田雅成,熊谷真实,朝加真由美,藕劝师赏,柳东卿十郎,小山梅海,生田宜平,福田ユミ",
-    vod_director: "千笠行利,崖谷宜平",
-    vod_class: "日剧"
-  },
-  url: "https://vv.jisuzyv.com/play/9aA4LQze",
-  url_next: "https://vv.jisuzyv.com/play/lejD37Rb",
-  from: "jsyun",
-  server: "no",
-  note: "",
-  id: "106815",
-  sid: 1,
-  nid: 1
-}
-
-
-        */
-        const regex = /var player_aaaa=(\{.*?\});/s;
-        const playlists = new_data.match(regex);
-        const playerData = JSON.parse(match[1]).url
-
+      
         
             group.tracks.push({
                 name: name,
@@ -220,7 +176,7 @@ if (group.tracks.length > 0) {
 
 
         
-    }//内循环
+    
 
 
 

@@ -127,8 +127,9 @@ async function getTracks(ext) {
     
     //获取外层列表
     const tabItems = $('.module-tab-item')
-    
+    let key = 0
    for (let i = 0; i < tabItems.length; i++) {
+       key =key + 1
         const element = tabItems[i];
         
         // 优先获取 tabName，若为空则获取 data-dropdown-value
@@ -149,7 +150,7 @@ async function getTracks(ext) {
        const element = playlist[i];
         let name = $(element).attr('title')
       
-      //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
+    
        const href = $(element).attr('href')
 
         const ShareUrl = href
@@ -158,7 +159,7 @@ async function getTracks(ext) {
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
         const id_key = href.match(sid_key)[1];
     
-       if(i.toString()=== id_key ){
+       if(key.toString()=== id_key ){
 
       
         

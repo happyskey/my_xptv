@@ -3,30 +3,60 @@ const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 const appConfig = {
     ver: 1,
-    title: '樱花动漫',
-    site: 'https://yhdm.one',
+    title: '美剧网',
+    site: 'https://www.j00j.com/',
     tabs: [
         {
-            name: '日本动漫',
+            name: '欧美剧',
             ext: {
-                id: 'jp',
+                id: 20,
             },
         },
         {
-            name: '国产动漫',
+            name: '新马泰剧',
             ext: {
-                id: 'cn',
+                id: 21,
             },
         },
         {
-            name: '欧美动漫',
+            name: '韩剧',
             ext: {
-                id: 'us',
+                id: 22,
             },
         },{
-            name: '其他的',
+            name: '日剧',
             ext: {
-                id: 'other',
+                id: 23,
+            },
+        },{
+            name: '台剧',
+            ext: {
+                id: 25,
+            },
+        },{
+            name: '在线电影',
+            ext: {
+                id: 24,
+            },
+        },{
+            name: '在线综艺',
+            ext: {
+                id: 36,
+            },
+        },{
+            name: '在线动漫',
+            ext: {
+                id: 43,
+            },
+        },{
+            name: '在线预告',
+            ext: {
+                id: 48,
+            },
+        },{
+            name: '在线短剧',
+            ext: {
+                id: 49,
             },
         }
         
@@ -35,30 +65,33 @@ const appConfig = {
 async function getConfig() {
     return jsonify(appConfig)
 }
+
+
+//https://www.j00j.com/index.php/vod/show/id/20/page/2.html
+
+
 async function getCards(ext) {
     ext = argsify(ext)
     let cards = []
     let { page = 1, id } = ext
-    const url =appConfig.site + `/list/?country=${id}&page=${page}` 
+    const url =appConfig.site + `/index.php/vod/show/id/${id}/page/${page}.html` 
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
-            'Referer': 'https://yhdm.one/',
-            'Origin': 'https://yhdm.one',
         },
     })
     const $ = cheerio.load(data)
-    const videos = $('ul.list-unstyled li')
+    const videos = $('.module-poster-item')
     videos.each((_, e) => {
-        const href = $(e).find('a').attr('href')
-        const title = $(e).find('h6').text()
-        const cover =appConfig.site + $(e).find('img').attr('data-original')
-        //const remarks = $(e).find('.note > span').text()
+        const href = $(e).attr('href')
+        const title = $(e).attr('title')
+        const cover = $(e).find('img').attr('data-original')
+        const remarks = $(e).find('.module-item-note').text().trim()
         cards.push({
             vod_id: href,
             vod_name: title,
             vod_pic: cover,
-            //vod_remarks: remarks, // 海報右上角的子標題
+            vod_remarks: remarks, // 海報右上角的子標題
             ext: {
                 url: `${appConfig.site}${href}`,
             },
@@ -70,9 +103,7 @@ async function getCards(ext) {
     })
 }
 
-
-//
-//
+/*
 
 async function getTracks(ext) {
     
@@ -93,54 +124,89 @@ async function getTracks(ext) {
     
 
     const $ = cheerio.load(data)
-    const playlist = $('.ep-panel.mb-3 a')
-    for (const e of playlist) {
-       
-        let name = $(e).attr('title')
-        const regex = /\/vod-play\/(.*?)\.html/;
-
-        const ShareUrl = 'https://yhdm.one/_get_plays/' +  $(e).attr('href').match(regex)[1];
-
-
+    let tabDict = {}
+    //获取外层列表
+    const tabItems = $('.module-tab-item')
+   for (let i = 0; i < tabItems.length; i++) {
+        const element = tabItems[i];
         
-         let group = {
-              title:name ,
+        // 优先获取 tabName，若为空则获取 data-dropdown-value
+        const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
+        
+        // 将 tabName 和对应的索引 i+1 添加到字典中
+        tabDict[tabName] = i + 1; 
+  
+     let group = {
+              title:tabName  ,
               tracks: [],
         }
 
+    //提取href 剧集按钮
+    
+    const playlist = $('.module-play-list-link').toArray()
+    for (let i = 0; i < playlist.length; i++) {
+       const element = playlist[i];
+        let name = $(element).attr('title')
+        const regex = $(element).attr('href')[1].replace(/sid\/\d+/g, `sid/${tabValue}`).replace(/nid\/\d+/g, `nid/${tabValue}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
 
-//后加
+        const ShareUrl = appConfig.site +  $(e).attr('href').match(regex);
+
+//https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html
+        
+    
+
+
         
          const new_data = await $fetch.get(ShareUrl, {
                 headers: {
                     'User-Agent': UA,
-                      'Referer': 'https://yhdm.one/',
-                        'Origin': 'https://yhdm.one',
+                
                 },
             });
 
-        const playlists = argsify(new_data.data).video_plays
 
-/*
+      
+
+
+player_aaaa 数据: {
+  flag: "play",
+  encrypt: 0,
+  trysee: 0,
+  points: 0,
+  link: "/index.php/vod/play/id/106815/sid/1/nid/1.html",
+  link_next: "/index.php/vod/play/id/106815/sid/1/nid/2.html",
+  link_pre: "",
+  vod_data: {
+    vod_name: "触击手",
+    vod_actor: "铜木亨之,仓科加奈,平原哲,阿久江仁爱,石川轩华,和田雅成,熊谷真实,朝加真由美,藕劝师赏,柳东卿十郎,小山梅海,生田宜平,福田ユミ",
+    vod_director: "千笠行利,崖谷宜平",
+    vod_class: "日剧"
+  },
+  url: "https://vv.jisuzyv.com/play/9aA4LQze",
+  url_next: "https://vv.jisuzyv.com/play/lejD37Rb",
+  from: "jsyun",
+  server: "no",
+  note: "",
+  id: "106815",
+  sid: 1,
+  nid: 1
+}
+
+
         
+        const regex = /var player_aaaa=(\{.*?\});/s;
+        const playlists = new_data.match(regex);
+        const playerData = JSON.parse(match[1]).url
 
-     let  playlists = [
-            { "play_data": "https://hd.ijycnd.com/play/9b6589Na/index.m3u8", "src_site": "jyzy" },
-            { "play_data": "https://hn.bfvvs.com/play/Le351wpb/index.m3u8", "src_site": "hnzy" },
-            { "play_data": "https://play.xluuss.com/play/7e55yLXe/index.m3u8", "src_site": "xlzy" }
-        ];
-
-
-*/
-         for (const d of playlists) {
+        
             group.tracks.push({
-                name: d.src_site,
+                name: name,
                 pan: '',
                 ext: {
-                    url: d.play_data,
+                    url: playerData,
                 },
             });
-        }
+        
 
         
      
@@ -154,11 +220,11 @@ if (group.tracks.length > 0) {
 
 
         
-    }
+    }//内循环
 
 
 
-
+   }//外循环
 
     
 
@@ -180,14 +246,19 @@ async function getPlayinfo(ext) {
 }
 
 
+*/
 
+
+//
+
+//https://www.j00j.com/index.php/vod/search/page/2/wd/柯南.html
 async function search(ext) {
     ext = argsify(ext)
     let cards = []
 
     let text = encodeURIComponent(ext.text)
     let page = ext.page || 1
-    let url = `${appConfig.site}/search?q=${text}`//https://yhdm.one/search?q=%E5%90%8D
+    let url = `${appConfig.site}/index.php/vod/search/page/${page}/wd/${text}.html`//https://yhdm.one/search?q=%E5%90%8D
 
     const { data } = await $fetch.get(url, {
         headers: {
@@ -197,32 +268,21 @@ async function search(ext) {
 
     const $ = cheerio.load(data)
 
-    const videos = $('#search_list li')
+    const videos = $('.module-card-item')
     videos.each((_, e) => {
-
-        const item = $(e);
-
-        // 提取 href 和 title
-        const link = item.find('a').first(); // 找到第一个 <a>
-        const href = link.attr('href');
-
-
-
-        const img = item.find('img').first(); // 找到第一个 <img>
+        const href = $(e).find('a.module-card-item-poster').attr('href') || '';
         
-        const cover = img.attr('data-original') || img.attr('src'); // 使用 || 处理优先级
-
-        // 提取图片的 alt 标题
-        const title = img.attr('alt');
-
-
+        const title =  $(e).find('.module-card-item-title strong').text().trim() || '';
+        
+        const cover =$(e).find('.module-item-pic img').attr('data-original') || '';  
+        const remarks = $(e).find('.module-item-note').text().trim() || '';
 
         
         cards.push({
             vod_id: href,
             vod_name: title,
-            vod_pic: appConfig.site + cover,
-            vod_remarks: '',
+            vod_pic: cover,
+            vod_remarks: remarks,
 
             ext: {
                 url: `${appConfig.site}${href}`,

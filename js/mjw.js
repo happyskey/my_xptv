@@ -150,15 +150,16 @@ async function getTracks(ext) {
        const element = playlist[i];
         let name = $(element).attr('title')
       
-        const regex = $(element).attr('href')[1]//.replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
+      //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
+       const href = $(element).attr('href')
 
-        const ShareUrl = appConfig.site +  $(element).attr('href').match(regex);
-
-   //https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html
+        const ShareUrl = href
+   ///index.php/vod/play/id/106815/sid/1/nid/7.html
         
-
+        const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
+        const id_key = href.match(sid_key)[1];
     
-
+       if(key.toString()!== id_key ){
 
       
         
@@ -166,25 +167,32 @@ async function getTracks(ext) {
                 name: name,
                 pan: '',
                 ext: {
-                    url:' 1',
+                    url:appConfig.site + href,
                 },
             });
+
+
+          
+           
+       }else{
+       break;
+       }
         //
         
         
        }//内层for
 
-if (group.tracks.length > 0) {
-      groups.push(group)
-    }
 
 
 
+ 
 
 
 //    }//内层for
     
-
+if (group.tracks.length > 0) {
+      groups.push(group)
+    }
 
 
    }//外循环
@@ -200,12 +208,30 @@ return jsonify({ list: groups })
 
 
 
-
+//播放
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
-    return jsonify({ urls: [url] })
+
+   const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+const $ = cheerio.load(data)
+let playerData = '';
+$('script').each((i, element) => {
+    const scriptContent = $(element).html();
+    if (scriptContent.includes('var player_aaaa=')) {
+        const match = scriptContent.match(/var player_aaaa=({.*});/);
+        if (match && match[1]) {
+            playerData = JSON.parse(match[1]); // 解析 JSON 数据
+        }
+    }
+})
+    
+    return jsonify({ urls: [playerData.url] })
 }
 
 

@@ -157,7 +157,7 @@ async function getTracks(ext) {
    ///index.php/vod/play/id/106815/sid/1/nid/7.html
         
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
-        const id_key = href.match(sid_key);
+        const id_key = href.match(sid_key)[1];
     
 
 

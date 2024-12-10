@@ -4,7 +4,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const appConfig = {
     ver: 1,
     title: '美剧网',
-    site: 'https://www.j00j.com/',
+    site: 'https://www.j00j.com',
     tabs: [
         {
             name: '欧美剧',

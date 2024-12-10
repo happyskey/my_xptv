@@ -104,6 +104,89 @@ async function getCards(ext) {
 }
 
 //
+async function getTracks(ext) {
+    ext = argsify(ext); // 假设这是一个有效的函数
+    let groups = [];
+    let url = ext.url;
+
+    // 获取数据
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA, // 假设 UA 是已定义的全局变量
+        },
+    });
+
+    const $ = cheerio.load(data);
+
+    // 获取外层列表
+    const tabItems = $('.module-tab-item');
+    let key = 1;
+
+    for (let i = 0; i < tabItems.length; i++) {
+        const element = tabItems[i];
+        
+        // 获取 tabName，优先获取 span 内的文本，备用 data-dropdown-value
+        const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
+
+        // 初始化组对象
+        let group = {
+            title: tabName, // 路线名
+            tracks: [],     // 存储每个 tab 的播放列表
+        };
+
+        // 获取播放列表
+        const playlist = $('.module-play-list-link');
+        for (let j = 0; j < playlist.length; j++) {
+            const element = playlist[j];
+            let name = $(element).attr('title'); // 获取标题
+            const href = $(element).attr('href'); // 获取链接
+
+            // 解析 href，提取 sid 和 nid
+            const sidKeyMatch = href.match(/sid\/(\d+)\/nid\/(\d+)/);
+            if (sidKeyMatch) {
+                const id_key = sidKeyMatch[1]; // 获取 sid
+
+                // 如果 sid 不匹配 key，则添加到 group.tracks 中
+                if (key.toString() !== id_key) {
+                    // 检查是否已存在，避免重复添加
+                    const trackExists = group.tracks.some(track => track.ext.url === appConfig.site + href);
+                    if (!trackExists) {
+                        group.tracks.push({
+                            name: name,
+                            pan: '',
+                            ext: {
+                                url: appConfig.site + href, // 完整链接
+                            },
+                        });
+                    }
+                } else {
+                    break; // 提前退出内层循环
+                }
+            }
+        }
+
+        // 如果 group.tracks 非空，添加到 groups
+        if (group.tracks.length > 0) {
+            groups.push(group);
+        }
+
+        // 更新 key
+        key = key + 1;
+    }
+
+    // 返回结果
+    return jsonify({ list: groups });
+}
+
+
+
+
+
+
+
+
+//
+/*
 
 async function getTracks(ext) {
     
@@ -177,18 +260,11 @@ async function getTracks(ext) {
        }else{
        break;
        }
-        //
-        
+      
         
        }//内层for
 
 
-
-
- 
-
-
-//    }//内层for
     
 if (group.tracks.length > 0) {
       groups.push(group)
@@ -205,7 +281,7 @@ return jsonify({ list: groups })
 }
 
 
-
+*/
 
 
 //播放

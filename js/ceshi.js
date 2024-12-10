@@ -192,7 +192,7 @@ async function getTracks(ext) {
 if (group.tracks.length > 0) {
       groups.push(group)
     }
-//key = key + 1; 
+key = key + 1; 
 
    }//外循环
 

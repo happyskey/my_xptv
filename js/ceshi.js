@@ -127,6 +127,7 @@ async function getTracks(ext) {
     
     //获取外层列表
     const tabItems = $('.module-tab-item')
+    let key = 1
    for (let i = 0; i < tabItems.length; i++) {
         const element = tabItems[i];
         
@@ -134,7 +135,7 @@ async function getTracks(ext) {
         const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
         
         // 将 tabName 和对应的索引 i+1 添加到字典中
-        let key = i + 1; 
+         key = i + 1; 
   
      let group = {
               title:tabName  ,//线路名上拉菜单

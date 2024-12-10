@@ -145,7 +145,7 @@ async function getTracks(ext) {
 
     
 
-       const playlist = $('.module-play-list-link').toArray()
+       const playlist = $('.module-play-list-link')
     for (let i = 0; i < playlist.length; i++) {
        const element = playlist[i];
         let name = $(element).attr('title')

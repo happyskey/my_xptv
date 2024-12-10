@@ -159,7 +159,7 @@ async function getTracks(ext) {
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
         const id_key = href.match(sid_key)[1];
     
-       if(key.toString()=== id_key ){
+     //  if(key.toString()=== id_key ){
 
       
         
@@ -174,7 +174,7 @@ async function getTracks(ext) {
 
           
            
-       }
+     //  }
         //
         
         
@@ -191,7 +191,7 @@ async function getTracks(ext) {
 if (group.tracks.length > 0) {
       groups.push(group)
     }
-key = key + 1; 
+//key = key + 1; 
 
    }//外循环
 

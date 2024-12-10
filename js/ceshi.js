@@ -165,7 +165,7 @@ async function getTracks(ext) {
       
         
             group.tracks.push({
-                name:`${key.toString()}><${id_key}`,
+                name:`${key.toString()}}==${id_key}>>${href}`,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,

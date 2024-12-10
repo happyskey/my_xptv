@@ -134,8 +134,7 @@ async function getTracks(ext) {
         // 优先获取 tabName，若为空则获取 data-dropdown-value
         const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
         
-        // 将 tabName 和对应的索引 i+1 添加到字典中
-        key = key + 1
+       
   
      let group = {
               title:tabName  ,//线路名上拉菜单
@@ -189,7 +188,8 @@ async function getTracks(ext) {
 if (group.tracks.length > 0) {
       groups.push(group)
     }
-
+ // 将 tabName 和对应的索引 i+1 添加到字典中
+        key = key + 1
 
    }//外循环
 

@@ -103,7 +103,7 @@ async function getCards(ext) {
     })
 }
 
-
+//
 
 async function getTracks(ext) {
     
@@ -127,15 +127,15 @@ async function getTracks(ext) {
     
     //获取外层列表
     const tabItems = $('.module-tab-item')
-    let key = 0
+    let key = 1
    for (let i = 0; i < tabItems.length; i++) {
-       key =key + 1
         const element = tabItems[i];
         
         // 优先获取 tabName，若为空则获取 data-dropdown-value
         const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
         
-       
+        // 将 tabName 和对应的索引 i+1 添加到字典中
+         key = key + 1; 
   
      let group = {
               title:tabName  ,//线路名上拉菜单
@@ -150,7 +150,7 @@ async function getTracks(ext) {
        const element = playlist[i];
         let name = $(element).attr('title')
       
-    
+      //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
        const href = $(element).attr('href')
 
         const ShareUrl = href
@@ -159,41 +159,45 @@ async function getTracks(ext) {
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
         const id_key = href.match(sid_key)[1];
     
-       if(key.toString()=== id_key ){
+       if(key.toString()!== id_key ){
 
       
         
             group.tracks.push({
-                name: appConfig.site + href,
+                name: name,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,
                 },
             });
 
-          
-           
+
           
            
        }else{
-
-           
        break;
        }
-      
+        //
+        
         
        }//内层for
 
 
+
+
+ 
+
+
+//    }//内层for
     
 if (group.tracks.length > 0) {
       groups.push(group)
     }
- 
+
 
    }//外循环
 
-     
+    
 
 return jsonify({ list: groups })
       

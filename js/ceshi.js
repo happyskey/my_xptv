@@ -146,8 +146,8 @@ async function getTracks(ext) {
     
 
        const playlist = $('.module-play-list-link')
-    for (let i = 0; i < playlist.length; i++) {
-       const element = playlist[i];
+    for (let j = 0; j < playlist.length; j++) {
+       const element = playlist[j];
         let name = $(element).attr('title')
       
       //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1

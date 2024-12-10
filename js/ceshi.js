@@ -127,7 +127,7 @@ async function getTracks(ext) {
     
     //获取外层列表
     const tabItems = $('.module-tab-item')
-    let key = 1
+    
    for (let i = 0; i < tabItems.length; i++) {
         const element = tabItems[i];
         
@@ -158,12 +158,12 @@ async function getTracks(ext) {
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
         const id_key = href.match(sid_key)[1];
     
-       if(key.toString()=== id_key ){
+       if(i.toString()=== id_key ){
 
       
         
             group.tracks.push({
-                name: name,
+                name: appConfig.site + href,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,
@@ -188,8 +188,7 @@ async function getTracks(ext) {
 if (group.tracks.length > 0) {
       groups.push(group)
     }
- // 将 tabName 和对应的索引 i+1 添加到字典中
-        key = key + 1
+ 
 
    }//外循环
 

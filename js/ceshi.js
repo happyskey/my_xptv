@@ -151,7 +151,7 @@ async function getTracks(ext) {
         let name = $(element).attr('title')
       
       //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
-       const href = $(element).attr('href')
+       const href = $(element).attr('href')[1]
 
         const ShareUrl = appConfig.site +  href
    //https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html

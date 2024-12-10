@@ -104,68 +104,74 @@ async function getCards(ext) {
 }
 
 //
-async function getTracks(ext) {
-    ext = argsify(ext); // 假设这是一个有效的函数
-    let groups = [];
-    let url = ext.url;
 
-    // 获取数据
+//
+async function getTracks(ext) {
+    ext = argsify(ext);  // 解析参数
+    let groups = [];  // 存储所有的 tab 数据
+    let url = ext.url;  // 获取目标 URL
+
+    // 通过 $fetch 获取数据
     const { data } = await $fetch.get(url, {
         headers: {
-            'User-Agent': UA, // 假设 UA 是已定义的全局变量
+            'User-Agent': UA, // 使用预定义的 User-Agent
         },
     });
 
+    // 使用 cheerio 解析 HTML 数据
     const $ = cheerio.load(data);
 
-    // 获取外层列表
+    // 获取外层列表的所有 tab
     const tabItems = $('.module-tab-item');
-    let key = 1;
+    let key = 1; // 初始化 key，用于判断 sid 是否匹配
 
+    // 遍历每个 tab
     for (let i = 0; i < tabItems.length; i++) {
         const element = tabItems[i];
-        
-        // 获取 tabName，优先获取 span 内的文本，备用 data-dropdown-value
+
+        // 获取 tabName，优先从 span 中获取文本，否则从 data-dropdown-value 获取
         const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
 
-        // 初始化组对象
+        // 初始化 group 对象，用于存储每个 tab 的 tracks
         let group = {
-            title: tabName, // 路线名
-            tracks: [],     // 存储每个 tab 的播放列表
+            title: tabName,  // tab 的标题（线路名）
+            tracks: [],      // 当前 tab 下的所有播放列表
         };
 
-        // 获取播放列表
+        // 获取当前 tab 下所有的播放链接
         const playlist = $('.module-play-list-link');
+
+        // 遍历播放列表
         for (let j = 0; j < playlist.length; j++) {
             const element = playlist[j];
-            let name = $(element).attr('title'); // 获取标题
-            const href = $(element).attr('href'); // 获取链接
+            let name = $(element).attr('title');  // 获取链接的标题（即播放列表的名字）
+            const href = $(element).attr('href');  // 获取链接（href）
 
-            // 解析 href，提取 sid 和 nid
+            // 使用正则表达式解析 sid 和 nid
             const sidKeyMatch = href.match(/sid\/(\d+)\/nid\/(\d+)/);
             if (sidKeyMatch) {
-                const id_key = sidKeyMatch[1]; // 获取 sid
+                const id_key = sidKeyMatch[1];  // 获取 sid
 
-                // 如果 sid 不匹配 key，则添加到 group.tracks 中
+                // 如果 sid 不等于当前的 key，则添加到 tracks 中
                 if (key.toString() !== id_key) {
-                    // 检查是否已存在，避免重复添加
+                    // 确保当前 track 的 url 没有重复
                     const trackExists = group.tracks.some(track => track.ext.url === appConfig.site + href);
                     if (!trackExists) {
                         group.tracks.push({
                             name: name,
-                            pan: '',
+                            pan: '',  // 可根据需要填写
                             ext: {
-                                url: appConfig.site + href, // 完整链接
+                                url: appConfig.site + href,  // 拼接完整的 URL
                             },
                         });
                     }
                 } else {
-                    break; // 提前退出内层循环
+                    break;  // 当 sid 和 key 相等时，退出内层循环
                 }
             }
         }
 
-        // 如果 group.tracks 非空，添加到 groups
+        // 如果该 group 有 tracks 数据，则将其加入到 groups 中
         if (group.tracks.length > 0) {
             groups.push(group);
         }
@@ -174,13 +180,9 @@ async function getTracks(ext) {
         key = key + 1;
     }
 
-    // 返回结果
+    // 返回最终的结果
     return jsonify({ list: groups });
 }
-
-
-
-
 
 
 

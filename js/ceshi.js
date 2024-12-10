@@ -172,7 +172,7 @@ async function getTracks(ext) {
             });
 
           
-           break;
+           
           
            
        }else{

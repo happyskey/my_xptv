@@ -159,12 +159,13 @@ async function getTracks(ext) {
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
         const id_key = href.match(sid_key)[1];
     
-     //  if(key.toString()=== id_key ){
+      if(key.toString()!== id_key ) continue;
+          //{
 
       
         
             group.tracks.push({
-                name: key.toString()=== id_key,
+                name: href,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,
@@ -174,7 +175,7 @@ async function getTracks(ext) {
 
           
            
-     //  }
+      // }
         //
         
         

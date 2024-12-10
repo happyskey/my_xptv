@@ -162,7 +162,7 @@ async function getTracks(ext) {
 
         const regex_sid = /sid\/(\d+)\/nid\/(\d+)/;
         const url_id = url.match(regex_sid)[1];
-        if (url_id ==key){
+    
 
 
 
@@ -176,7 +176,7 @@ async function getTracks(ext) {
                 },
             });
         //
-        }
+        
         
        }//内层for
 

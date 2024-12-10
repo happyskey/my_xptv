@@ -156,10 +156,10 @@ async function getTracks(ext) {
       
         
             group.tracks.push({
-                name: i,
+                name: tabDict[tabName],
                 pan: '',
                 ext: {
-                    url: i,
+                    url: tabDict[tabName],
                 },
             });
         

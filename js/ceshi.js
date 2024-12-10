@@ -164,7 +164,7 @@ async function getTracks(ext) {
       
         
             group.tracks.push({
-                name: name,
+                name: typeof key.toString(),
                 pan: '',
                 ext: {
                     url:appConfig.site + href,
@@ -231,7 +231,7 @@ $('script').each((i, element) => {
     }
 })
     
-    return jsonify({ urls: [playerData.url] })
+    return jsonify({ urls: [playerData.data.url] })
 }
 
 

@@ -154,17 +154,17 @@ async function getTracks(ext) {
        const href = $(element).attr('href')
 
         const ShareUrl = href
-   //https://www.j00j.com/index.php/vod/play/id/106815/sid/1/nid/1.html
+   ///index.php/vod/play/id/106815/sid/1/nid/7.html
         
-       // const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
-        //const id_key = href.match(sid_key);
+        const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
+        const id_key = href.match(sid_key);
     
 
 
       
         
             group.tracks.push({
-                name: ShareUrl,
+                name: id_key,
                 pan: '',
                 ext: {
                     url:' 1',

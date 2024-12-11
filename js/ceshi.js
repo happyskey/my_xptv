@@ -199,7 +199,7 @@ const bb = aa.substring(0, 20)
                 name:bb,
                 pan: '',
                 ext: {
-                    url:aa;//appConfig.site + href,
+                    url:aa,//appConfig.site + href,
                 },
             });
 

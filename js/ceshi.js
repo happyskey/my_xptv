@@ -201,7 +201,7 @@ const url = new_html('#playleft iframe').attr('src')
               
         
             group.tracks.push({
-                name:other_data.data,
+                name:url,
                 pan: '',
                 ext: {
                     url:url,//appConfig.site + href,

@@ -190,7 +190,7 @@ const New_url = appConfig.site + href
               $print("777777")
  
 const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
-//const url = new_html('#playleft iframe').attr('src')
+const urlo= new_html('#playleft iframe').attr('src')
  const scriptContent = new_html('script:contains("player_aaaa")').text()
               
 const Regex = /"url":"(.*?)"/;
@@ -201,7 +201,7 @@ const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
               
         
             group.tracks.push({
-                name: url,
+                name: urlo,
                 pan: '',
                 ext: {
                     url:url,//appConfig.site + href,

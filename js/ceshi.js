@@ -200,7 +200,7 @@ const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
               
         
             group.tracks.push({
-                name:url,
+                name:name,
                 pan: '',
                 ext: {
                     url:url,//appConfig.site + href,

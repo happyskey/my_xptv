@@ -189,7 +189,7 @@ const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.ht
 
               
  
-const aa = JSON.stringify(other_data).substring(0, 2000);
+const aa = JSON.stringify(other_data).substring(0, 200);
     // 
 
               
@@ -198,7 +198,7 @@ const aa = JSON.stringify(other_data).substring(0, 2000);
                 name:name,
                 pan: '',
                 ext: {
-                    url:aa;//appConfig.site + href,
+                    url:JSON.stringify(other_data);//appConfig.site + href,
                 },
             });
 

@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧444',
+            name: '欧美剧44',
             ext: {
                 id: 20,
             },
@@ -192,7 +192,7 @@ const New_url = appConfig.site + href
 const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
 const scriptContent = new_html('script:contains("player_aaaa")').text()
   let jsonDataMatch = scriptContent.match(/var player_aaaa=({.*?});/);
-const playerData = JSON.parse(jsonDataMatch[1]);
+//const playerData = JSON.parse(jsonDataMatch[1]);
               
         
             group.tracks.push({

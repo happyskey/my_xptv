@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧',
+            name: '欧美剧14',
             ext: {
                 id: 20,
             },

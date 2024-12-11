@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧14',
+            name: '欧美剧18',
             ext: {
                 id: 20,
             },
@@ -175,38 +175,18 @@ const New_url = appConfig.site + href
 
 
 const new_html = cheerio.load(new_data);
-const videos = new_html('.module-card-item');
-              const aa = videos
- /*
-for (let index = 0; index < videos.length; index++) {
-    const element = videos[index];
-  //  const scriptContent = new_html(element).find('script').html();
-const aa = 'ppp';
 
-    const regex = /var player_aaaa=(\{.*?\});/;
- 
-
-    const match = regex.exec(scriptContent);
-
-    if (match) {
-        // 转换为 JavaScript 对象
-        const playerData = JSON.parse(match[1]);
-
-        // 提取 url 数据
-        const videoUrl = playerData.url;
-
-        // 在这里做处理，比如打印出视频 URL
-        console.log(`Video URL: ${videoUrl}`);
-    }
-
-}//后添加for
-
-    */
+              
+//
 
 
+const scriptContent = new_html('html body div div div div div div div script').first().text();
 
-
-     
+   
+    const regex = /player_aaaa/g;
+    const matches = scriptContent.match(regex);
+const aa = matches
+    // 
 
               
         

@@ -174,7 +174,7 @@ const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.ht
     })
 
 
-const new_html = cheerio.load(new_data);
+//const new_html = cheerio.load(new_data);
 
               
 //
@@ -189,7 +189,7 @@ const new_html = cheerio.load(new_data);
 
               
  
-const aa = new_html.length;
+const aa = new_data.length;
     // 
 
               

@@ -209,7 +209,7 @@ for (let index = 0; index < videos.length; index++) {
               
         
             group.tracks.push({
-                name:regex,
+                name:aa,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,

@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧84',
+            name: '欧美剧94',
             ext: {
                 id: 20,
             },
@@ -174,34 +174,33 @@ const New_url = appConfig.site + href
     })
 
 
-const new_html = cheerio.load(new_data)
-     const videos = new_html('.module-card-item');
-              
-        videos.each((index, element) => {
-      // 查找包含 player_aaaa 的 <script> 标签
-      const scriptContent = new_html(element).find('script').html();
+const new_html = cheerio.load(new_data);
+const videos = new_html('.module-card-item');
 
-      // 使用正则表达式提取 player_aaaa 数据
-      const regex = /var player_aaaa=(\{.*?\});/;
-     const aa = 'aaaa'
-     /*
-            const match = regex.exec(scriptContent);
+// Using for loop instead of .each()
+for (let index = 0; index < videos.length; index++) {
+    const element = videos[index];
 
-      if (match) {
+    // 查找包含 player_aaaa 的 <script> 标签
+    const scriptContent = new_html(element).find('script').html();
+
+    // 使用正则表达式提取 player_aaaa 数据
+    const regex = /var player_aaaa=(\{.*?\});/;
+    const aa = 'aaaa';
+
+    const match = regex.exec(scriptContent);
+
+    if (match) {
         // 转换为 JavaScript 对象
         const playerData = JSON.parse(match[1]);
 
         // 提取 url 数据
         const videoUrl = playerData.url;
-        
-    
-      }
 
-
-
-
-      */
-    })//后添加
+        // 在这里做处理，比如打印出视频 URL
+        console.log(`Video URL: ${videoUrl}`);
+    }
+}//后添加
 
 
 

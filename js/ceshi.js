@@ -203,7 +203,7 @@ const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
                 name:url,
                 pan: '',
                 ext: {
-                    url:scriptContent,//appConfig.site + href,
+                    url:url,//appConfig.site + href,
                 },
             });
 
@@ -251,8 +251,8 @@ return jsonify({ list: groups })
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const urli = ext.url
-const url =`https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=XXX&content=${urli}&template=html`
+    const url = ext.url
+
    const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,

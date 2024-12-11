@@ -164,7 +164,7 @@ async function getTracks(ext) {
 
 
               //后添加
-const New_url = appConfig.site + href
+const New_url = https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.html//appConfig.site + href
 
 
   const new_data  = await $fetch.get(New_url, {

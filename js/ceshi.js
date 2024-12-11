@@ -153,7 +153,7 @@ async function getTracks(ext) {
 
        const href = $(element).attr('href')
 
-        const ShareUrl = href
+       // const ShareUrl = href //
    ///index.php/vod/play/id/106815/sid/1/nid/7.html
         
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
@@ -190,7 +190,7 @@ const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
                 name: name,
                 pan: '',
                 ext: {
-                    url:href,//appConfig.site + href,
+                    url: appConfig.site + href,
                 },
             });
 
@@ -239,11 +239,11 @@ return jsonify({ list: groups })
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
-    //
-    const New_url = appConfig.site + ext.url
+    
+    
 
 
-  const other_data  = await $fetch.get(New_url, {
+  const other_data  = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },

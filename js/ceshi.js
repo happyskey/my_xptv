@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧14',
+            name: '欧美剧84',
             ext: {
                 id: 20,
             },
@@ -161,8 +161,11 @@ async function getTracks(ext) {
     
       if(key.toString()=== id_key )
           {
+
+
+              //后添加
 const New_url = appConfig.site + href
-//后添加
+
 
   const new_data  = await $fetch.get(New_url, {
         headers: {
@@ -180,8 +183,10 @@ const new_html = cheerio.load(new_data)
 
       // 使用正则表达式提取 player_aaaa 数据
       const regex = /var player_aaaa=(\{.*?\});/;
-      const match = regex.exec(scriptContent);
-const aa = 'aaaa'
+     const aa = 'aaaa'
+     /*
+            const match = regex.exec(scriptContent);
+
       if (match) {
         // 转换为 JavaScript 对象
         const playerData = JSON.parse(match[1]);
@@ -191,12 +196,16 @@ const aa = 'aaaa'
         
     
       }
-    })
 
 
 
-//
-              
+
+      */
+    })//后添加
+
+
+
+     
 
               
         

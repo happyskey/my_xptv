@@ -184,7 +184,7 @@ const scriptContent = new_html('script:contains(player_aaaa)').text();
 
    
  
-const aa = scriptContent
+const aa = typeof scriptContent
     // 
 
               

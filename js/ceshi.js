@@ -193,7 +193,7 @@ const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify
 const scriptContent = new_html('script:contains("player_aaaa")').text()
               
 const Regex = /"url":"(.*?)"/;
-const url = scriptContent.match(Regex)[1]
+const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
 
 // 提取 URL 值
 

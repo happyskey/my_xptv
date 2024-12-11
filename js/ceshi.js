@@ -150,7 +150,7 @@ async function getTracks(ext) {
        const element = playlist[j];
         let name = $(element).attr('title')
       
-      //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
+
        const href = $(element).attr('href')
 
         const ShareUrl = href
@@ -189,8 +189,7 @@ const new_html = cheerio.load(new_data)
         // 提取 url 数据
         const videoUrl = playerData.url;
         
-        // 输出 url 数据
-        console.log(`视频 URL: ${videoUrl}`);
+    
       }
     })
 
@@ -202,7 +201,7 @@ const new_html = cheerio.load(new_data)
               
         
             group.tracks.push({
-                name:videoUrl,
+                name:regex,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,

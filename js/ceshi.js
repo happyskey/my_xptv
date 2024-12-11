@@ -190,12 +190,13 @@ const New_url = appConfig.site + href
               
  
 const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
-const scriptContent = new_html('script:contains("player_aaaa")').text()
+const url = new_html('#playleft iframe').attr('src')
+ //const scriptContent = new_html('script:contains("player_aaaa")').text()
               
-const Regex = /"url":"(.*?)"/;
-const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
+//const Regex = /"url":"(.*?)"/;
+//const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
 
-// 提取 URL 值
+
 
               
         

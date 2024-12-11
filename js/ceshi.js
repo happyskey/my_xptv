@@ -243,7 +243,7 @@ return jsonify({ list: groups })
 //https://www.j00j.com/static/js/playerconfig.js?t=20241211
 
 
-
+/*
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
@@ -269,7 +269,7 @@ $('script').each((i, element) => {
     return jsonify({ urls: [playerData.data.url] })
 }
 
-
+*/
 
 //
 

@@ -196,7 +196,7 @@ const playerData = JSON.parse(jsonDataMatch[1]);
               
         
             group.tracks.push({
-                name:playerData.url,
+                name:jsonDataMatch,
                 pan: '',
                 ext: {
                     url:scriptContent,//appConfig.site + href,

@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧898',
+            name: '欧美剧5555',
             ext: {
                 id: 20,
             },
@@ -184,9 +184,9 @@ const scriptContent = new_html('script:contains(player_aaaa)').text();
 
               let jsonDataMatch = scriptContent.match(/var player_aaaa=({.*?});/);
 
-    var playerData = JSON.parse(jsonDataMatch[1])
+    //var playerData = JSON.parse(jsonDataMatch[1])
  
-const aa = playerData.url;
+const aa = jsonDataMatch.length;
     // 
 
               

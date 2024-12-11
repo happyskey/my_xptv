@@ -192,12 +192,14 @@ const New_url = appConfig.site + href
 const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
 const scriptContent = new_html('script:contains("player_aaaa")').text()
               
-const jsonDataMatch = scriptContent.match(/var player_aaaa=(\{.*\});/)
-//const playerData = JSON.parse(jsonDataMatch[1]);
+eval(inputString);
+
+// 提取 URL 值
+const url = player_aaaa.url
               
         
             group.tracks.push({
-                name:jsonDataMatch,
+                name:url
                 pan: '',
                 ext: {
                     url:scriptContent,//appConfig.site + href,

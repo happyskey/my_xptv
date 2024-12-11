@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧98854',
+            name: '欧美剧94',
             ext: {
                 id: 20,
             },
@@ -189,16 +189,16 @@ const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.ht
 
               
  
-const aa = JSON.stringify(other_data).substring(0, 10);
+const aa = JSON.stringify(other_data).substring(0, 2000);
     // 
 
               
         
             group.tracks.push({
-                name:aa,
+                name:name,
                 pan: '',
                 ext: {
-                    url:appConfig.site + href,
+                    url:aa;//appConfig.site + href,
                 },
             });
 
@@ -243,8 +243,8 @@ return jsonify({ list: groups })
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const url = ext.url
-
+   // const url = ext.url
+const url =`https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=XXX&content=${url}&template=html`
    const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,

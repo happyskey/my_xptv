@@ -167,7 +167,7 @@ async function getTracks(ext) {
 const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.html'       //appConfig.site + href
 
 
-  const new_data  = await $fetch.get(New_url, {
+  const other_data  = await $fetch.get(New_url, {
         headers: {
             'User-Agent': UA,
         },
@@ -189,7 +189,7 @@ const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.ht
 
               
  
-const aa = new_data.length;
+const aa =  other_data.length;
     // 
 
               

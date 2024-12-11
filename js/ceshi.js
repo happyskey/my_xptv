@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧4',
+            name: '欧美剧444',
             ext: {
                 id: 20,
             },
@@ -189,7 +189,7 @@ const New_url = appConfig.site + href
 
               
  
-const aa = JSON.stringify(other_data.data);
+const aa =other_data.data// JSON.stringify(other_data.data);
 const bb = aa.substring(0, 200)
     // 
 

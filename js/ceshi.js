@@ -180,11 +180,11 @@ const new_html = cheerio.load(new_data);
 //
 
 
-const scriptContent = new_html('script:contains(player_aaaa)').text();
+const scriptContent = new_html('script:contains("player_aaaa")').text()
 
-           //   let jsonDataMatch = scriptContent.match(/var player_aaaa=({.*?});/);
+           //  let jsonDataMatch = scriptContent.match(/var player_aaaa=({.*?});/);
 
-    //var playerData = JSON.parse(jsonDataMatch[1])
+    //const playerData = JSON.parse(jsonDataMatch[1]);
  
 const aa = scriptContent.length;
     // 

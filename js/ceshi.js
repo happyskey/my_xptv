@@ -164,6 +164,7 @@ async function getTracks(ext) {
 
 
               //后添加
+              /*
 const New_url = appConfig.site + href
 
 
@@ -173,38 +174,23 @@ const New_url = appConfig.site + href
         },
     })
 
-
-//const new_html = cheerio.load(new_data.data);
-
-              
-//
-
-
-//const scriptContent = new_html('script:contains("player_aaaa")').text()
-
-           //  let jsonDataMatch = scriptContent.match(/var player_aaaa=({.*?});/);
-
-    //const playerData = JSON.parse(jsonDataMatch[1]);
-
-
-              
+          
  
-const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
-//const urlo= new_html('#playleft iframe').attr('src')
- const scriptContent = new_html('script:contains("player_aaaa")').text()
+const new_html =cheerio.load(other_data.data) 
+const scriptContent = new_html('script:contains("player_aaaa")').text()
               
 const Regex = /"url":"(.*?)"/;
 const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
-
+*/
 
 
               
         
             group.tracks.push({
-                name: other_data.data,
+                name: name,
                 pan: '',
                 ext: {
-                    url:url,//appConfig.site + href,
+                    url:href,//appConfig.site + href,
                 },
             });
 
@@ -253,7 +239,25 @@ return jsonify({ list: groups })
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
+    //
+    const New_url = appConfig.site + ext.url
 
+
+  const other_data  = await $fetch.get(New_url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+          
+ 
+const new_html =cheerio.load(other_data.data) 
+const scriptContent = new_html('script:contains("player_aaaa")').text()
+              
+const Regex = /"url":"(.*?)"/;
+const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
+
+//
    
     return jsonify({ urls: [url] })
 }

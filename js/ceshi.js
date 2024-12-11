@@ -180,7 +180,7 @@ const videos = new_html('.module-card-item');
 for (let index = 0; index < videos.length; index++) {
     const element = videos[index];
     const scriptContent = new_html(element).find('script').html();
-const aa = scriptContent;
+const aa = index;
 
     const regex = /var player_aaaa=(\{.*?\});/;
   /*
@@ -197,9 +197,9 @@ const aa = scriptContent;
         // 在这里做处理，比如打印出视频 URL
         console.log(`Video URL: ${videoUrl}`);
     }
-
-
 */
+}//后添加for
+
     
 
 
@@ -217,7 +217,7 @@ const aa = scriptContent;
                 },
             });
 
-}//后添加for
+
           
            
       }//if

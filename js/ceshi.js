@@ -161,10 +161,10 @@ async function getTracks(ext) {
     
       if(key.toString()=== id_key )
           {
+const New_url = appConfig.site + href
+//后添加
 
-//
-
-  const new_data  = await $fetch.get(appConfig.site + href, {
+  const new_data  = await $fetch.get(New_url, {
         headers: {
             'User-Agent': UA,
         },

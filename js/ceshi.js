@@ -251,18 +251,9 @@ const url =`https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f592
         },
     })
 const $ = cheerio.load(data)
-let playerData = '';
-$('script').each((i, element) => {
-    const scriptContent = $(element).html();
-    if (scriptContent.includes('var player_aaaa=')) {
-        const match = scriptContent.match(/var player_aaaa=({.*});/);
-        if (match && match[1]) {
-            playerData = JSON.parse(match[1]); // 解析 JSON 数据
-        }
-    }
-})
+
     
-    return jsonify({ urls: [playerData.data.url] })
+    return jsonify({ urls: [''] })
 }
 
 

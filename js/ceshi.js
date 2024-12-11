@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧66',
+            name: '欧美剧86',
             ext: {
                 id: 20,
             },
@@ -184,7 +184,7 @@ const scriptContent = new_html('script:contains(player_aaaa)').text();
 
    
  
-const aa = scriptContent.player_aaaa.substring(0, 20);
+const aa = scriptContent.substring(0, 20);
     // 
 
               

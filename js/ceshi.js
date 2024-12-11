@@ -181,7 +181,7 @@ const new_html = cheerio.load(new_data)
       // 使用正则表达式提取 player_aaaa 数据
       const regex = /var player_aaaa=(\{.*?\});/;
       const match = regex.exec(scriptContent);
-
+const aa = 'aaaa'
       if (match) {
         // 转换为 JavaScript 对象
         const playerData = JSON.parse(match[1]);

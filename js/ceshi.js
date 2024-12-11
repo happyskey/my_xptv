@@ -174,7 +174,7 @@ const New_url = appConfig.site + href
     })
 
 
-//const new_html = cheerio.load(new_data);
+const new_html = cheerio.load(new_data.data);
 
               
 //
@@ -189,7 +189,7 @@ const New_url = appConfig.site + href
 
               
  
-const aa = JSON.stringify(other_data);
+const aa = JSON.stringify(new_html);
 const bb = aa.substring(0, 200)
     // 
 

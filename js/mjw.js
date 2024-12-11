@@ -150,10 +150,10 @@ async function getTracks(ext) {
        const element = playlist[j];
         let name = $(element).attr('title')
       
-      //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
+
        const href = $(element).attr('href')
 
-        const ShareUrl = href
+       // const ShareUrl = href //
    ///index.php/vod/play/id/106815/sid/1/nid/7.html
         
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
@@ -162,20 +162,42 @@ async function getTracks(ext) {
       if(key.toString()=== id_key )
           {
 
-      
+
+              //后添加
+              /*
+const New_url = appConfig.site + href
+
+
+  const other_data  = await $fetch.get(New_url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+          
+ 
+const new_html =cheerio.load(other_data.data) 
+const scriptContent = new_html('script:contains("player_aaaa")').text()
+              
+const Regex = /"url":"(.*?)"/;
+const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
+*/
+
+
+              
         
             group.tracks.push({
-                name:name,
+                name: name,
                 pan: '',
                 ext: {
-                    url:appConfig.site + href,
+                    url: appConfig.site + href,
                 },
             });
 
 
           
            
-      }
+      }//if
         //
         
         
@@ -211,31 +233,34 @@ return jsonify({ list: groups })
 
 //https://www.j00j.com/static/js/playerconfig.js?t=20241211
 
+
+
+
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
+    
+    
 
-   const { data } = await $fetch.get(url, {
+
+  const other_data  = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },
     })
-const $ = cheerio.load(data)
-let playerData = '';
-$('script').each((i, element) => {
-    const scriptContent = $(element).html();
-    if (scriptContent.includes('var player_aaaa=')) {
-        const match = scriptContent.match(/var player_aaaa=({.*});/);
-        if (match && match[1]) {
-            playerData = JSON.parse(match[1]); // 解析 JSON 数据
-        }
-    }
-})
-    
-    return jsonify({ urls: [playerData.data.url] })
+
+          
+ 
+const new_html =cheerio.load(other_data.data) 
+const scriptContent = new_html('script:contains("player_aaaa")').text()
+              
+const Regex = /"url":"(.*?)"/;
+const url_id = scriptContent.match(Regex)[1].replace(/\\/g, "")
+
+//
+   
+    return jsonify({ urls: [url_id] })
 }
-
-
 
 
 

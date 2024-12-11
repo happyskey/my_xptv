@@ -196,7 +196,7 @@ const bb = aa.substring(0, 200)
               
         
             group.tracks.push({
-                name:bb,
+                name:aa,
                 pan: '',
                 ext: {
                     url:aa,//appConfig.site + href,

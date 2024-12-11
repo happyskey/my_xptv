@@ -189,17 +189,17 @@ const New_url = appConfig.site + href
 
               
  
-const aa = typeof other_data.data// JSON.stringify(other_data.data);
-const bb = aa.substring(0, 200)
+const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
+const scriptContent = new_html('script:contains("player_aaaa")').text()
     // 
 
               
         
             group.tracks.push({
-                name:aa,
+                name:scriptContent,
                 pan: '',
                 ext: {
-                    url:aa,//appConfig.site + href,
+                    url:scriptContent,//appConfig.site + href,
                 },
             });
 

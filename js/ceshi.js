@@ -187,7 +187,7 @@ const New_url = appConfig.site + href
     //const playerData = JSON.parse(jsonDataMatch[1]);
 
 
-              
+              $print("777777")
  
 const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
 //const url = new_html('#playleft iframe').attr('src')

@@ -162,10 +162,47 @@ async function getTracks(ext) {
       if(key.toString()=== id_key )
           {
 
-      
+//
+
+  const new_data  = await $fetch.get(appConfig.site + href, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+
+const new_html = cheerio.load(new_data)
+     const videos = new_html('.module-card-item');
+              
+        videos.each((index, element) => {
+      // 查找包含 player_aaaa 的 <script> 标签
+      const scriptContent = new_html(element).find('script').html();
+
+      // 使用正则表达式提取 player_aaaa 数据
+      const regex = /var player_aaaa=(\{.*?\});/;
+      const match = regex.exec(scriptContent);
+
+      if (match) {
+        // 转换为 JavaScript 对象
+        const playerData = JSON.parse(match[1]);
+
+        // 提取 url 数据
+        const videoUrl = playerData.url;
+        
+        // 输出 url 数据
+        console.log(`视频 URL: ${videoUrl}`);
+      }
+    })
+
+
+
+//
+              
+
+              
         
             group.tracks.push({
-                name:name,
+                name:videoUrl,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,
@@ -208,6 +245,8 @@ return jsonify({ list: groups })
 
 
 //播放
+
+//https://www.j00j.com/static/js/playerconfig.js?t=20241211
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)

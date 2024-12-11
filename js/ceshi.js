@@ -180,12 +180,11 @@ const new_html = cheerio.load(new_data);
 //
 
 
-const scriptContent = new_html('html body div div div div div div div script').first().text();
+const scriptContent = new_html('script:contains(player_aaaa)').text();
 
    
-    const regex = /player_aaaa/g;
-    const matches = scriptContent.match(regex);
-const aa = matches
+ 
+const aa = scriptContent
     // 
 
               

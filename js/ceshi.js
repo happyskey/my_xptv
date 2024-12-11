@@ -184,7 +184,7 @@ const scriptContent = new_html('script:contains(player_aaaa)').text();
 
    
  
-const aa = typeof scriptContent
+const aa = scriptContent.player_aaaa.substring(0, 20);
     // 
 
               

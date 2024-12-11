@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧94',
+            name: '欧美剧14',
             ext: {
                 id: 20,
             },
@@ -176,7 +176,8 @@ const New_url = appConfig.site + href
 
 const new_html = cheerio.load(new_data);
 const videos = new_html('.module-card-item');
-
+ const aa = 'aaaa';
+              /*
 // Using for loop instead of .each()
 for (let index = 0; index < videos.length; index++) {
     const element = videos[index];
@@ -203,7 +204,7 @@ for (let index = 0; index < videos.length; index++) {
 }//后添加
 
 
-
+*/
      
 
               

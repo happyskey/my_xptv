@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧94',
+            name: '欧美剧4',
             ext: {
                 id: 20,
             },
@@ -164,7 +164,7 @@ async function getTracks(ext) {
 
 
               //后添加
-const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.html'       //appConfig.site + href
+const New_url = appConfig.site + href
 
 
   const other_data  = await $fetch.get(New_url, {
@@ -174,7 +174,7 @@ const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.ht
     })
 
 
-const new_html = cheerio.load(new_data);
+//const new_html = cheerio.load(new_data);
 
               
 //
@@ -189,7 +189,7 @@ const new_html = cheerio.load(new_data);
 
               
  
-const aa = JSON.stringify(new_html);
+const aa = JSON.stringify(other_data);
 const bb = aa.substring(0, 200)
     // 
 

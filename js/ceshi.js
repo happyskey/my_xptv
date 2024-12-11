@@ -242,22 +242,32 @@ return jsonify({ list: groups })
 
 //https://www.j00j.com/static/js/playerconfig.js?t=20241211
 
+
+
+
 async function getPlayinfo(ext) {
     ext = argsify(ext)
-    const url = ext.url
-const url =`https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=XXX&content=${url}&template=html`
+    const urli = ext.url
+const url =`https://www.pushplus.plus/send?token=787adaf5ed4442e2aada92d4ce7f5925&title=XXX&content=${urli}&template=html`
    const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },
     })
 const $ = cheerio.load(data)
-
+let playerData = '';
+$('script').each((i, element) => {
+    const scriptContent = $(element).html();
+    if (scriptContent.includes('var player_aaaa=')) {
+        const match = scriptContent.match(/var player_aaaa=({.*});/);
+        if (match && match[1]) {
+            playerData = JSON.parse(match[1]); // 解析 JSON 数据
+        }
+    }
+})
     
-    return jsonify({ urls: ['1'] })
+    return jsonify({ urls: [playerData.data.url] })
 }
-
-
 
 
 

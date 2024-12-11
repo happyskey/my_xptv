@@ -176,18 +176,14 @@ const New_url = appConfig.site + href
 
 const new_html = cheerio.load(new_data);
 const videos = new_html('.module-card-item');
- const aa = 'aaaa';
-              /*
-// Using for loop instead of .each()
+ 
 for (let index = 0; index < videos.length; index++) {
     const element = videos[index];
-
-    // 查找包含 player_aaaa 的 <script> 标签
     const scriptContent = new_html(element).find('script').html();
+const aa = scriptContent;
 
-    // 使用正则表达式提取 player_aaaa 数据
     const regex = /var player_aaaa=(\{.*?\});/;
-    const aa = 'aaaa';
+  /*
 
     const match = regex.exec(scriptContent);
 
@@ -201,10 +197,14 @@ for (let index = 0; index < videos.length; index++) {
         // 在这里做处理，比如打印出视频 URL
         console.log(`Video URL: ${videoUrl}`);
     }
-}//后添加
 
 
 */
+    
+
+
+
+
      
 
               
@@ -217,10 +217,10 @@ for (let index = 0; index < videos.length; index++) {
                 },
             });
 
-
+}//后添加for
           
            
-      }
+      }//if
         //
         
         

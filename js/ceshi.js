@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧34',
+            name: '欧美剧44',
             ext: {
                 id: 20,
             },
@@ -179,7 +179,7 @@ const videos = new_html('.module-card-item');
  
 for (let index = 0; index < videos.length; index++) {
     const element = videos[index];
-    const scriptContent = new_html(element).find('script').html();
+  //  const scriptContent = new_html(element).find('script').html();
 const aa = index;
 
     const regex = /var player_aaaa=(\{.*?\});/;

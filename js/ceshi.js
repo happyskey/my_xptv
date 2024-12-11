@@ -7,7 +7,7 @@ const appConfig = {
     site: 'https://www.j00j.com',
     tabs: [
         {
-            name: '欧美剧96978854',
+            name: '欧美剧98854',
             ext: {
                 id: 20,
             },
@@ -189,7 +189,7 @@ const New_url = 'https://www.j00j.com/index.php/vod/play/id/13858/sid/1/nid/1.ht
 
               
  
-const aa = typeof  other_data;
+const aa = JSON.stringify(other_data).substring(0, 10);
     // 
 
               

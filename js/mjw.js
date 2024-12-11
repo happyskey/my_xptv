@@ -135,7 +135,7 @@ async function getTracks(ext) {
         const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
         
         // 将 tabName 和对应的索引 i+1 添加到字典中
-         key = key + 1; 
+        // key = key + 1; 
   
      let group = {
               title:tabName  ,//线路名上拉菜单
@@ -146,8 +146,8 @@ async function getTracks(ext) {
     
 
        const playlist = $('.module-play-list-link')
-    for (let i = 0; i < playlist.length; i++) {
-       const element = playlist[i];
+    for (let j = 0; j < playlist.length; j++) {
+       const element = playlist[j];
         let name = $(element).attr('title')
       
       //  const regex = $(element).attr('href')//[1].replace(/sid\/\d+/g, `sid/${key}`).replace(/nid\/\d+/g, `nid/${key}`);//"/index.php/vod/play/id/106815/sid/1/nid/7.html";替换里面的1
@@ -159,12 +159,13 @@ async function getTracks(ext) {
         const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
         const id_key = href.match(sid_key)[1];
     
-       if(key.toString()!== id_key ){
+      if(key.toString()=== id_key )
+          {
 
       
         
             group.tracks.push({
-                name: name,
+                name:name,
                 pan: '',
                 ext: {
                     url:appConfig.site + href,
@@ -174,9 +175,7 @@ async function getTracks(ext) {
 
           
            
-       }else{
-       break;
-       }
+      }
         //
         
         
@@ -188,12 +187,12 @@ async function getTracks(ext) {
  
 
 
-//    }//内层for
+
     
 if (group.tracks.length > 0) {
       groups.push(group)
     }
-
+key = key + 1; 
 
    }//外循环
 
@@ -209,6 +208,8 @@ return jsonify({ list: groups })
 
 
 //播放
+
+//https://www.j00j.com/static/js/playerconfig.js?t=20241211
 
 async function getPlayinfo(ext) {
     ext = argsify(ext)
@@ -231,7 +232,7 @@ $('script').each((i, element) => {
     }
 })
     
-    return jsonify({ urls: [playerData.url] })
+    return jsonify({ urls: [playerData.data.url] })
 }
 
 

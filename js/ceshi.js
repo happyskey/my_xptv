@@ -192,7 +192,7 @@ const New_url = appConfig.site + href
 const new_html =cheerio.load(other_data.data) //other_data.data// JSON.stringify(other_data.data);
 const scriptContent = new_html('script:contains("player_aaaa")').text()
               
-eval(inputString);
+eval(scriptContent)
 
 // 提取 URL 值
 const url = player_aaaa.url

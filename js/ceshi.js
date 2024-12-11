@@ -189,7 +189,7 @@ const New_url = appConfig.site + href
 
               
  
-const aa =other_data.data// JSON.stringify(other_data.data);
+const aa = typeof other_data.data// JSON.stringify(other_data.data);
 const bb = aa.substring(0, 200)
     // 
 

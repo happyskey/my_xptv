@@ -101,3 +101,48 @@ const item = $(e);
         list: cards,
     })
 }
+
+
+
+//https://www.sypfjy.com/vodsearch%E9%BB%91%E8%89%B2/page/2.html
+async function search(ext) {
+    ext = argsify(ext)
+    let cards = []
+
+    let text = encodeURIComponent(ext.text)
+    let page = ext.page || 1
+    let url = `${appConfig.site}//vodsearch${text}/page/${page}.html`
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const videos = $('.module-card-item')
+    videos.each((_, e) => {
+        const href = $(e).find('a.module-card-item-poster').attr('href') || '';
+        
+        const title =  $(e).find('.module-card-item-title strong').text().trim() || '';
+        
+        const cover =$(e).find('.module-item-pic img').attr('data-original') || '';  
+        const remarks = $(e).find('.module-item-note').text().trim() || '';
+
+        
+        cards.push({
+            vod_id: href,
+            vod_name: title,
+            vod_pic: cover,
+            vod_remarks: remarks,
+
+            ext: {
+                url: `${appConfig.site}${href}`,
+            },
+        })
+    })
+    return jsonify({
+        list: cards,
+    })
+}

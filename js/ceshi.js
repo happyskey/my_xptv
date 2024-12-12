@@ -197,6 +197,32 @@ return jsonify({ list: groups })
 }
 
 
+async function getPlayinfo(ext) {
+    ext = argsify(ext)
+    const url = ext.url
+    
+    
+
+
+  const other_data  = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+          
+ 
+const new_html =cheerio.load(other_data.data) 
+const scriptContent = new_html('script:contains("player_aaaa")').text()
+              
+//const Regex = /"url":"(.*?)"/;//
+//const url_id = scriptContent.match(Regex)[1].replace(/\\/g, "")
+
+
+   eval(scriptContent)
+   const url_id= player_aaaa.url
+    return jsonify({ urls: [url_id] })
+}
 
 
 

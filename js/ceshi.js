@@ -104,6 +104,108 @@ const item = $(e);
 
 
 
+
+
+
+
+//
+
+async function getTracks(ext) {
+    
+    ext = argsify(ext)
+   let groups = []
+    
+    let url = ext.url
+    
+    
+
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+
+    
+
+    const $ = cheerio.load(data)
+    
+    //获取外层列表
+    const tabItems = $('.module-tab-item')
+    let key = 1
+   for (let i = 0; i < tabItems.length; i++) {
+        const element = tabItems[i];
+        
+    
+        const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
+        
+    
+      
+  
+     let group = {
+              title:tabName  ,
+              tracks: [],
+        }
+
+
+    
+
+       const playlist = $('.scroll-content a')
+    for (let j = 0; j < playlist.length; j++) {
+       const element = playlist[j];
+        let name = $(element).find('span').text();
+      
+
+       const href = $(element).attr('href')
+
+       // const ShareUrl = href //
+   ///index.php/vod/play/id/106815/sid/1/nid/7.html
+        
+        const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
+        const id_key = href.match(sid_key)[1];
+    
+      if(key.toString()=== id_key )
+          {
+   
+        
+            group.tracks.push({
+                name: name,
+                pan: '',
+                ext: {
+                    url: appConfig.site + href,
+                },
+            });
+       
+      }//if
+        
+        
+       }//内层for
+
+    
+if (group.tracks.length > 0) {
+      groups.push(group)
+    }
+key = key + 1; 
+
+   }//外循环
+
+    
+
+return jsonify({ list: groups })
+      
+   
+}
+
+
+
+
+
+
+
+
+//
+
+
 //https://www.sypfjy.com/vodsearch%E9%BB%91%E8%89%B2/page/2.html
 async function search(ext) {
     ext = argsify(ext)

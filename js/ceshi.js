@@ -140,7 +140,7 @@ async function getTracks(ext) {
         const tabName =  $(element).attr('data-dropdown-value');
         
     
-      $utils.toastError(tabName)
+      
   
      let group = {
               title:tabName  ,
@@ -155,7 +155,7 @@ async function getTracks(ext) {
        const element = playlist[j];
         let name = $(element).find('span').text();
       
-
+$utils.toastError(name )
        const href = $(element).attr('href')
 
        // const ShareUrl = href //

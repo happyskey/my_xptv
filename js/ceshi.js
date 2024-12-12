@@ -123,12 +123,12 @@ async function search(ext) {
 
     const videos = $('.module-search-item')
     videos.each((_, e) => {
-        const href = $(e).find('a.video-serial').attr('href') || '';
+        const href = $(e).find('a.video-serial').attr('href') 
         
-        const title =  $(e).find('img').attr('alt') || '';
+        const title =  $(e).find('img').attr('alt') 
         
-        const cover =$(e).find('img').attr('data-src') || '';  
-        const remarks = $(e).find('a.video-serial').text().trim() || '';
+        const cover =$(e).find('img').attr('data-src') 
+        const remarks = $(e).find('a.video-serial').text().trim() 
 
         
         cards.push({

@@ -121,14 +121,14 @@ async function search(ext) {
 
     const $ = cheerio.load(data)
 
-    const videos = $('.module-card-item')
+    const videos = $('.module-search-item')
     videos.each((_, e) => {
-        const href = $(e).find('a.module-card-item-poster').attr('href') || '';
+        const href = $(e).find('a.video-serial').attr('href') || '';
         
-        const title =  $(e).find('.module-card-item-title strong').text().trim() || '';
+        const title =  $(e).find('img').attr('alt') || '';
         
-        const cover =$(e).find('.module-item-pic img').attr('data-original') || '';  
-        const remarks = $(e).find('.module-item-note').text().trim() || '';
+        const cover =$(e).find('img').attr('data-src') || '';  
+        const remarks = $(e).find('a.video-serial').text().trim() || '';
 
         
         cards.push({

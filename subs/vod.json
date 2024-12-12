@@ -32,8 +32,13 @@
 },{
             "name": "美剧网|昊",
             "type": 3,
-            "api": "csp_js/mmjw",
+            "api": "csp_js/mjw",
             "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mjw.js" 
+},{
+            "name": "新视觉影院|昊",
+            "type": 3,
+            "api": "csp_js/xsjyy",
+            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/xsjyy.js" 
 }
        
     ]

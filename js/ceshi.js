@@ -54,10 +54,28 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
     const videos = $('.module-item')
     videos.each((_, e) => {
-        const href = $(e).find('.module-item-title a').attr('href');//
-        const title = $(e).find('.module-item-title').attr('title');//
-        const cover = $(e).find('.module-item-pic img').attr('data-src');
-        const remarks = $(e).find('.module-item-text').text();
+
+const item = $(e);
+
+    // 提取 title 和 href
+    const link = item.find('.module-item-pic a');
+        
+    const title = link.attr('title') || 'N/A';
+    const href = link.attr('href') || 'N/A';
+
+    // 提取图片的 data-src
+    const img = item.find('.module-item-pic img');
+    const  cover= img.attr('data-src') || 'N/A';
+    
+
+    // 提取更新文本
+    const remarks = item.find('.module-item-text').text().trim() || 'N/A';
+
+        
+    
+
+
+        
         cards.push({
             vod_id: href,
             vod_name: title,

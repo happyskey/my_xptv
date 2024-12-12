@@ -111,7 +111,7 @@ async function search(ext) {
 
     let text = encodeURIComponent(ext.text)
     let page = ext.page || 1
-    let url = `${appConfig.site}//vodsearch${text}/page/${page}.html`
+    let url = `${appConfig.site}/vodsearch${text}/page/${page}.html`
 
     const { data } = await $fetch.get(url, {
         headers: {

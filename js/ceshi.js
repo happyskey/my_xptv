@@ -7,7 +7,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const appConfig = {
     ver: 1,
     title: 'NikeTV|昊',
-    site: 'https://www.whbzj.com',
+    site: 'https://www.sypfjy.com',
     tabs: [
         {
             name: '电影',
@@ -31,6 +31,16 @@ const appConfig = {
             name: '动漫',
             ext: {
                 id: 'dongman',
+            },
+        },{
+            name: '热门短片',
+            ext: {
+                id: 'remenduanju',
+            },
+        },{
+            name: '体育赛事',
+            ext: {
+                id: 'tiyusaishi',
             },
         }
     ],

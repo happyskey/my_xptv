@@ -131,14 +131,14 @@ async function getTracks(ext) {
    for (let i = 0; i < tabItems.length; i++) {
         const element = tabItems[i];
         
-        // 优先获取 tabName，若为空则获取 data-dropdown-value
+    
         const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
         
-        // 将 tabName 和对应的索引 i+1 添加到字典中
-        // key = key + 1; 
+    
+      
   
      let group = {
-              title:tabName  ,//线路名上拉菜单
+              title:tabName  ,
               tracks: [],
         }
 
@@ -161,30 +161,7 @@ async function getTracks(ext) {
     
       if(key.toString()=== id_key )
           {
-
-
-              //后添加
-              /*
-const New_url = appConfig.site + href
-
-
-  const other_data  = await $fetch.get(New_url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-          
- 
-const new_html =cheerio.load(other_data.data) 
-const scriptContent = new_html('script:contains("player_aaaa")').text()
-              
-const Regex = /"url":"(.*?)"/;
-const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
-*/
-
-
-              
+   
         
             group.tracks.push({
                 name: name,
@@ -193,22 +170,11 @@ const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
                     url: appConfig.site + href,
                 },
             });
-
-
-          
-           
+       
       }//if
-        //
         
         
        }//内层for
-
-
-
-
- 
-
-
 
     
 if (group.tracks.length > 0) {
@@ -224,15 +190,6 @@ return jsonify({ list: groups })
       
    
 }
-
-
-
-
-
-//播放
-
-//https://www.j00j.com/static/js/playerconfig.js?t=20241211
-
 
 
 
@@ -254,11 +211,12 @@ async function getPlayinfo(ext) {
 const new_html =cheerio.load(other_data.data) 
 const scriptContent = new_html('script:contains("player_aaaa")').text()
               
-const Regex = /"url":"(.*?)"/;
-const url_id = scriptContent.match(Regex)[1].replace(/\\/g, "")
+//const Regex = /"url":"(.*?)"/;//
+//const url_id = scriptContent.match(Regex)[1].replace(/\\/g, "")
 
-//
-   
+
+   eval(scriptContent)
+   const url_id= player_aaaa.url
     return jsonify({ urls: [url_id] })
 }
 

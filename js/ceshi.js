@@ -52,12 +52,12 @@ async function getCards(ext) {
         },
     })
     const $ = cheerio.load(data)
-    const videos = $('.module-poster-item')
+    const videos = $('.module-item')
     videos.each((_, e) => {
-        const href = $(e).attr('href')
-        const title = $(e).attr('title')
-        const cover = $(e).find('img').attr('data-original')
-        const remarks = $(e).find('.module-item-note').text().trim()
+        const href = $(e).find('.module-item-title a').attr('href');//
+        const title = $(e).find('.module-item-title').attr('title');//
+        const cover = $(e).find('.module-item-pic img').attr('data-src');
+        const remarks = $(e).find('.module-item-text').text();
         cards.push({
             vod_id: href,
             vod_name: title,

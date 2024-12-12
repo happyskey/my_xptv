@@ -256,7 +256,7 @@ const scriptContent = new_html('script:contains("player_aaaa")').text()
               
 const Regex = /"url":"(.*?)"/;//
 const url_id = scriptContent.match(Regex)[1].replace(/\\/g, "")
-
+$print(url_id)
 //
    // eval(scriptContent)
   // const url_id= player_aaaa.url

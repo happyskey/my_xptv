@@ -64,28 +64,13 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
     const videos = $('.module-item')
     videos.each((_, e) => {
-
-const item = $(e);
-
-    // 提取 title 和 href
-    const link = item.find('.module-item-pic a');
-        
-    const title = link.attr('title') || 'N/A';
-    const href = link.attr('href') || 'N/A';
-
-    // 提取图片的 data-src
-    const img = item.find('.module-item-pic img');
-    const  cover= img.attr('data-src') || 'N/A';
-    
-
-    // 提取更新文本
-    const remarks = item.find('.module-item-text').text().trim() || 'N/A';
-
-        
-    
-
-
-        
+        const item = $(e);
+        const link = item.find('.module-item-pic a');
+        const title = link.attr('title') || 'N/A';
+        const href = link.attr('href') || 'N/A';
+        const img = item.find('.module-item-pic img');
+        const  cover= img.attr('data-src') || 'N/A';
+        const remarks = item.find('.module-item-text').text().trim() || 'N/A';
         cards.push({
             vod_id: href,
             vod_name: title,
@@ -135,39 +120,26 @@ async function getTracks(ext) {
     let key = 1
    for (let i = 0; i < tabItems.length; i++) {
         const element = tabItems[i];
-        
-    
         const tabName =  $(element).attr('data-dropdown-value');
-        
-    
-      
-  
-     let group = {
-              title:tabName  ,
-              tracks: [],
-        }
+        // $utils.toastError(tabName )  
+         let group = {
+                  title:tabName  ,
+                  tracks: [],
+            }
 
 
     
 
-       const playlist = $('.scroll-content a')
+         const playlist = $('.scroll-content a')
     for (let j = 0; j < playlist.length; j++) {
-       const element = playlist[j];
+        const element = playlist[j];
         let name = $(element).find('span').text();
-      
-
-       const href = $(element).attr('href')
-
-      
-   ////vodplay/146988-2-4.html
-        
-       
+        const href = $(element).attr('href')
+   //vodplay/146988-2-4.html
         const id_key = href.match(/-(\d+)-/)[1];
     
       if(key.toString()=== id_key )
           {
-   
-        
             group.tracks.push({
                 name: name,
                 pan: '',
@@ -177,40 +149,25 @@ async function getTracks(ext) {
             });
        
       }//if
-        
-        
+          
        }//内层for
-
-    
 if (group.tracks.length > 0) {
       groups.push(group)
     }
 key = key + 1; 
-
    }//外循环
-
-    
-
 return jsonify({ list: groups })
-      
-   
 }
-
-
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
-    
-    
-
-
-  const other_data  = await $fetch.get(url, {
+    const other_data  = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },
     })
 
-        $utils.toastError(other_data.data )  
+      
  
 const new_html =cheerio.load(other_data.data) 
 const scriptContent = new_html('script:contains("player_aaaa")').text()

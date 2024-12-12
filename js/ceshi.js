@@ -155,7 +155,7 @@ async function getTracks(ext) {
        const element = playlist[j];
         let name = $(element).find('span').text();
       
-$utils.toastError(name )
+
        const href = $(element).attr('href')
 
       
@@ -210,7 +210,7 @@ async function getPlayinfo(ext) {
         },
     })
 
-          
+        $utils.toastError(other_data.data )  
  
 const new_html =cheerio.load(other_data.data) 
 const scriptContent = new_html('script:contains("player_aaaa")').text()

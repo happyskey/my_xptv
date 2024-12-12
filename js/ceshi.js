@@ -137,7 +137,7 @@ async function getTracks(ext) {
         const element = tabItems[i];
         
     
-        const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
+        const tabName =  $(element).attr('data-dropdown-value');
         
     
       

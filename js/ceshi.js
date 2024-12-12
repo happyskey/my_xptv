@@ -1,311 +1,162 @@
 //昊
 const cheerio = createCheerio()
+
+// 預先定義請求使用的 user-agent
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+
 const appConfig = {
     ver: 1,
-    title: '美剧网',
-    site: 'https://www.j00j.com',
+    title: '小米UC资源站|昊',
+    site: 'http://www.mucpan.cc',
     tabs: [
         {
-            name: '欧美剧888',
+            name: '全部小米电影',
             ext: {
                 id: 20,
             },
         },
         {
-            name: '新马泰剧',
+            name: '小米电影片库',
             ext: {
                 id: 21,
             },
         },
         {
-            name: '韩剧',
+            name: '小米动漫片库',
             ext: {
                 id: 22,
             },
-        },{
-            name: '日剧',
+        },
+        {
+            name: '小米综艺片库',
             ext: {
                 id: 23,
             },
-        },{
-            name: '台剧',
-            ext: {
-                id: 25,
-            },
-        },{
-            name: '在线电影',
+        }, 
+      {
+            name: '小米少儿片库',
             ext: {
                 id: 24,
             },
-        },{
-            name: '在线综艺',
-            ext: {
-                id: 36,
-            },
-        },{
-            name: '在线动漫',
-            ext: {
-                id: 43,
-            },
-        },{
-            name: '在线预告',
-            ext: {
-                id: 48,
-            },
-        },{
-            name: '在线短剧',
-            ext: {
-                id: 49,
-            },
-        }
-        
+        },
     ],
 }
 async function getConfig() {
     return jsonify(appConfig)
 }
-
-
-//https://www.j00j.com/index.php/vod/show/id/20/page/2.html
-
-
 async function getCards(ext) {
     ext = argsify(ext)
     let cards = []
+    // let page = ext.page
+    // let id = ext.id
     let { page = 1, id } = ext
-    const url =appConfig.site + `/index.php/vod/show/id/${id}/page/${page}.html` 
+    const url = appConfig.site + `/index.php/vod/show/id/${id}/page/${page}.html`
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },
     })
     const $ = cheerio.load(data)
-    const videos = $('.module-poster-item')
+    const videos = $('.module-item')
     videos.each((_, e) => {
-        const href = $(e).attr('href')
-        const title = $(e).attr('title')
-        const cover = $(e).find('img').attr('data-original')
-        const remarks = $(e).find('.module-item-note').text().trim()
-        cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            vod_remarks: remarks, // 海報右上角的子標題
-            ext: {
-                url: `${appConfig.site}${href}`,
-            },
-        })
-    })
-
-    return jsonify({
-        list: cards,
-    })
-}
-
-//
-
-async function getTracks(ext) {
-    
-    ext = argsify(ext)
-   let groups = []
-    
-    let url = ext.url
-    
-    
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-
-    
-
-    const $ = cheerio.load(data)
-    
-    //获取外层列表
-    const tabItems = $('.module-tab-item')
-    let key = 1
-   for (let i = 0; i < tabItems.length; i++) {
-        const element = tabItems[i];
-        
-        // 优先获取 tabName，若为空则获取 data-dropdown-value
-        const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
-        
-        // 将 tabName 和对应的索引 i+1 添加到字典中
-        // key = key + 1; 
-  
-     let group = {
-              title:tabName  ,//线路名上拉菜单
-              tracks: [],
-        }
-
-
-    
-
-       const playlist = $('.module-play-list-link')
-    for (let j = 0; j < playlist.length; j++) {
-       const element = playlist[j];
-        let name = $(element).attr('title')
-      
-
-       const href = $(element).attr('href')
-
-       // const ShareUrl = href //
-   ///index.php/vod/play/id/106815/sid/1/nid/7.html
-        
-        const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
-        const id_key = href.match(sid_key)[1];
-    
-      if(key.toString()=== id_key )
-          {
-
-
-              //后添加
-              /*
-const New_url = appConfig.site + href
-
-
-  const other_data  = await $fetch.get(New_url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-          
- 
-const new_html =cheerio.load(other_data.data) 
-const scriptContent = new_html('script:contains("player_aaaa")').text()
-              
-const Regex = /"url":"(.*?)"/;
-const url = scriptContent.match(Regex)[1].replace(/\\/g, "")
-*/
-
-
-              
-        
-            group.tracks.push({
-                name: name,
-                pan: '',
-                ext: {
-                    url: appConfig.site + href,
-                },
-            });
-
-
-          
-           
-      }//if
-        //
-        
-        
-       }//内层for
-
-
-
-
- 
-
-
-
-    
-if (group.tracks.length > 0) {
-      groups.push(group)
-    }
-key = key + 1; 
-
-   }//外循环
-
-    
-
-return jsonify({ list: groups })
-      
-   
-}
-
-
-
-
-
-//播放
-
-//https://www.j00j.com/static/js/playerconfig.js?t=20241211
-
-
-
-
-async function getPlayinfo(ext) {
-    ext = argsify(ext)
-    const url = ext.url
-    
-    
-
-
-  const other_data  = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-          
- 
-const new_html =cheerio.load(other_data.data) 
-const scriptContent = new_html('script:contains("player_aaaa")').text()
-              
-const Regex = /"url":"(.*?)"/;//
-const url_id = scriptContent.match(Regex)[1].replace(/\\/g, "")
-$print(url_id)
-//
-   // eval(scriptContent)
-  // const url_id= player_aaaa.url
-    return jsonify({ urls: [url_id] })
-}
-
-
-
-//
-
-//https://www.j00j.com/index.php/vod/search/page/2/wd/柯南.html
-async function search(ext) {
-    ext = argsify(ext)
-    let cards = []
-
-    let text = encodeURIComponent(ext.text)
-    let page = ext.page || 1
-    let url = `${appConfig.site}/index.php/vod/search/page/${page}/wd/${text}.html`//https://yhdm.one/search?q=%E5%90%8D
-
-    const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
-
-    const $ = cheerio.load(data)
-
-    const videos = $('.module-card-item')
-    videos.each((_, e) => {
-        const href = $(e).find('a.module-card-item-poster').attr('href') || '';
-        
-        const title =  $(e).find('.module-card-item-title strong').text().trim() || '';
-        
-        const cover =$(e).find('.module-item-pic img').attr('data-original') || '';  
-        const remarks = $(e).find('.module-item-note').text().trim() || '';
-
-        
+        const href = $(e).find('.module-item-cover a').attr('href')
+        const title = $(e).find('.module-item-cover a').attr('title')
+        const cover = $(e).find('img').attr('src')
+        const remarks = $(e).find('.module-item-text').text()
         cards.push({
             vod_id: href,
             vod_name: title,
             vod_pic: cover,
             vod_remarks: remarks,
-
             ext: {
                 url: `${appConfig.site}${href}`,
             },
         })
     })
+
     return jsonify({
         list: cards,
     })
+}
+async function getTracks(ext) {
+    ext = argsify(ext)
+    let tracks = []
+    let url = ext.url
+    const { data } = await $fetch.get(url, {
+        headers: {
+            'User-Agent': UA,
+        },
+    })
+
+    const $ = cheerio.load(data)
+
+    const playlist = $('.module-row-one .module-row-info .module-row-text')
+    playlist.each((_, e) => {
+        const name = $(e).attr('title').replace('复制', '').replace('第1集下载地址', '')
+        const ShareUrl = $(e).attr('data-clipboard-text')   
+        tracks.push({
+            name:name.trim(),
+            pan: 'https://115.com/s/swhy7f33no3?password=e3d4&#' ,
+           ext: {
+                        url: '',
+                    }, 
+        })
+    })
+
+    return jsonify({
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
+    })
+}
+
+async function getPlayinfo(ext) {
+	return jsonify({ urls: [] })
+}
+
+async function search(ext) {
+	ext = argsify(ext)
+	let cards = []
+
+	let text = encodeURIComponent(ext.text)
+	//let page = ext.page || 1
+	let url = `${appConfig.site}/index.php/vod/search.html?wd=${text}`
+
+	const { data } = await $fetch.get(url, {
+		headers: {
+			'User-Agent': UA,
+		},
+	})
+
+const $ = cheerio.load(data);
+
+const videos = $('div.module-search-item');
+videos.each((_, e) => {
+    const img = $(e).find('div.module-item-pic img');
+    const title = img.attr('alt'); // 提取标题
+    const cover = img.attr('data-src') || img.attr('src'); // 提取封面地址
+
+    const serialLink = $(e).find('div.video-info div.video-info-header a.video-serial');
+    const href = serialLink.attr('href'); // 提取链接
+    const remarks = serialLink.text().trim(); // 提取更新信息
+
+    cards.push({
+        vod_id: href,
+        vod_name: title,
+        vod_pic: cover,
+        vod_remarks: remarks,
+        ext: {
+            url: href.startsWith('http') ? href : `${appConfig.site}${href}`, // 拼接完整链接
+        },
+    });
+});
+
+
+	
+	return jsonify({
+		list: cards,
+	})
 }

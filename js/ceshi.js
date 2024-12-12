@@ -158,11 +158,11 @@ async function getTracks(ext) {
 $utils.toastError(name )
        const href = $(element).attr('href')
 
-       // const ShareUrl = href //
-   ///index.php/vod/play/id/106815/sid/1/nid/7.html
+      
+   ////vodplay/146988-2-4.html
         
-        const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
-        const id_key = href.match(sid_key)[1];
+       
+        const id_key = href.match(/-(\d+)-/)[1];
     
       if(key.toString()=== id_key )
           {

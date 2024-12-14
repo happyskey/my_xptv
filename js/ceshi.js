@@ -69,7 +69,11 @@ async function getCards(ext) {
     let { page = 1, id } = ext
 
     // 定義請求的 URL
-    const url = appConfig.site + `${id}/page/${page}`    //`/index.php/vod/show/id/${id}/page/${page}.html`
+    if(page!==1}{
+    const url = appConfig.site + `${id}/page/${page}`  
+}else{
+const url = appConfig.site + `${id}` 
+}
     // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {
         headers: {

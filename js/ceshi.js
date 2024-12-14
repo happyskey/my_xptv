@@ -1,81 +1,100 @@
 //昊
 const cheerio = createCheerio()
 
-// 預先定義請求使用的 user-agent
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 
 const appConfig = {
     ver: 1,
-    title: '新视觉影院',
-    site: 'https://www.sypfjy.com',
+    title: '4K',
+    site: 'https://www.4kvm.tv',
+    // 定義分類
     tabs: [
+        // name 為分類名，ext 可以傳入任意參數由 getCards 接收
         {
             name: '电影',
             ext: {
-                id: 'dianying',
+                id: 'movies',
             },
         },
         {
-            name: '电视剧',
+            name: '美剧',
             ext: {
-                id: 'dsj',
+                id: "/classify/meiju",
             },
         },
         {
-            name: '综艺',
+            name: '国产剧',
             ext: {
-                id: 'zongyi',
+                id: '/classify/guochan',
             },
         },
         {
-            name: '动漫',
+            name: '韩剧',
             ext: {
-                id: 'dongman',
+                id: '/classify/hanju',
             },
-        },{
-            name: '热门短片',
+        }, {
+            name: '番剧',
             ext: {
-                id: 'remenduanju',
+                id: '/classify/fanju',
             },
-        },{
-            name: '体育赛事',
+        }, {
+            name: '热门播放',
             ext: {
-                id: 'tiyusaishi',
+                id: "/trending",
             },
-        }
+        },
     ],
 }
+
+// 進入源時調用，ver,title,site,tabs 為必須項
 async function getConfig() {
     return jsonify(appConfig)
 }
-//https://www.whbzj.com/vodshow/dianying--------2---.html
 
 
+
+
+
+
+// 取得分類的影片列表，ext 為 tabs 定義的 ext 加上頁碼(page)
 async function getCards(ext) {
+    // 將 JSON 字符串轉為 JS 對象
     ext = argsify(ext)
+    // 定義一個空的卡片數組
     let cards = []
+    // 從 ext 中解構賦值取出頁數及分類 id，等同於:
+    // let page = ext.page
+    // let id = ext.id
     let { page = 1, id } = ext
-    const url =appConfig.site + `/vodshow/${id}--------${page}---.html` 
+
+    // 定義請求的 URL
+    const url = appConfig.site + `${id}/meiju/page/${page}`    //`/index.php/vod/show/id/${id}/page/${page}.html`
+    // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },
     })
+
+    // 用 cheerio 解析 html
     const $ = cheerio.load(data)
-    const videos = $('.module-item')
+
+    // 用 css 選擇器選出影片列表
+    const videos = $('.item.tvshows')
+    // 遍歷所有影片
     videos.each((_, e) => {
-        const item = $(e);
-        const link = item.find('.module-item-pic a');
-        const title = link.attr('title') || 'N/A';
-        const href = link.attr('href') || 'N/A';
-        const img = item.find('.module-item-pic img');
-        const  cover= img.attr('data-src') || 'N/A';
-        const remarks = item.find('.module-item-text').text().trim() || 'N/A';
+        const href = $(e).find('a').attr('href')
+        const title = $(e).find('img').attr('alt')
+        const cover = $(e).find('img').attr('src')
+        const remarks = $(e).find('.update').text()
+        // 將每個影片加入 cards 數組中
         cards.push({
             vod_id: href,
             vod_name: title,
             vod_pic: cover,
             vod_remarks: remarks, // 海報右上角的子標題
+            // ext 會傳給 getTracks
             ext: {
                 url: `${appConfig.site}${href}`,
             },
@@ -86,9 +105,6 @@ async function getCards(ext) {
         list: cards,
     })
 }
-
-
-
 
 
 

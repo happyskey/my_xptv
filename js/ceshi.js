@@ -69,10 +69,11 @@ async function getCards(ext) {
     let { page = 1, id } = ext
 
     // 定義請求的 URL
-    if(page!==1}{
-    const url = appConfig.site + `${id}/page/${page}`  
+    if(page===1 && id === '/movies'}{
+    
+    const url = appConfig.site + `${id}`
 }else{
-const url = appConfig.site + `${id}` 
+ const url = appConfig.site + `${id}/page/${page}`  
 }
     // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {
@@ -109,6 +110,10 @@ const url = appConfig.site + `${id}`
         list: cards,
     })
 }
+
+
+
+
 
 
 

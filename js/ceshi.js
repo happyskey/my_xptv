@@ -98,7 +98,7 @@ async function getCards(ext) {
             vod_remarks: remarks, // 海報右上角的子標題
             // ext 會傳給 getTracks
             ext: {
-                url: `${appConfig.site}${href}`,
+                url: `${href}`,
             },
         })
     })
@@ -107,12 +107,6 @@ async function getCards(ext) {
         list: cards,
     })
 }
-
-
-
-
-
-
 
 
 

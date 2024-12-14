@@ -13,7 +13,7 @@ const appConfig = {
         {
             name: '电影',
             ext: {
-                id: 'movies',
+                id: '/movies',
             },
         },
         {

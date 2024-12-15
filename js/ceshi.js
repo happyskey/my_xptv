@@ -70,7 +70,7 @@ async function getCards(ext) {
 
     // 定義請求的 URL
     let url =''
-if (id ==='/movies' && page ==='1'){
+if (id ==='/movies' && page ===1){
       url = appConfig.site + `${id}`  
 
 }else{

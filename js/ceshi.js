@@ -69,7 +69,7 @@ async function getCards(ext) {
     let { page = 1, id } = ext
 
     // 定義請求的 URL
-if (id ==='/movies' && page ===1){
+if (id ==='/movies' && page ==='1'){
      const url = appConfig.site + `${id}`  
 
 }else{

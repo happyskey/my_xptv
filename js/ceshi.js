@@ -75,7 +75,8 @@ if (page ===1){
     $utils.toastError(url)
 
 }else{
-  url = appConfig.site + `${id}/page/${page}`  
+  url = appConfig.site + `${id}/page/${page}` 
+    $utils.toastError(url)
 }
     // 使用內置的 http client 發起請求獲取 html
     const { data } = await $fetch.get(url, {

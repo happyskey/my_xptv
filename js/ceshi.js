@@ -101,7 +101,7 @@ if (page ===1 && id ==='/movies'){
         const href = $(e).find('a').attr('href')
         const title = $(e).find('img').attr('alt')
         const cover = $(e).find('img').attr('src')
-        const remarks = $(e).find('.update').text()
+        const remarks = $(e).find('.update').text() || ''
         // 將每個影片加入 cards 數組中
         cards.push({
             vod_id: href,

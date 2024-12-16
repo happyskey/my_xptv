@@ -63,8 +63,8 @@ async function getCards(ext) {
     })
 
     const $ = cheerio.load(data)
-
-    $('.grid.grid-cols-2.mb-6 > div').each((_, element) => {
+//.shadow //.grid.grid-cols-2.mb-6 > div
+    $('.shadow').each((_, element) => {
         if ($(element).find('.relative').length == 0) return
         const href = $(element).find('.relative a').attr('href')
         const title = $(element).find('img').attr('alt')

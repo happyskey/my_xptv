@@ -70,12 +70,18 @@ async function getCards(ext) {
 
     // 定義請求的 URL
     let url =''
-if (page ===1){
-      url = appConfig.site + `${id}`  
-    $utils.toastError(url)
+    let key =''
+if (page ===1 && id ==='/movies'){
+        url = appConfig.site + `${id}`  
+        key = '.archive-content)'
+        $utils.toastError(url)
 
+}else if(id ==='/movies'){
+       url = appConfig.site + `${id}/page/${page}` 
+       key = '.archive-content)'
 }else{
   url = appConfig.site + `${id}/page/${page}` 
+    key='.item.tvshows'
     $utils.toastError(url)
 }
     // 使用內置的 http client 發起請求獲取 html
@@ -89,7 +95,7 @@ if (page ===1){
     const $ = cheerio.load(data)
 
     // 用 css 選擇器選出影片列表
-    const videos = $('.item.tvshows') || $('.archive-content') \\archive-content
+    const videos = $(key)  
     // 遍歷所有影片
     videos.each((_, e) => {
         const href = $(e).find('a').attr('href')

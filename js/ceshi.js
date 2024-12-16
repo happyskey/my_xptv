@@ -72,6 +72,7 @@ async function getCards(ext) {
     let url =''
 if (page ===1){
       url = appConfig.site + `${id}`  
+    $utils.toastError(url)
 
 }else{
   url = appConfig.site + `${id}/page/${page}`  

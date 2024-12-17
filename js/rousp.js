@@ -81,6 +81,8 @@ async function getCards(ext) {
                 url: appConfig.site + href,
             },
         })
+
+            $utils.toastError(cards)
         }
         
     })

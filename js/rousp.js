@@ -66,12 +66,12 @@ async function getCards(ext) {
 //.shadow //.grid.grid-cols-2.mb-6 > div
     $('.shadow').each((_, element) => {
        // if ($(element).find('.relative').length == 0) return
-        const href = $(element).find('.relative a').attr('href')
-        const title = $(element).find('img').attr('alt')
-        const cover = $(element).find('img').attr('src')
-        const subTitle = $(element).find('.relative a > div:eq(1)').text()
-        const hdinfo = $(element).find('.relative a > div:first').text()
-        if(title){
+        const href = $(element).find('.relative a').attr('href')|| 'N/A';
+        const title = $(element).find('img').attr('alt')|| 'N/A';
+        const cover = $(element).find('img').attr('src')|| 'N/A';
+        const subTitle = $(element).find('.relative a > div:eq(1)').text()|| 'N/A';
+        const hdinfo = $(element).find('.relative a > div:first').text()|| 'N/A';
+        if(title!=='N/A'){
         cards.push({
             vod_id: href,
             vod_name: title,

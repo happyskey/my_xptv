@@ -69,14 +69,14 @@ async function getCards(ext) {
         const href = $(element).find('a').attr('href')|| 'N/A';
         const title = $(element).find('img').attr('alt')|| 'N/A';
         const cover = $(element).find('img').attr('src')|| 'N/A';
-       // const subTitle = $(element).find('.relative a > div:eq(1)').text()|| 'N/A';
-      //  const hdinfo = $(element).find('.relative a > div:first').text()|| 'N/A';
+        const subTitle = $(element).find('.relative a > div:eq(1)').text()|| 'N/A';
+       const hdinfo = $(element).find('.relative a > div:first').text()|| 'N/A';
         if(href!=='N/A'||title!=='N/A'||cover!=='N/A'){
         cards.push({
             vod_id: href,
             vod_name: title,
             vod_pic: cover,
-          //  vod_remarks: subTitle || hdinfo,
+            vod_remarks: subTitle || hdinfo,
             ext: {
                 url: appConfig.site + href,
             },

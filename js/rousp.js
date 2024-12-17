@@ -71,7 +71,7 @@ async function getCards(ext) {
         const cover = $(element).find('img').attr('src')|| 'N/A';
         const subTitle = $(element).find('.relative a > div:eq(1)').text()|| 'N/A';
         const hdinfo = $(element).find('.relative a > div:first').text()|| 'N/A';
-        if(title!=='N/A'){
+        if(href!=='N/A'||title!=='N/A'||cover!=='N/A'){
         cards.push({
             vod_id: href,
             vod_name: title,

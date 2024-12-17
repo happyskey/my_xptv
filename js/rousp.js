@@ -66,7 +66,7 @@ async function getCards(ext) {
 //.shadow //.grid.grid-cols-2.mb-6 > div
     $('.shadow').each((_, element) => {
        // if ($(element).find('.relative').length == 0) return
-        const href = $(element).find('.relative a').attr('href')|| 'N/A';
+        const href = $(element).find('a').attr('href')|| 'N/A';
         const title = $(element).find('img').attr('alt')|| 'N/A';
         const cover = $(element).find('img').attr('src')|| 'N/A';
         const subTitle = $(element).find('.relative a > div:eq(1)').text()|| 'N/A';

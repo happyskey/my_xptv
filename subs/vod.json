@@ -5,45 +5,45 @@
             "name": "桃子影视|昊",
             "type": 3,
             "api": "csp_tzsp",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js"
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js"
         },
       {
             "name": "pppHub",
             "type": 3,
             "api": "csp_ppron",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
 },
          {
             "name": "樱花动漫|昊",
             "type": 3,
             "api": "csp_yhdm",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/yhdm.js" 
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/yhdm.js" 
 },
         {
             "name": "编译中",
             "type": 3,
             "api": "csp_ceshi",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/ceshi.js" 
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/ceshi.js" 
 },{
             "name": "小米UC视频|昊",
             "type": 3,
             "api": "csp_js/mucpan",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mucpan.js" 
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mucpan.js" 
 },{
             "name": "美剧网|昊",
             "type": 3,
             "api": "csp_js/mjw",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mjw.js" 
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mjw.js" 
 },{
             "name": "新视觉影院|昊",
             "type": 3,
             "api": "csp_js/xsjyy",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/xsjyy.js" 
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/xsjyy.js" 
 },{
             "name": "肉视频",
             "type": 3,
             "api": "csp_js/rousp",
-            "ext": "https://ghp.ci/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/rousp.js" 
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/rousp.js" 
 }
        
     ]

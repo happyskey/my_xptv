@@ -82,7 +82,7 @@ async function getCards(ext) {
             },
         })
 
-            $utils.toastError(cards)
+           // $utils.toastError(cards)
         }
         
     })

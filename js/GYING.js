@@ -39,7 +39,7 @@ async function getCards(ext) {
     ext = argsify(ext)
     let cards = []
     let { page = 1, id } = ext
-    const url =appConfig.site + `/index.php/vod/show/id/${id}/page/${page}.html` 
+    const url =appConfig.site + ${id}+${page}
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,

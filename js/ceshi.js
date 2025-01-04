@@ -84,5 +84,5 @@ const { data } = await $fetch.get(url, {
         list: cards,
     })
 
-    /*
+    */
 }

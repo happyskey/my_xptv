@@ -59,6 +59,9 @@ async function getCards(ext) {
           "PHPSESSID": "dvpsqd0l0qi7s0e7pamuqrvhhe",
         },
     })
+
+     $utils.toastError(cards)
+    /*
     const $ = cheerio.load(data)
     const videos = $('.module-poster-item')
     videos.each((_, e) => {
@@ -76,7 +79,7 @@ async function getCards(ext) {
             },
         })
     })
-
+*/
     return jsonify({
         list: cards,
     })

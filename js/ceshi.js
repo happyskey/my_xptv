@@ -50,6 +50,8 @@ async function getCards(ext) {
           "Sec-Fetch-Dest": "mpty",
           "Accept-Language": "h-CN,zh-Hans;q=0.9"
         },
+        
+    },{
         cookies:{
           "BT_auth": "eaafXbMdoN3stoD0xbAwxS5ZF0FNwRxBjClRtMRrYXfMNnHyuXtIJKkRDpf_BDn-pjI7AJO5_0kqUTjYo1-C6o9km8RXuoW_n1Toqs0vTUv9fIRBehmMF1Y5UoCxRk3_Lrk3AdEttJskAyvYmgEe75LZRCtZqC7cHzOG0S0Tg5UA",
           "BT_cookietime": "3bb6gBq68zhQtACydkV1QN0aJiUZkTOHRjzKUbkdNEiqK11G69Ju",

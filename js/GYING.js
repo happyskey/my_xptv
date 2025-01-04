@@ -60,7 +60,7 @@ async function getCards(ext) {
         },
     })
 
-     $utils.toastError(cards)
+     $utils.toastError(data)
     /*
     const $ = cheerio.load(data)
     const videos = $('.module-poster-item')

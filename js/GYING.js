@@ -57,56 +57,54 @@ const { data } = await $fetch.get(url, {
  
     
     const scriptContent = $('script').filter((_, script) => {
-        return $(script).html().includes('_obj.header');
-    }).html();
+            return $(script).html().includes('_obj.header');
+        }).html();
 
-    const jsonStart = scriptContent.indexOf('{');
-    const jsonEnd = scriptContent.lastIndexOf('}') + 1;
-    const json =JSON.parse(scriptContent.slice(jsonStart, jsonEnd));
+        const jsonStart = scriptContent.indexOf('{');
+        const jsonEnd = scriptContent.lastIndexOf('}') + 1;
+        const jsonString = scriptContent.slice(jsonStart, jsonEnd);
 
+// 提取 _obj.inlist 部分
+const inlistMatch = jsonString.match(/_obj\.inlist=({.*});/);
+if (!inlistMatch) {
+    $utils.toastError("未找到 _obj.inlist 数据");
+} else {
+    // 解析为 JSON 对象
+    const inlistData = JSON.parse(inlistMatch[1]);
 
- 
+    // 定义目标字段
+    //const targetFields = ['a', 'r', 'z', 'd', 'i', 'g', 't', 'ty'];
 
-
-
-
-
-
- const inlist = json.inlist;
-
-// 遍历 inlist 中的每个键值对
-for (const key in inlist) {
-  if (Object.hasOwnProperty.call(inlist, key)) {
-    console.log(`Key: ${key}`);
-    console.log("Value:", inlist[key]);
-
-    // 如果值是数组，可以进一步遍历处理
-    if (Array.isArray(inlist[key])) {
-      inlist[key].forEach((item, index) => {
-       
-   $utils.toastError(`  Index ${index}:`, item)
-       
-      });
-    }
-  }
-}
-    /*
-    const videos = $('.module-poster-item')
-    videos.each((_, e) => {
-        const href = $(e).attr('href')
-        const title = $(e).attr('title')
-        const cover = $(e).find('img').attr('data-original')
-        const remarks = $(e).find('.module-item-note').text().trim()
-        cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            vod_remarks: remarks, // 海報右上角的子標題
-            ext: {
-                url: `${appConfig.site}${href}`,
-            },
-        })
+    // 提取并输出每个字段
+    //console.log(inlistData)
+    
+    inlistData["i"].forEach((item,index)=>{
+      //console.log(`${index}:${item}`)
+      
+      
+      cards.push({
+                  vod_id: item,
+                  vod_name: inlistData["t"][index],
+                  vod_pic: `https://s.tutu.pm/img/${inlistData["ty"]}/${item}.webp`,
+                  vod_remarks: inlistData["g"][index], // 海報右上角的子標題
+                  ext: {
+                      url: `https://www.gyg.la/${inlistData["ty"]}/${item}`,
+                  },
+              })
+              
+              
+            //  console.log(cards)
+      
+      
     })
+    
+    
+    
+    
+    
+    
+}
+
 
     return jsonify({
         list: cards,

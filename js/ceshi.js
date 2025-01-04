@@ -51,8 +51,9 @@ const { data } = await $fetch.get(url, {
 
 
      $utils.toastError(url)
-    /*
+    
     const $ = cheerio.load(data)
+    /*
     const videos = $('.module-poster-item')
     videos.each((_, e) => {
         const href = $(e).attr('href')

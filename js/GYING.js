@@ -1,5 +1,5 @@
 //昊
-const cheerio = createCheerio()
+ const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 const appConfig = {
     ver: 1,
@@ -33,9 +33,8 @@ async function getConfig() {
 
 
 
-
 async function getCards(ext) {
-      ext = argsify(ext)
+    ext = argsify(ext)
     let cards = []
     let { page = 1, id } = ext
     const url =appConfig.site + id + page
@@ -52,10 +51,19 @@ const { data } = await $fetch.get(url, {
 });
 
 
-
-     $utils.toastError(data)
-    /*
+     
+    
     const $ = cheerio.load(data)
+    
+    const scriptContent = $('script').filter((_, script) => {
+        return $(script).html().includes('_obj.header');
+    }).html();
+
+    const jsonStart = scriptContent.indexOf('{');
+    const jsonEnd = scriptContent.lastIndexOf('}') + 1;
+    const jsonString = scriptContent.slice(jsonStart, jsonEnd);
+   $utils.toastError(typeof jsonString)
+    /*
     const videos = $('.module-poster-item')
     videos.each((_, e) => {
         const href = $(e).attr('href')
@@ -72,10 +80,12 @@ const { data } = await $fetch.get(url, {
             },
         })
     })
-*/
+
     return jsonify({
         list: cards,
     })
+
+    */
 }
 
 //

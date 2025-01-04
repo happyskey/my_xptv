@@ -62,11 +62,33 @@ const { data } = await $fetch.get(url, {
 
     const jsonStart = scriptContent.indexOf('{');
     const jsonEnd = scriptContent.lastIndexOf('}') + 1;
-    const jsonString =JSON.parse(scriptContent.slice(jsonStart, jsonEnd));
+    const json =JSON.parse(scriptContent.slice(jsonStart, jsonEnd));
 
 
  
    $utils.toastError(typeof jsonString)
+
+
+
+
+
+
+ const inlist = json.inlist;
+
+// 遍历 inlist 中的每个键值对
+for (const key in inlist) {
+  if (Object.hasOwnProperty.call(inlist, key)) {
+    console.log(`Key: ${key}`);
+    console.log("Value:", inlist[key]);
+
+    // 如果值是数组，可以进一步遍历处理
+    if (Array.isArray(inlist[key])) {
+      inlist[key].forEach((item, index) => {
+        console.log(`  Index ${index}:`, item);
+      });
+    }
+  }
+}
     /*
     const videos = $('.module-poster-item')
     videos.each((_, e) => {

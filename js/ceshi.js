@@ -61,6 +61,12 @@ const { data } = await $fetch.get(url, {
     const jsonStart = scriptContent.indexOf('{');
     const jsonEnd = scriptContent.lastIndexOf('}') + 1;
     const jsonString = scriptContent.slice(jsonStart, jsonEnd);
+
+
+
+
+
+ 
    $utils.toastError(jsonString)
     /*
     const videos = $('.module-poster-item')

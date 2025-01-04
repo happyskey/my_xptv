@@ -66,7 +66,7 @@ const { data } = await $fetch.get(url, {
 
 
 
- $print(jsonString)
+ $print.log(jsonString)
   // $utils.toastError(jsonString)
     /*
     const videos = $('.module-poster-item')

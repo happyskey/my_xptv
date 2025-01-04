@@ -66,7 +66,6 @@ const { data } = await $fetch.get(url, {
 
 
  
-   $utils.toastError(typeof jsonString)
 
 
 
@@ -84,7 +83,9 @@ for (const key in inlist) {
     // 如果值是数组，可以进一步遍历处理
     if (Array.isArray(inlist[key])) {
       inlist[key].forEach((item, index) => {
-        console.log(`  Index ${index}:`, item);
+       
+   $utils.toastError(`  Index ${index}:`, item)
+       
       });
     }
   }

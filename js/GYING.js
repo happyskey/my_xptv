@@ -62,7 +62,7 @@ const { data } = await $fetch.get(url, {
 
     const jsonStart = scriptContent.indexOf('{');
     const jsonEnd = scriptContent.lastIndexOf('}') + 1;
-    const jsonString =argsify(scriptContent.slice(jsonStart, jsonEnd));
+    const jsonString =JSON.parse(scriptContent.slice(jsonStart, jsonEnd));
 
 
  

@@ -54,6 +54,7 @@ const { data } = await $fetch.get(url, {
      
     
     const $ = cheerio.load(data)
+ 
     
     const scriptContent = $('script').filter((_, script) => {
         return $(script).html().includes('_obj.header');
@@ -62,6 +63,9 @@ const { data } = await $fetch.get(url, {
     const jsonStart = scriptContent.indexOf('{');
     const jsonEnd = scriptContent.lastIndexOf('}') + 1;
     const jsonString =argsify(scriptContent.slice(jsonStart, jsonEnd));
+
+
+ 
    $utils.toastError(typeof jsonString)
     /*
     const videos = $('.module-poster-item')

@@ -49,11 +49,11 @@ async function getCards(ext) {
           "Sec-Fetch-Mode": "ors",
           "Accept": "/*",
           "User-Agent": "ozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
-          "Referer": "ttps://www.gyg.la/mv",
+         // "Referer": "ttps://www.gyg.la/mv",
           "Sec-Fetch-Dest": "mpty",
           "Accept-Language": "h-CN,zh-Hans;q=0.9"
         },
-        cookies = {
+        cookies: {
           "BT_auth": "eaafXbMdoN3stoD0xbAwxS5ZF0FNwRxBjClRtMRrYXfMNnHyuXtIJKkRDpf_BDn-pjI7AJO5_0kqUTjYo1-C6o9km8RXuoW_n1Toqs0vTUv9fIRBehmMF1Y5UoCxRk3_Lrk3AdEttJskAyvYmgEe75LZRCtZqC7cHzOG0S0Tg5UA",
           "BT_cookietime": "3bb6gBq68zhQtACydkV1QN0aJiUZkTOHRjzKUbkdNEiqK11G69Ju",
           "PHPSESSID": "dvpsqd0l0qi7s0e7pamuqrvhhe",

@@ -39,7 +39,8 @@ async function getCards(ext) {
     ext = argsify(ext)
     let cards = []
     let { page = 1, id } = ext
-    const url =appConfig.site + ${id}+${page}
+    const url =appConfig.site + id + page
+     $utils.toastError(url)
     const { data } = await $fetch.get(url, {
         headers: {
           "Host": "ww.gyg.la",
@@ -60,7 +61,7 @@ async function getCards(ext) {
         },
     })
 
-     $utils.toastError(data)
+     $utils.toastError(url)
     /*
     const $ = cheerio.load(data)
     const videos = $('.module-poster-item')

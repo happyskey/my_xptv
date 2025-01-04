@@ -1,4 +1,4 @@
-const cheerio = createCheerio()
+ const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 const appConfig = {
     ver: 1,
@@ -61,7 +61,7 @@ const { data } = await $fetch.get(url, {
     const jsonStart = scriptContent.indexOf('{');
     const jsonEnd = scriptContent.lastIndexOf('}') + 1;
     const jsonString = scriptContent.slice(jsonStart, jsonEnd);
-$utils.toastError(jsonString)
+   $utils.toastError(jsonString)
     /*
     const videos = $('.module-poster-item')
     videos.each((_, e) => {
@@ -79,8 +79,10 @@ $utils.toastError(jsonString)
             },
         })
     })
-*/
+
     return jsonify({
         list: cards,
     })
+
+    /*
 }

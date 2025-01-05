@@ -1,5 +1,5 @@
 //昊
-//78
+//66
  const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 const cookie = ["BT_auth=eaafXbMdoN3stoD0xbAwxS5ZF0FNwRxBjClRtMRrYXfMNnHyuXtIJKkRDpf_BDn-pjI7AJO5_0kqUTjYo1-C6o9km8RXuoW_n1Toqs0vTUv9fIRBehmMF1Y5UoCxRk3_Lrk3AdEttJskAyvYmgEe75LZRCtZqC7cHzOG0S0Tg5UA",
@@ -138,7 +138,8 @@ async function getTracks(ext) {
 
 
      const respstr = data
-  $utils.toastError(respstr);
+  $utils.toastError(typeof respstr);
+ respstr = argsify(respstr)
       //  console.log(respstr.panlist)
         respstr.panlist.url.forEach((item, index) => {
           //  console.log(`${item}:${index}`)

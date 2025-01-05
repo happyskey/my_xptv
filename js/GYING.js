@@ -92,7 +92,7 @@ if (!inlistMatch) {
                   vod_pic: `https://s.tutu.pm/img/${inlistData["ty"]}/${item}.webp`,
                   vod_remarks: inlistData["g"][index], // 海報右上角的子標題
                   ext: {
-                      url: `https://www.gyg.la/${inlistData["ty"]}/${item}`,
+                      url: `https://www.gyg.la/res/downurl/${inlistData["ty"]}/${item}`,
                   },
               })
               
@@ -131,6 +131,7 @@ async function getTracks(ext) {
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
+            "Cookie":cookie 
         },
     })
 

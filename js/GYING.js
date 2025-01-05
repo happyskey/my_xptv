@@ -122,7 +122,7 @@ if (!inlistMatch) {
 async function getTracks(ext) {
     
     ext = argsify(ext)
-   let groups = []
+   let tracks = []
     
     let url = ext.url
     
@@ -136,72 +136,35 @@ async function getTracks(ext) {
     })
 
 
-    
+     const respstr = data.data
 
-    const $ = cheerio.load(data)
-    
-    //获取外层列表
-    const tabItems = $('.module-tab-item')
-    let key = 1
-   for (let i = 0; i < tabItems.length; i++) {
-        const element = tabItems[i];
-        
-    
-        const tabName = $(element).find('span').text().trim() || $(element).attr('data-dropdown-value');
-        
-    
-      
-  
-     let group = {
-              title:tabName  ,
-              tracks: [],
-        }
-
-
-    
-
-       const playlist = $('.module-play-list-link')
-    for (let j = 0; j < playlist.length; j++) {
-       const element = playlist[j];
-        let name = $(element).attr('title')
-      
-
-       const href = $(element).attr('href')
-
-       // const ShareUrl = href //
-   ///index.php/vod/play/id/106815/sid/1/nid/7.html
-        
-        const sid_key = /sid\/(\d+)\/nid\/(\d+)/;
-        const id_key = href.match(sid_key)[1];
-    
-      if(key.toString()=== id_key )
-          {
-   
-        
-            group.tracks.push({
-                name: name,
-                pan: '',
+        console.log(respstr.panlist)
+        respstr.panlist.url.forEach((item, index) => {
+          //  console.log(`${item}:${index}`)
+            tracks.push({
+                name: respstr.panlist.tname[respstr.panlist.type[index]],
+                pan: item,
                 ext: {
-                    url: appConfig.site + href,
+                    url: '',
                 },
-            });
-       
-      }//if
-        
-        
-       }//内层for
+            })
 
-    
-if (group.tracks.length > 0) {
-      groups.push(group)
-    }
-key = key + 1; 
+        })
 
-   }//外循环
+   
+
+
 
     
 
-return jsonify({ list: groups })
+   return jsonify({
+        list: [
+            {
+                title: '默认分组',
+                tracks,
+            },
+        ],
+    })
       
    
 }

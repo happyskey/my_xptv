@@ -184,15 +184,7 @@ $utils.toastError('没有网盘资源');
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
-    
-    
-
-
-  const other_data  = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
-    })
+   
 
           
     return jsonify({ urls: [ext.url] })

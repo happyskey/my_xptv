@@ -138,7 +138,7 @@ async function getTracks(ext) {
 
 
      const respstr = data
-  
+  $utils.toastError(typeof respstr);
  respstr = JSON.parse(respstr)
  $utils.toastError(typeof respstr);
       //  console.log(respstr.panlist)

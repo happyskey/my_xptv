@@ -137,7 +137,7 @@ async function getTracks(ext) {
 
 
      const respstr = data.data
-  $utils.toastError(respstr.panlist);
+  $utils.toastError(respstr);
       //  console.log(respstr.panlist)
         respstr.panlist.url.forEach((item, index) => {
           //  console.log(`${item}:${index}`)

@@ -1,11 +1,11 @@
 //昊
-//68
  const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
-const cookie = ["BT_auth=eaafXbMdoN3stoD0xbAwxS5ZF0FNwRxBjClRtMRrYXfMNnHyuXtIJKkRDpf_BDn-pjI7AJO5_0kqUTjYo1-C6o9km8RXuoW_n1Toqs0vTUv9fIRBehmMF1Y5UoCxRk3_Lrk3AdEttJskAyvYmgEe75LZRCtZqC7cHzOG0S0Tg5UA",
-      "BT_cookietime=3bb6gBq68zhQtACydkV1QN0aJiUZkTOHRjzKUbkdNEiqK11G69Ju",
-      "PHPSESSID=dvpsqd0l0qi7s0e7pamuqrvhhe"
-    ].join("; ")
+const cookie = ["BT_auth=8688STmtvWE9fMfj9m_XO6MT-bu8J2bx2pGF27BYu_9nmlwMRVd-8rK-WgPPjB_I05Yrfa3R7-QlB4kFfAWo1Kgur7IJPvMuT7tcPbvpce_qk7tp7RFHF0fdcWD3evUDFeR0eX55H19DxWgUWLkoqxDG0SFwonWy9qCOvR8v55VK",
+      "BT_cookietime=b461UmezqKVCkfPkOvkOvvNxaFEaevKbYCBN8Gldps5sd0LyHzbZ",
+      "PHPSESSID=lg998erieepepfipip4k3u74v5",
+      "vrg_go=1",
+      "vrg_sc=429fd4561a01ad5e9570f08dac039d1c",].join("; ")
 const appConfig = {
     ver: 1,
     title: '观影网',
@@ -47,11 +47,7 @@ const { data } = await $fetch.get(url, {
   headers: {
     "User-Agent": UA,
   
-    "Cookie": [
-      "BT_auth=eaafXbMdoN3stoD0xbAwxS5ZF0FNwRxBjClRtMRrYXfMNnHyuXtIJKkRDpf_BDn-pjI7AJO5_0kqUTjYo1-C6o9km8RXuoW_n1Toqs0vTUv9fIRBehmMF1Y5UoCxRk3_Lrk3AdEttJskAyvYmgEe75LZRCtZqC7cHzOG0S0Tg5UA",
-      "BT_cookietime=3bb6gBq68zhQtACydkV1QN0aJiUZkTOHRjzKUbkdNEiqK11G69Ju",
-      "PHPSESSID=dvpsqd0l0qi7s0e7pamuqrvhhe"
-    ].join("; ")
+    "Cookie": cookie 
   },
 });
 
@@ -137,15 +133,17 @@ async function getTracks(ext) {
     })
 
 
-     const respstr = data
-  $utils.toastError(typeof respstr);
- respstr = JSON.parse(respstr)
- $utils.toastError(typeof respstr);
+     const respstr =JSON.parse(data)
+     //$utils.toastError(typeof respstr);
       //  console.log(respstr.panlist)
-        respstr.panlist.url.forEach((item, index) => {
+     // $utils.toastError(respstr.panlist);
+
+if(respstr.hasOwnProperty('panlist')){
+
+   respstr.panlist.url.forEach((item, index) => {
           //  console.log(`${item}:${index}`)
             tracks.push({
-                name: respstr.panlist.tname[respstr.panlist.type[index]],
+                name:`${respstr.panlist.name[index].replace(/-----------/, "")}+${respstr.panlist.tname[respstr.panlist.type[index]]}`,
                 pan: item,
                 ext: {
                     url: '',
@@ -153,8 +151,17 @@ async function getTracks(ext) {
             })
 
         })
+ 
 
-   
+   }else if(respstr.hasOwnProperty('file')){
+
+$utils.toastError('网盘验证掉签')
+}else{
+
+$utils.toastError('没有网盘资源');
+    
+
+}
 
 
 
@@ -188,62 +195,61 @@ async function getPlayinfo(ext) {
     })
 
           
- 
-const new_html =cheerio.load(other_data.data) 
-const scriptContent = new_html('script:contains("player_aaaa")').text()
-              
-//const Regex = /"url":"(.*?)"/;//
-//const url_id = scriptContent.match(Regex)[1].replace(/\\/g, "")
-
-
-   eval(scriptContent)
-   const url_id= player_aaaa.url
-    return jsonify({ urls: [url_id] })
+    return jsonify({ urls: [ext.url] })
 }
 
 
 
 //
 
-//https://www.j00j.com/index.php/vod/search/page/2/wd/柯南.html
+
 async function search(ext) {
     ext = argsify(ext)
-    let cards = []
+    
 
     let text = encodeURIComponent(ext.text)
     let page = ext.page || 1
-    let url = `${appConfig.site}/index.php/vod/search/page/${page}/wd/${text}.html`//https://yhdm.one/search?q=%E5%90%8D
+    let url = `${appConfig.site}/s/1---${page}/${text}`
 
     const { data } = await $fetch.get(url, {
-        headers: {
-            'User-Agent': UA,
-        },
+       headers: {
+    "User-Agent": UA,
+  
+    "Cookie": cookie 
+  },
     })
 
     const $ = cheerio.load(data)
+  // $utils.toastError(data);
+let cards = []
+   $('.v5d').each((index, element) => {
+  const name = $(element).find('b').text().trim() || 'N/A';
+  const imgUrl = $(element).find('picture source[data-srcset]').attr('data-srcset') || 'N/A';
+  
+  // 提取附加信息
+  const additionalInfo = $(element).find('p').text().trim() || 'N/A';
 
-    const videos = $('.module-card-item')
-    videos.each((_, e) => {
-        const href = $(e).find('a.module-card-item-poster').attr('href') || '';
-        
-        const title =  $(e).find('.module-card-item-title strong').text().trim() || '';
-        
-        const cover =$(e).find('.module-item-pic img').attr('data-original') || '';  
-        const remarks = $(e).find('.module-item-note').text().trim() || '';
+const pathMatch =  $(element).find('a').attr('href') || 'N/A'
 
+  
         
         cards.push({
-            vod_id: href,
-            vod_name: title,
-            vod_pic: cover,
-            vod_remarks: remarks,
+            vod_id: pathMatch,
+            vod_name: name,
+            vod_pic: imgUrl,
+            vod_remarks: additionalInfo,
 
             ext: {
-                url: `${appConfig.site}${href}`,
+                url: `${appConfig.site}/res/downurl${pathMatch}`,
             },
         })
-    })
+ 
+
+});
+
+
     return jsonify({
         list: cards,
     })
+
 }

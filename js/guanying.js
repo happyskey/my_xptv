@@ -115,7 +115,7 @@ async function getTracks(ext) {
            	 }
 
 			tracks.push({
-				name:`${name}`,
+				name:`${name}${respstr.panlist.tname[respstr.panlist.type[index]]}`,
 				pan: item,
 				ext: {
 					url: '',

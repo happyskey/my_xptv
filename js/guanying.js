@@ -106,7 +106,7 @@ async function getTracks(ext) {
 		})
    }else if(respstr.hasOwnProperty('file')){
 
-   $utils.toastError('网盘验证掉签')
+   $utils.toastError('网盘验证掉签请前往主站完成验证数字')
    }else{
 
 	$utils.toastError('没有网盘资源');

@@ -1,4 +1,4 @@
-//来自群友'Qi Qi'
+//方佬改进
 const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_2 like Mac OS X) AppleWebKit/604.1.14 (KHTML, like Gecko)'
 

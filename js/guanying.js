@@ -94,8 +94,26 @@ async function getTracks(ext) {
 	 const respstr =JSON.parse(data)
 
 	 if(respstr.hasOwnProperty('panlist')){
-
+   const regex = {
+            '中英': /中英/g,
+            '1080P': /1080P/g,
+            '杜比': /杜比/g,
+            '原盘': /原盘/g,
+            '1080p': /1080p/g,
+            '双语字幕': /双语字幕/g,
+        };
      respstr.panlist.url.forEach((item, index) => {
+
+	     let name = ''
+            for (const keyword in regex) {
+                const matches = respstr.panlist.name[index].match(regex[keyword]);
+                if(matches){
+               
+                name = name +'<'+ matches[0]+'>'
+                }
+             
+            }
+
 			tracks.push({
 				name:'网盘',
 				pan: item,

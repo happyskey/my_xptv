@@ -1,71 +1,71 @@
-//ê»
+//æ˜Š
 const cheerio = createCheerio()
 
-// îAÏÈ¶¨ÁxÕˆÇóÊ¹ÓÃµÄ user-agent
+// é å…ˆå®šç¾©è«‹æ±‚ä½¿ç”¨çš„ user-agent
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 
 const appConfig = {
     ver: 1,
-    title: 'ÃÀ¾çÃÔ|ê»',
+    title: 'ç¾Žå‰§è¿·|æ˜Š',
     site: 'https://www.meijumi.net',
     tabs: [
         {
-            name: 'ÁéÒì/¾ªã¤',
+            name: 'çµå¼‚/æƒŠæ‚š',
             ext: {
                 id: '/usa/xuanyi/',
             },
         },
         {
-            name: 'Ä§»Ã/¿Æ»Ã ',
+            name: 'é­”å¹»/ç§‘å¹» ',
             ext: {
                 id: '/usa/mohuan/',
             },
         },
         {
-            name: '×ï°¸/¶¯×÷µýÕ½',
+            name: 'ç½ªæ¡ˆ/åŠ¨ä½œè°æˆ˜',
             ext: {
                 id: '/usa/zuian/',
             },
         },
         {
-            name: '¾çÇé/ÀúÊ·',
+            name: 'å‰§æƒ…/åŽ†å²',
             ext: {
                 id: '/usa/qinggan/',
             },
         },{
-            name: 'Ï²¾ç',
+            name: 'å–œå‰§',
             ext: {
                 id: '/usa/xiju/',
             },
         },{
-            name: 'ÂÉÕþ/Ò½Îñ',
+            name: 'å¾‹æ”¿/åŒ»åŠ¡',
             ext: {
                 id: '/usa/yiwu/',
             },
         },{
-            name: '¶¯Âþ/¶¯»­',
+            name: 'åŠ¨æ¼«/åŠ¨ç”»',
             ext: {
                 id: '/usa/katong/',
             },
         },{
-            name: '¼ÍÂ¼Æ¬',
+            name: 'çºªå½•ç‰‡',
             ext: {
                 id: '/usa/jilu/',
             },
         },{
-            name: '×ÛÒÕ/ÕæÈËÐã',
+            name: 'ç»¼è‰º/çœŸäººç§€',
             ext: {
                 id: '/usa/zongyi/',
             },
         },{
-            name: 'Ó¢¾ç',
+            name: 'è‹±å‰§',
             ext: {
                 id: '/en/',
             },
         },{
-            name: '2024ÐÂ¾ç',
+            name: '2024æ–°å‰§',
             ext: {
-                id: '/2024ÐÂ¾ç/',
+                id: '/2024æ–°å‰§/',
             },
         },
 
@@ -90,17 +90,17 @@ async function getCards(ext) {
     const $ = cheerio.load(data)
     const videos = $('post_list_box')
     videos.each((_, e) => {
-        const href = $(e).find('a').attr('href')
-        const title = $(e).find('a > img').attr('alt')
-        const cover = $(e).find('a > img').attr('src')
-        const remarks = $(e).find('.note > span').text()
+        const href = $(e).find('.entry-title a').attr('href');  
+        const title = $(e).find('.entry-title a').text().trim()
+        const cover = $(e).find('.home-thumb').attr('src');
+        const remarks = $(e).find('.date').attr('title'); 
         cards.push({
             vod_id: href,
             vod_name: title,
             vod_pic: cover,
             vod_remarks: remarks,
             ext: {
-                url: `${appConfig.site}${href}`,
+                url: `${href}`,
             },
         })
     })
@@ -138,7 +138,7 @@ async function getTracks(ext) {
     return jsonify({
         list: [
             {
-                title: 'Ä¬ÈÏ·Ö×é',
+                title: 'é»˜è®¤åˆ†ç»„',
                 tracks,
             },
         ],

@@ -109,13 +109,13 @@ async function getTracks(ext) {
                 	const matches = respstr.panlist.name[index].match(regex[keyword]);
                 	if(matches){
                
-               		 name = name +'<'+ matches[0]+'>'
+               		 name = `${name}${matches[0]}`
                	 	}
              
            	 }
 
 			tracks.push({
-				name:'网盘',
+				name:name,
 				pan: item,
 				ext: {
 					url: '',

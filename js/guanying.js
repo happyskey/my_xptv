@@ -115,7 +115,7 @@ async function getTracks(ext) {
            	 }
 
 			tracks.push({
-				name:'网盘',
+				name:`${name}${respstr.panlist.tname[respstr.panlist.type[index]]}`,
 				pan: item,
 				ext: {
 					url: '',

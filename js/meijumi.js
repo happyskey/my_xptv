@@ -95,7 +95,7 @@ async function getCards(ext) {
         const href = $(e).find('.entry-title a').attr('href');  
         const title = $(e).find('.entry-title a').text().trim()
         const cover = $(e).find('.home-thumb').attr('src');
-        const remarks = $(e).find('.date').attr('title'); 
+        const remarks = $(e).find('.gxts').text().trim(); 
 
         cards.push({
             vod_id: href,
@@ -194,7 +194,7 @@ const $ = cheerio.load(data);
         const href = $(e).find('.entry-title a').attr('href');  
         const title = $(e).find('.entry-title a').text().trim()
         const cover = $(e).find('.home-thumb').attr('src');
-        const remarks = $(e).find('.date').attr('title'); 
+        const remarks = $(e).find('.gxts').text().trim(); 
 
 
     cards.push({

@@ -1,25 +1,22 @@
 
 {
     "sites": [
-        {
+{
             "name": "桃子影视|昊",
             "type": 3,
             "api": "csp_tzsp",
             "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js"
-        },
-      {
+},{
             "name": "pppHub",
             "type": 3,
             "api": "csp_ppron",
             "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
-},
-         {
+},{
             "name": "樱花动漫|昊",
             "type": 3,
             "api": "csp_yhdm",
             "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/yhdm.js" 
-},
-    {
+},{
             "name": "小米UC视频|昊",
             "type": 3,
             "api": "csp_js/mucpan",

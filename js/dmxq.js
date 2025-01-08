@@ -181,14 +181,14 @@ const $ = cheerio.load(data);
 
         const cover = $(e).find('a.fed-list-pics').attr('data-original');
         const remarks = $(e).find('span.fed-list-remarks').text().trim();
-
+          
         cards.push({
-            vod_id: href,
+            vod_id: href.match(/(\d+)(?=-)/)[1],
             vod_name: title,
             vod_pic: cover,
             vod_remarks: remarks,
             ext: {
-                url: `${appConfig.site}${href}`,
+                url: `${appConfig.site}/dmvoddetail/${href}.html`,
             },
         })
     })

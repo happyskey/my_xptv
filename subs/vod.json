@@ -46,6 +46,11 @@
             "type": 3,
             "api": "csp_js/dmxq",
             "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/dmxq.js" 
+},{
+            "name": "麻豆村|昊",
+            "type": 3,
+            "api": "csp_js/madoucun",
+            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/madoucun.js" 
 },
        
     ]

@@ -5,52 +5,52 @@
             "name": "桃子影视|昊",
             "type": 3,
             "api": "csp_tzsp",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js"
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/taozi.js"
 },{
             "name": "pppHub",
             "type": 3,
             "api": "csp_ppron",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/pppPorn.js" 
 },{
             "name": "樱花动漫|昊",
             "type": 3,
             "api": "csp_yhdm",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/yhdm.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/yhdm.js" 
 },{
             "name": "小米UC视频|昊",
             "type": 3,
             "api": "csp_js/mucpan",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mucpan.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/mucpan.js" 
 },{
             "name": "观影网|昊",
             "type": 3,
             "api": "csp_js/GYING",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/guanying.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/guanying.js" 
 },{
             "name": "肉视频",
             "type": 3,
             "api": "csp_js/rousp",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/rousp.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/rousp.js" 
 },{
             "name": "missav",
             "type": 3,
             "api": "csp_js/missav",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/fengtangyuan/nodejs/refs/heads/main/missav.js" 
+            "ext": "https://raw.githubusercontent.com/fengtangyuan/nodejs/refs/heads/main/missav.js" 
 },{
             "name": "美剧迷|昊",
             "type": 3,
             "api": "csp_js/xsjyy",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/meijumi.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/meijumi.js" 
 },{
             "name": "大米星球|昊",
             "type": 3,
             "api": "csp_js/dmxq",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/dmxq.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/dmxq.js" 
 },{
             "name": "麻豆村|昊",
             "type": 3,
             "api": "csp_js/madoucun",
-            "ext": "https://github.moeyy.xyz/https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/madoucun.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/madoucun.js" 
 },
        
     ]

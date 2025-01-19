@@ -1,28 +1,9 @@
 //昊
 const cheerio = createCheerio()
 
-//https://madoucun.com/vodsearch/巨----------2---.html
-const timestamp = (new Date()).valueOf();
 
 // 預先定義請求使用的 user-agent
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
-
-const cookie = {
-  "5edf439fd173772c341977da2df73cd2": "b51e1e38b857fce2f9d871a9031f8e11",
-  "bd677e2b4d25e8ca5d39e5838e3fc5f7": "2ab7e9172e2195e436471c95bfbc509c",
-  "__51uvsct__JjgJ2Z3Pwy8NoiNL": "2",
-  "__51vcke__JjgJ2Z3Pwy8NoiNL": "e0a32bae-31e0-5ba9-92bd-3be7f5e3ce03",
-  "__51vuft__JjgJ2Z3Pwy8NoiNL": `${timestamp}`,
-  "__vtins__JjgJ2Z3Pwy8NoiNL": "%7B%22sid%22%3A%20%2297461bd9-2bde-50c4-a542-750a6ad11e18%22%2C%20%22vd%22%3A%201%2C%20%22stt%22%3A%200%2C%20%22dr%22%3A%200%2C%20%22expires%22%3A%201737176920622%2C%20%22ct%22%3A%201737175120622%7D",
-  "1939dc21d66b2ef6a0c761f0d20135b1": "382b779d2409c5fb8b8dd35190583586",
-  "4ecb4333b1616d2d960245ca976b17a3": "0e90fb88bda656fbfbc509a8d9e49f3d",
-  "d2c676cd7770777c2bc19a9dd5ab43d0": "adf8a9851a310ea4585b4b02f22be9f7",
-  "22ebba9f927474280cb7b92edd69c172": "1828202b06a24e62e9290a1fd507013a",
-  "ax": "BkDBAHnqeJ",
-  "170a2fdb3c09f62387d3cfceb80761a4": "7ab5e89bb6e0ddc5043acf14eee8a190",
-  "ead2799b3a0ca3299cda7f18dd48de3e": "b078f9430f08ba43909dec33395929ea",
-}
-
 
 const appConfig = {
 	ver: 1,

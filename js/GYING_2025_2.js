@@ -38,7 +38,7 @@ async function getCards(ext) {
 	let cards = []
 	let { page = 1, id } = ext
 	const url =`${appConfig.site}${id}${page}`
-$utils.toastError(url);
+       //$utils.toastError(url);
 	const { data } = await $fetch.get(url, {
     headers: {
 		"User-Agent": UA,
@@ -90,7 +90,7 @@ async function getTracks(ext) {
 	ext = argsify(ext)
     let tracks = []
 	let url = ext.url
-$utils.toastError(url);
+
 	const { data } = await $fetch.get(url, {
 		headers: {
 			'User-Agent': UA,

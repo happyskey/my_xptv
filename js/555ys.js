@@ -1,3 +1,5 @@
+//昊
+
 const cheerio = createCheerio()
 const CryptoJS = createCryptoJS()
 
@@ -72,7 +74,7 @@ async function getCards(ext) {
 
   const $ = cheerio.load(data);
 
-   $('.module-poster-item.module-item').each((index, element) => {  // 这里必须是个列表class
+   $('.module-poster-item.module-item').each((index, element) => { 
         const href = $(element).attr('href');
         const title = $(element).find('.module-item-pic img').attr('alt');
         const cover= $(element).find('.module-item-pic img').attr('data-original');
@@ -117,7 +119,7 @@ async function getTracks(ext) {
     const $ = cheerio.load(data);
 
     const void_line = [];
-     $('.module-tab-item.tab-item').each((index, element) => {  // 这里必须是个列表class
+     $('.module-tab-item.tab-item').each((index, element) => {  
 
 
       const void_title = $(element).find('span').text().trim();
@@ -128,7 +130,7 @@ async function getTracks(ext) {
 
 
    // $utils.toastError(jsonify(lines));
-     $('.module-list.sort-list.tab-list.his-tab-list').each((index, element) => {  // 这里必须是个列表class
+     $('.module-list.sort-list.tab-list.his-tab-list').each((index, element) => {  
 
      console.log(index)
 
@@ -183,7 +185,7 @@ async function getPlayinfo(ext) {
     });
 
 
-                $utils.toastError(jsonify(data.data.replace(/["\\]/g, '')));
+       // $utils.toastError(jsonify(data.data.replace(/["\\]/g, '')));
 
 	return jsonify({ urls: [data.data.replace(/["\\]/g, '')] })
 }
@@ -213,14 +215,14 @@ async function search(ext) {
 
     const $ = cheerio.load(data)
 
-      $('.module-card-item').each((index, element) => {  // 这里必须是个列表class
+      $('.module-card-item').each((index, element) => {  
        
         const href =$(element).find('a').attr('href')
       
-        const title =  $(element).find('.module-card-item-title strong em').parent().text().trim();// 获取剧集标题（去掉 <em> 标签）
+        const title =  $(element).find('.module-card-item-title strong em').parent().text().trim();
         const cover=   $(element).find('img').attr('data-original')
         const remarks =$(element).find('.module-item-note').text().trim();
-       // const type = $(element).find('.module-card-item-class').text().trim();//获取视频类型
+       // const type = $(element).find('.module-card-item-class').text().trim();
         cards.push({
             vod_id:   href,
             vod_name: title,
@@ -237,23 +239,3 @@ async function search(ext) {
     })
 }
 
-
-
-
-
-function aesDecode(str) {
-    let key = CryptoJS.enc.Utf8.parse('ASD010QNC636LJY9')
-    let iv = CryptoJS.enc.Utf8.parse('C636LJY9ASD010QN')
-
-    let decrypted = CryptoJS.AES.decrypt(str, key, {
-        iv: iv,
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7,
-    })
-
-    return decrypted.toString(CryptoJS.enc.Utf8)
-}
-
-function base64Decode(str) {
-    return CryptoJS.enc.Utf8.stringify(CryptoJS.enc.Base64.parse(str))
-}

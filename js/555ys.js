@@ -109,7 +109,7 @@ let cards = []
 //
 
   let url = `${appConfig.site}${id}.html`
- $utils.toastError(jsonify(url));
+ //$utils.toastError(jsonify(url));
 
     const { data } = await $fetch.get(url, {
         headers: {

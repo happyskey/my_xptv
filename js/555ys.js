@@ -140,11 +140,11 @@ let cards = []
   
           cards.push({
               vod_id: href,
-              vod_name: `${list_little}:${title}`, // 用反引号拼接字符串
+              vod_name: `${list_little}:${title}`, 
               vod_pic: cover,
               vod_remarks: remarks,
               ext: {
-                  url: `${appConfig.site}${href}`, // 用反引号拼接字符串
+                  url: `${appConfig.site}${href}`, 
               },
           });
       });

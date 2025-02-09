@@ -260,7 +260,7 @@ async function getPlayinfo(ext) {
     });
 
 
-                $utils.toastError(jsonify(data.data.replace(/["\\]/g, '')));
+            //    $utils.toastError(jsonify(data.data.replace(/["\\]/g, '')));
 
 	return jsonify({ urls: [data.data.replace(/["\\]/g, '')] })
 }

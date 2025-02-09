@@ -310,5 +310,3 @@ async function search(ext) {
 
 
 
-    return CryptoJS.enc.Utf8.stringify(CryptoJS.enc.Base64.parse(str))
-}

@@ -81,7 +81,7 @@ async function getCards(ext) {
 
    		url = `${appConfig.site}${id}--------${page}---.html`
 	}
-    $utils.toastError(jsonify(url));
+
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
@@ -118,7 +118,6 @@ async function getCards(ext) {
 
   let url = `${appConfig.site}${id}.html`
 
-$utils.toastError(jsonify(url));
 
     const { data } = await $fetch.get(url, {
         headers: {

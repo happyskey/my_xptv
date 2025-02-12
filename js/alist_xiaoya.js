@@ -267,7 +267,7 @@ async function getPlayinfo(ext) {
 async function search(ext) {
     ext = argsify(ext)
     let cards = []
-
+    let page = ext.page || 1
     if (ext.text.startsWith('xiaoya:')) {
         function isValid(input) {
             const regex = /^https?:\/\/[^\s\/:]+(:\d+)?/
@@ -319,8 +319,12 @@ async function search(ext) {
     if (typeof $config_str !== 'undefined') {
         host = argsify($config_str)?.url || $cache.get('alist_xiaoya_host')
     }
-    const url = `${host}/sou?box=${text}&type=video&url=`
+if (page===1){
+ url = `${host}/sou?box=${text}&type=video&url=`
+}else{
+url = `${host}/sou?box=&type=video&url=`
 
+}
     const { data } = await $fetch.get(url)
 
     const $ = cheerio.load(data)

@@ -241,7 +241,7 @@ async function getPlayinfo(ext) {
 
     let mp4_url = host+'/d/'+encodeURIComponent(path)
 
-    $utils.toastError(jsonify(mp4_url))
+   // $utils.toastError(jsonify(mp4_url))
 
 /*
     let url = `${host}/api/fs/get`

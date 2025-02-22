@@ -253,7 +253,7 @@ if (group.tracks.length > 0) {
 
 async function getPlayinfo(ext) {
     ext = argsify(ext);
-    let url = `https://555dy.terra.us.kg/?url=${ext.url}`;
+    let url = `https://555dy.analyt.eu.org/?url=${ext.url}`;
     const data= await $fetch.get(url, {
 
     });

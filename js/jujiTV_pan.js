@@ -114,23 +114,22 @@ async function getTracks(ext) {
     });
     const $ = cheerio.load(data);
 									
-   //查找第二个 a.hjtvui-btn.hjtvui-btn-radius 一使用 .eq(1) 方法 二.slice(1, 2)会选1
 
     let urlString = $('div.detail-main-btn').find('a.hjtvui-btn.hjtvui-btn-radius').eq(1).attr('href')
 
 
-const regex = /wd=([^&]+)/;
-const match = urlString.match(regex)[1].split('=');
+    const regex = /wd=([^&]+)/;
+    const match = urlString.match(regex)[1].split('=');
 									
-const encodedValue = encodeURIComponent(match[0]);
+    const encodedValue = encodeURIComponent(match[0]);
 
 
-const newUrlString = urlString.replace(regex, `wd=${encodedValue}`);
+   const newUrlString = urlString.replace(regex, `wd=${encodedValue}`);
 
  									
 
- tracks  =await getPan_url(newUrlString ) 
-return jsonify({
+  tracks  =await getPan_url(newUrlString ) 
+  return jsonify({
 		list: [
 			{
 				title: '默认分组',
@@ -218,7 +217,6 @@ async function search(ext) {
 	let text = encodeURIComponent(ext.text)
 	let page = ext.page || 1
 	let url = `${appConfig.site}/search/${text}----------${page}---.html`
-//https://www.tvjuji.cc/search/%E6%96%97----------2---.html
 	const { data } = await $fetch.get(url, {
 		headers: {
 			'User-Agent': UA,
@@ -245,66 +243,9 @@ const $ = cheerio.load(data);
 
     })
 
-
-//$utils.toastError(jsonify(cards));
 	
 	return jsonify({
 		list: cards,
 	})
 }
 
-
-
-
-/*
-
-async function getPan_url(url) {
-  let tracks = []
-  let { data } = await $fetch.get(url, {
-    headers: {
-      'User-Agent': UA,
-    },
-  })
-  const $ = cheerio.load(data);
-  const videos = $('.pianyi li')
-
-  for (const e of videos) {
-
-    const pan_name = $(e).text().trim()
-    const pan_url = `https://www.jujizy.com${$(e).find('a').attr('href')}`
-    let pan = await getPan(pan_url)
-
-//
-
-tracks.push({
-				name:text,
-				pan: href,
-				ext: {
-					url: '',
-				},
-			})
- //
-
-//$utils.toastError(jsonify(pan))
-    
-  }
-
-
-}
-
-async function getPan(url) {
-  const { data } = await $fetch.get(url, {
-    headers: {
-      'User-Agent': UA,
-    },
-  })
-  const $ = cheerio.load(data);
- const links = $('a[rel="nofollow"]').map((index, element) => {
-  const href = $(element).attr('href');
-  const text = $(element).find('p').text();
-  return { href, text };
-}).get();
- return links; // 添加 return 语句
-}
-
-*/

@@ -56,10 +56,10 @@
             "api": "csp_js/555ys",
             "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/555ys.js" 
 },{
-            "name": "剧集TV-online|昊",
+            "name": "剧集TV-pan|昊",
             "type": 3,
             "api": "csp_js/jujiTV-online",
-            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/jujiTV-online.js" 
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/jujiTV_pan.js" 
 },{
             "name": "小虎斑|盘",
             "type": 3,

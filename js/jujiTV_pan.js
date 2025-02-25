@@ -197,6 +197,10 @@ async function getPan(url) {
 }
 
 
+async function getPlayinfo(ext) {
+	return jsonify({ urls: [] })
+}
+
 async function search(ext) {
 	ext = argsify(ext)
 	let cards = []

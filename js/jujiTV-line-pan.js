@@ -79,7 +79,7 @@ async function getCards(ext) {
         cards.push({
             vod_id: href,
             vod_name: title,
-            vod_pic: cover,
+            vod_pic: `${appConfig.site}${cover}`,
             vod_remarks: remarks,
             ext: {
                 url: `${appConfig.site}${href}`,

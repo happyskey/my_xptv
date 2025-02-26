@@ -46,6 +46,11 @@
             "api": "csp_js/dmxq",
             "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/dmxq.js" 
 },{
+            "name": "新视觉",
+            "type": 3,
+            "api": "csp_js/xsjyy",
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/xsjyy.js" 
+},{
             "name": "麻豆村|昊",
             "type": 3,
             "api": "csp_js/madoucun",

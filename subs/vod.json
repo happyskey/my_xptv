@@ -56,6 +56,11 @@
             "api": "csp_js/madoucun",
             "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/madoucun.js" 
 },{
+            "name": "naixxzy|昊",
+            "type": 3,
+            "api": "csp_js/naixxzy",
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/naixxzy.js" 
+},{
             "name": "555影视|昊",
             "type": 3,
             "api": "csp_js/555ys",

@@ -2,7 +2,6 @@ const cheerio = createCheerio()
 
 // 设置User Agent，模拟iPhone浏览器
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0'
-//https://naixxzy.com/api.php/provide/vod/?ids=recommend
 let appConfig = {
     ver: 1,
     title: 'naixxzy',
@@ -24,14 +23,7 @@ async function getTabs() {
             'User-Agent': UA,
         },
     })
-const vod_list = argsify(data.data)
-
-//$utils.toastError(jsonify(vod_list.class));
-   
-
-
-
-//https://naixxzy.com/api.php/provide/vod/?ac=videolist&t=21&pg=1&h=&ids=&wd=
+    const vod_list = argsify(data.data)
 
     vod_list.class.forEach((child,index) => {
     if(!child.type_name.includes("精")&&index<26){
@@ -70,10 +62,6 @@ const url = appConfig.site + `/api.php/provide/vod/?ac=videolist&t=${id}&pg=${pa
 
 const vod_list = argsify(data.data)
 
-//$utils.toastError(jsonify(data));
-
-
-
 vod_list.list.forEach(child => {
        
         const vod_id =`${child.vod_id}`||'N/A';
@@ -95,10 +83,6 @@ vod_list.list.forEach(child => {
 }
         
     })
-
-
- //$utils.toastError(jsonify( cards))
-
 
     return jsonify({
         list: cards,

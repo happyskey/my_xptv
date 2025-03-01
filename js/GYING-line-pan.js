@@ -1,5 +1,6 @@
 //方佬改进
 //2025-2-5由于网站dns劫持，修改
+//2025-3-1添加完善脚本添加在线播放
 const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_2 like Mac OS X) AppleWebKit/604.1.14 (KHTML, like Gecko)'
 

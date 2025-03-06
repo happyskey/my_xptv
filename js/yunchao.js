@@ -244,6 +244,7 @@ async function reply(url) {
 	if (errorMessage.includes("登录")) {
 		$utils.toastError("请在主站注册登入");
 		$utils.openSafari(appConfig.site, UA);
+		return false
 	} else if (errorMessage.includes("60")) {
 		$utils.toastError("60s保护无法获取连接")
 		return false

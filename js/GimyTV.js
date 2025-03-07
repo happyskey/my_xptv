@@ -78,7 +78,6 @@ async function getTracks(ext) {
    let groups = []
     
     let url = ext.url
-    $utils.toastError(jsonify(url));
     const { data } = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,

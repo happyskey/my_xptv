@@ -242,7 +242,7 @@ async function groupByMiddleNumber(data) {
 };
 
 
-function processDuplicates(array) {
+async function processDuplicates(array) {
   const countMap = {};      
   const replaceCount = {};  
   array.forEach(item => {

@@ -169,7 +169,7 @@ label=label+1
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
-    $utils.toastError(jsonify(url));
+ //   $utils.toastError(jsonify(url));
 const other_data  = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
@@ -242,7 +242,7 @@ async function groupByMiddleNumber(data) {
 };
 
 
-async function processDuplicates(array) {
+ function processDuplicates(array) {
   const countMap = {};      
   const replaceCount = {};  
   array.forEach(item => {

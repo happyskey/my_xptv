@@ -1,5 +1,5 @@
 //昊
-//2025-3-10
+//2025-3-11
 const cheerio = createCheerio()
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
@@ -58,22 +58,21 @@ async function getCards(ext) {
             'User-Agent': UA,
         },
     })
-    //const $ = cheerio.load(data)
+
 
     const videos_list = argsify(data.data).data.List
-    //$utils.toastError(jsonify(videos_list));
     videos_list.forEach(e => {
 
 
         const pic = e.vod_pic || 'NV'
         if (pic != 'NV') {
             cards.push({
-                vod_id: `${e.vod_id}`,//不能纯数字
+                vod_id: `${e.vod_id}`,
                 vod_name: e.vod_name,
                 vod_pic: e.vod_pic,
                 vod_remarks: e.vod_remarks,
                 ext: {
-                    change: [id, e.vod_id],//不能纯数字
+                    change: [id, e.vod_id],
                 },
 
             })
@@ -81,27 +80,17 @@ async function getCards(ext) {
 
     })
 
-
-    //$utils.toastError(jsonify( cards))
     return jsonify({
         list: cards,
     })
 }
-
-
-
-
-
-
-
-//
 
 async function getTracks(ext) {
 
     ext = argsify(ext)
     let groups = []
 
-    let url = appConfig.site + `/vod/v1/info?id=${ext.change[1]}&tid=${ext.change[0]}`// 
+    let url = appConfig.site + `/vod/v1/info?id=${ext.change[1]}&tid=${ext.change[0]}`
 
     $utils.toastError(jsonify(url))
 
@@ -112,7 +101,7 @@ async function getTracks(ext) {
     })
 
 
-    const void_line = argsify(data.data)//.data.vod_sources
+    const void_line = argsify(data.data).data.vod_sources
 
 
 
@@ -120,18 +109,11 @@ async function getTracks(ext) {
 
 
     void_line.forEach(item => {
-
-        //$utils.toastError(jsonify( item.source_name))
         let group = {
             title: item.source_name,
             tracks: [],
         };
-
-
-        //$utils.toastError(jsonify(  typeof item.vod_play_list)) 
         item.vod_play_list.urls.forEach(ele => {
-
-
             group.tracks.push({
                 name: ele.name,
                 pan: '',
@@ -146,31 +128,13 @@ async function getTracks(ext) {
         if (group.tracks.length > 0) {
             groups.push(group);
         }
-
-
     })
-
-
-
     return jsonify({ list: groups })
 }
-
-
-
-
-
-
 async function getPlayinfo(ext) {
     ext = argsify(ext)
     const url = ext.url
-
-
     return jsonify({ urls: [url] })
-
-
-
-
-
 }
 
 async function search(ext) {
@@ -178,41 +142,32 @@ async function search(ext) {
     let cards = []
     let { page = 1 } = ext
     let text = encodeURIComponent(ext.text)
-
-    //https://api.yingshi.tv/vod/v1/search?wd=%E5%A5%B3&limit=20&page=1
     let url = `${appConfig.site}/vod/v1/search?wd=${text}&limit=20&page=${page}`
-
     const data = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,
         },
     })
     const videos_list = argsify(data.data).data.List
-
     videos_list.forEach(e => {
 
-        //$utils.toastError(jsonify(e.vod_year));
         const pic = e.vod_pic || 'NV'
         if (pic != 'NV') {
             cards.push({
-                vod_id: `${e.vod_id}`,//不能纯数字
+                vod_id: `${e.vod_id}`,
                 vod_name: e.vod_name,
                 vod_pic: e.vod_pic,
                 vod_remarks: `${e.vod_year}`,
                 ext: {
-                    change: [e.type_id, e.vod_id],//不能纯数字
+                    change: [e.type_id, e.vod_id],
                 },
 
             })
         }
 
     })
-
-    //$utils.toastError(jsonify(cards));
-
     return jsonify({
         list: cards,
     })
 }
-
 

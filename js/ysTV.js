@@ -92,8 +92,6 @@ async function getTracks(ext) {
 
     let url = appConfig.site + `/vod/v1/info?id=${ext.change[1]}&tid=${ext.change[0]}`
 
-    $utils.toastError(jsonify(url))
-
     const data = await $fetch.get(url, {
         headers: {
             'User-Agent': UA,

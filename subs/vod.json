@@ -118,7 +118,7 @@
 },{
             "name": "anfuns",
             "type": 3,
-            "api": "csp_js/anfuns_1",
+            "api": "csp_js/anfuns",
             "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/anfuns.js" 
 },
        

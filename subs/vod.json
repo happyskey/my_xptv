@@ -101,6 +101,11 @@
             "api": "csp_js/vidhub",
             "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/vidhub.js" 
 },{
+            "name": "趣盘搜|昊",
+            "type": 3,
+            "api": "csp_js/qps",
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/qps.js" 
+},{
             "name": "小虎斑|盘",
             "type": 3,
             "api": "csp_js/huban",

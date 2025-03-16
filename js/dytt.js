@@ -96,7 +96,7 @@ async function getTracks(ext) {
 
     let url =appConfig.site+`/filmPlayInfo?id=${ext.number}`// 
 
-$utils.toastError(jsonify( url))
+//$utils.toastError(jsonify( url))
 
     const data= await $fetch.get(url, {
         headers: {

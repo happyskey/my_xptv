@@ -27,13 +27,12 @@ async function getTabs() {
         },
     })
 
-let nnn = ''
-  
+
     argsify(data.data).data.category.children.forEach(child => {
         const name = child.name
         const href = `${child.id}`
 
-nnn = nnn+'/'+href
+
 
 
         list.push({
@@ -43,7 +42,7 @@ nnn = nnn+'/'+href
             },
         })
     })
- $utils.toastError(jsonify(nnn));
+
     return list
 }
 

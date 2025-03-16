@@ -183,7 +183,7 @@ let { page = 1} = ext
 
         cards.push({
             vod_id: `${e.pid}`,
-            vod_name:pic,
+            vod_name:e.name,
             vod_pic: pic,
             vod_remarks: e.remarks,
             ext: {

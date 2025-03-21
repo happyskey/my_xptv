@@ -50,7 +50,6 @@ async function getCards(ext) {
     })
     const $ = cheerio.load(data)
     $("a.module-poster-item.module-item").each((index, e) => {
-        console.log(index)
         const href = $(e).attr('href') || ''
         const title = $(e).attr('title') || ''
         const img = $(e).find('img.lazy.lazyload').attr('data-original') || ''

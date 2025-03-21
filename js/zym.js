@@ -167,7 +167,7 @@ async function getPlayinfo(ext) {
     eval(scriptContent)
     let url_id = player_aaaa.url
 
-    $utils.toastError(jsonify(url_id));
+    //$utils.toastError(jsonify(url_id));
 
     return jsonify({ urls: [url_id] })
 }

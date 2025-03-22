@@ -175,14 +175,8 @@ async function search(ext) {
 
 
 function extractMultiCloudUrls(str) {
-  const regex = /https?:\/\/(?:[a-z]+\.)*(?:alipan\.com|uc\.cn|quark\.cn|baidu\.com|115\.com)(?:\/s?\/)[\da-zA-Z-]{10,}(?=\/|$|[\s'"]|[\u4e00-\u9fa5])/gi;
-
-  const preStr = str.replace(/(https?:\/\/)/gi, '\u200b$1');
-  
-  return [...new Set(
-    (preStr.match(regex) || []).map(url => 
-      url.replace(/^\u200b/, '') 
-         .replace(/(\/s)?\/$/, '') 
-    )
-  )];
+  const regex = /https?:\/\/(?:[a-z]+\.)*(?:alipan\.com|quark\.cn|baidu\.com|115\.com|uc\.cn)(?:\/s?\/)[\da-zA-Z-]{10,}(?=\/|$|[\s'"\u4e00-\u9fa5]|https?:|[\dA-Za-z-]*$)/gi;
+  const preprocessedStr = str.replace(/(https?:\/\/)/g, '\n$1');
+  const matches = preprocessedStr.match(regex) || [];
+  return [...new Set(matches.map(url => url.replace(/^\n/, '')))];
 }

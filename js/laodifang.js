@@ -1,5 +1,6 @@
 //昊
 //2025-3-27
+//修补 搜索后有些无法匹配问题
 const cheerio = createCheerio()
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
@@ -117,7 +118,8 @@ async function getTracks(ext) {
 
 	})
 
-	$('div.scroll-content').eq(1).each((num, el) => {
+	//$('div.scroll-content').eq(1).each((num, el) => {
+	line_list.forEach((change,num)=>{
 		//$utils.toastError(jsonify(line_list[num]));
 		let group = {
 			title: `${line_list[num]}`,

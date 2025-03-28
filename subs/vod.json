@@ -155,6 +155,11 @@
             "type": 3,
             "api": "csp_js/anfuns",
             "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/anfuns.js" 
+},{
+            "name": "校长影视",
+            "type": 3,
+            "api": "csp_js/xzys",
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/xzys.js" 
 },
        
     ]

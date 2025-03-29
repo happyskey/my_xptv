@@ -1,4 +1,5 @@
 //2025-3-28 修复视频详情页面链接修复
+// 2025-3-29 搜索修复
 const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 

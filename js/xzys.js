@@ -145,7 +145,8 @@ async function search(ext) {
 
     const videos = $('#container .list-boxes .left_ly a')
     videos.each((_, e) => {
-        const href = $(e).attr('href')
+        const href = $(e).attr('href').match(/\/(\d+)\.html/)[1]
+        const pan_id = href.slice(0, -2)
         const title = $(e).find('img').attr('alt')
         const cover = $(e).find('img').attr('src')
 
@@ -156,7 +157,7 @@ async function search(ext) {
             vod_remarks: '',
 
             ext: {
-                url: `${appConfig.site}${href}`,
+                url: `${appConfig.site}/article/m/${pan_id}/${href}.html`,
             },
         })
     })

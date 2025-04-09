@@ -104,20 +104,15 @@ async function getTracks(ext) {
 
 	const $ = cheerio.load(data)
 
-	 const playlist = $('.module-player-list .module-row-one')
-    playlist.each((_, e) => {
-      const panShareUrl = $(e).find('.module-row-title p').text()
-  
-      const pan_list = extractMultiCloudUrls(panShareUrl )
-      pan_list.forEach((child,index)=>{
-      tracks.push({
-        name: '网盘',
-        pan: child,
-      })
-
-    })
-    })
-  
+        const playlist =$('a.btn-pc.btn-down')
+	     playlist.each((index, e) => {
+	      const panShareUrl =$(e).attr('href')
+	     
+	      tracks.push({
+	        name: '网盘',
+	        pan: panShareUrl,
+	      })
+	    })
 
 
 	return jsonify({

@@ -8,7 +8,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const appConfig = {
 	ver: 1,
 	title: '麻豆村',
-	site: 'https://mm606-v1.com',
+	site: 'https://madoucun.com',
 	tabs: [
  	{
     name: "麻豆传媒",

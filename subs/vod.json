@@ -175,6 +175,21 @@
             "type": 3,
             "api": "csp_js/huban",
             "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/huban.js" 
+},{
+            "name": "jable/2",
+            "type": 3,
+            "api": "csp_js/jable",
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/jable.js" 
+},{
+            "name": "kanave/2",
+            "type": 3,
+            "api": "csp_js/kanav",
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/kanav.js" 
+},{
+            "name": "kanave/2",
+            "type": 3,
+            "api": "csp_js/kanav",
+            "ext": "https://raw.githubusercontent.com/kingreevice/my_xptv/refs/heads/main/js/kanav.js" 
 },
        
     ]
